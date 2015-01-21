@@ -1,1 +1,1 @@
-# spika
+# jubla-spika
