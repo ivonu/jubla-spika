@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'turbolinks'
 
 gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   gem 'sqlite3'
