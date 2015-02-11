@@ -1,0 +1,30 @@
+de:
+  activerecord:
+      models:
+        user: {
+          one: 'Benutzer',
+          other: 'Benutzer'
+        }
+
+      attributes:
+        user:
+          name: 'Name'
+
+  helpers:
+      submit:
+        create: "%{model} erstellen"
+        submit: "%{model} speichern"
+        update: "%{model} ändern"
+
+  errors:
+      attributes:
+        email:
+          invalid: 'Ungültige E-Mail Adresse'
+      messages:
+        blank: '%{attribute} kann nicht leer sein'
+        too_short: "%{attribute} muss mindestens %{count} Zeichen enthalten"
+        invalid: 'Ungültige Eingabe'
+        confirmation: 'Bestätigung stimmt nicht überein'
+        not_an_integer: 'Eingabe ist keine Ganzzahl'
+        not_a_number: 'Eingabe ist keine Zahl'
+        greater_than_or_equal_to: 'Eingabe muss grösser als %{count} sein'
