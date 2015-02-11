@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :users
-  root 'users#index'
+  root 'application#bootstrap'
   get 'bootstrap' => 'application#bootstrap'
-
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

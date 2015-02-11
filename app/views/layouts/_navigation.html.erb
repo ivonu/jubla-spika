@@ -20,14 +20,17 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Max Muster
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Profil ansehen</a></li>
-            <li><a href="#">Einstellungen</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Abmelden</a></li>
-          </ul>
+          <% if user_signed_in? %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              </ul>
+          <% else %>
+            <%= link_to "Login", new_user_session_path %>
+          <% end %>
+
         </li>
       </ul>
     </div>
