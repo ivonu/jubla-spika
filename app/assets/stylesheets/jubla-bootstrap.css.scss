@@ -28,7 +28,7 @@
   font-style: italic;
 }
 @font-face{
-  font-family: "HelveticaNeueW01-57Cn";
+  font-family: "Helvetica Neue W01";
   src: font-url("jubla/ecaa98fe-425a-42de-846b-c235f0dbc449.eot?#iefix");
   src: font-url("jubla/ecaa98fe-425a-42de-846b-c235f0dbc449.eot?#iefix") format("eot"),
   font-url("jubla/842088d0-1ae2-40d0-8561-3c95761ba7a6.woff") format("woff"),
@@ -36,12 +36,13 @@
   font-url("jubla/6cd480d1-47d0-48b4-86bd-283db2cb9235.svg#6cd480d1-47d0-48b4-86bd-283db2cb9235") format("svg");
 }
 @font-face{
-  font-family: "HelveticaNeueW01-77BdCn 692722";
+  font-family: "Helvetica Neue W01";
   src: font-url("jubla/83d5bc89-af33-46a9-8fe3-15d87784f50e.eot?#iefix");
   src: font-url("jubla/83d5bc89-af33-46a9-8fe3-15d87784f50e.eot?#iefix") format("eot"),
   font-url("jubla/102ab74c-0e84-4fe5-a17a-b20fb643591a.woff") format("woff"),
   font-url("jubla/1d146b29-55e2-485b-96aa-5cb628e7e9eb.ttf") format("truetype"),
   font-url("jubla/d90b3358-e1e2-4abb-ba96-356983a54c22.svg#d90b3358-e1e2-4abb-ba96-356983a54c22") format("svg");
+  font-weight: bold;
 }
 
 // Font variables
@@ -83,8 +84,8 @@ $navbar-default-link-active-color: #646464;
 //============== Customize CSS ===================
 h1 {
   color: #013888;
-  font-family: 'HelveticaNeueW01-77BdCn 692722';
-  font-weight: normal;
+  font-family: 'Helvetica Neue W01';
+  font-weight: bold;
 }
 
 h2, h3, h4, h5, h6 {
