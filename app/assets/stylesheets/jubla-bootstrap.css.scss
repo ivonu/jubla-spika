@@ -92,6 +92,10 @@ h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+p {
+  line-height: 18px;
+}
+
 p a {
   font-weight: bold;
 }
@@ -110,4 +114,8 @@ p a:hover {
 
 .navbar-toggle {
   @include navbar-vertical-align(28px);
+}
+
+.navbar-menu-point:hover {
+  border-bottom: 1px #646464 dotted;
 }
