@@ -13,9 +13,9 @@ class CreateEntries < ActiveRecord::Migration
       t.boolean :part_end
       t.boolean :indoors
       t.boolean :outdoor
-      t.booelan :weather_snow
-      t.booelan :weather_rain
-      t.booelan :weather_sun
+      t.boolean :weather_snow
+      t.boolean :weather_rain
+      t.boolean :weather_sun
       t.boolean :act_active
       t.boolean :act_calm
       t.boolean :act_creative
