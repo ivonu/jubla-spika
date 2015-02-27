@@ -12,7 +12,7 @@ one:
   part_main: false
   part_end: false
   indoors: false
-  outdoor: false
+  outdoors: false
   weather_snow: 
   weather_rain: 
   weather_sun: 
