@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  title_other: MyString
+  description: MyText
+  material: MyText
+  remarks: MyText
+  preparation: MyText
+  keywords: MyText
+  part_start: false
+  part_main: false
+  part_end: false
+  indoors: false
+  outdoors: false
+  weather_snow: 
+  weather_rain: 
+  weather_sun: 
+  act_active: false
+  act_calm: false
+  act_creative: false
+  group_size_min: 1
+  group_size_max: 1
+  age_min: 1
+  age_max: 1
+  time_min: 1
+  time_max: 1
+  independent: false
+
+two:
+  title: MyString
+  title_other: MyString
+  description: MyText
+  material: MyText
+  remarks: MyText
+  preparation: MyText
+  keywords: MyText
+  part_start: false
+  part_main: false
+  part_end: false
+  indoors: false
+  outdoor: false
+  weather_snow: 
+  weather_rain: 
+  weather_sun: 
+  act_active: false
+  act_calm: false
+  act_creative: false
+  group_size_min: 1
+  group_size_max: 1
+  age_min: 1
+  age_max: 1
+  time_min: 1
+  time_max: 1
+  independent: false

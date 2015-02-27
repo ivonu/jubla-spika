@@ -11,7 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211154717) do
+ActiveRecord::Schema.define(version: 20150226065216) do
+
+  create_table "entries", force: :cascade do |t|
+    t.string   "title"
+    t.string   "title_other"
+    t.text     "description"
+    t.text     "material"
+    t.text     "remarks"
+    t.text     "preparation"
+    t.text     "keywords"
+    t.boolean  "part_start"
+    t.boolean  "part_main"
+    t.boolean  "part_end"
+    t.boolean  "indoors"
+    t.boolean  "outdoors"
+    t.boolean  "weather_snow"
+    t.boolean  "weather_rain"
+    t.boolean  "weather_sun"
+    t.boolean  "act_active"
+    t.boolean  "act_calm"
+    t.boolean  "act_creative"
+    t.integer  "group_size_min"
+    t.integer  "group_size_max"
+    t.integer  "age_min"
+    t.integer  "age_max"
+    t.integer  "time_min"
+    t.integer  "time_max"
+    t.boolean  "independent"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "program_entries", force: :cascade do |t|
+    t.integer  "entry_id"
+    t.integer  "program_id"
+    t.integer  "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "program_entries", ["entry_id"], name: "index_program_entries_on_entry_id"
+  add_index "program_entries", ["program_id"], name: "index_program_entries_on_program_id"
+
+  create_table "programs", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

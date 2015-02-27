@@ -1,0 +1,15 @@
+<h1>Alle Spielideen</h1>
+
+<table class="table">
+  <tr>
+    <th>Titel</th>
+    <th>Beschreibung</th>
+  </tr>
+ 
+  <% @entries.each do |entry| %>
+    <tr>
+      <td><%= link_to entry.title, entry_path(entry) %></td>
+      <td><%= entry.description[0..100] + "..." %></td>
+    </tr>
+  <% end %>
+</table>
