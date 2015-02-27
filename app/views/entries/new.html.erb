@@ -1,30 +1,3 @@
-<%= simple_form_for @entry do |f| %>
-  
-  <%= f.input :title, label: 'Titel' %>
-  <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt' %>
-  <%= f.input :description, label: 'Spiel-Beschreibung' %>
-  <%= f.input :material, label: 'Material' %>
-  <%= f.input :remarks, label: 'Bemerkungen' %>
-  <%= f.input :preparation, label: 'Vorbereitungen' %>
-  <%= f.input :keywords, label: 'Stichwörter', hint: 'durch Komma getrennt' %>
-  <%= f.input :part_start, label: 'Einleitung' %>
-  <%= f.input :part_main, label: 'Hauptteil' %>
-  <%= f.input :part_end, label: 'Schluss' %>
-  <%= f.input :indoors, label: 'Drinnen' %>
-  <%= f.input :outdoors, label: 'Draussen' %>
-  <%= f.input :weather_snow, label: 'Schnee' %>
-  <%= f.input :weather_rain, label: 'Regen' %>
-  <%= f.input :weather_sun, label: 'Sonne' %>
-  <%= f.input :act_active, label: 'Aktiv' %>
-  <%= f.input :act_calm, label: 'Ruhig' %>
-  <%= f.input :act_creative, label: 'Kreativ' %>
-  <%= f.input :group_size_min, label: 'Gruppengrösse Minimum' %>
-  <%= f.input :group_size_max, label: 'Gruppengrösse Maximum' %>
-  <%= f.input :age_min, label: 'Alter Minimum' %>
-  <%= f.input :age_max, label: 'Alter Maximum' %>
-  <%= f.input :time_min, label: 'Zeitaufwand Minimum' %>
-  <%= f.input :time_max, label: 'Zeitaufwand Maximum' %>
-
-  <%= f.button :submit %>
-
-<% end %>
+<h1>Eintrag erstellen</h1>
+ 
+<%= render 'form' %>
