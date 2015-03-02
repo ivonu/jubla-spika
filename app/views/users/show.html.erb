@@ -1,16 +1,5 @@
 <div class="row">
-    <div class="h1 col-sm-9"><%= @user.name %></div>
-
-    <% if current_user.moderator? || current_user.admin? %>
-      <div class="col-sm-3">
-          <%= link_to edit_user_path(@user), class: 'btn btn-xs btn-success' do %>
-              <span class="glyphicon glyphicon-pencil"></span> <%= t(:edit) %>
-          <% end %>
-          <%= link_to user_path(@user), method: :delete, data: { confirm: t(:sure?) }, class: 'btn btn-xs btn-danger' do %>
-              <span class="glyphicon glyphicon-remove"></span> <%= t(:delete) %>
-          <% end %>
-      </div>
-    <% end %>
+    <h1 class="col-sm-12"><%= @user.name %></h1>
 </div>
 
 <div class="row">
@@ -19,3 +8,19 @@
   <div class="col-sm-2">Role:</div>
   <div class="col-sm-10"><%= get_role_label(@user.role) %></div>
 </div>
+
+<hr/>
+<% if current_user.moderator? || current_user.admin? %>
+<div class="row">
+    <span class="col-sm-12">
+        <%= link_to edit_user_path(@user), class: 'btn btn-xs btn-success' do %>
+            <span class="glyphicon glyphicon-pencil"></span> <%= t(:edit) %>
+        <% end %>
+        <%= link_to user_path(@user), method: :delete, data: { confirm: t(:sure?) }, class: 'btn btn-xs btn-danger' do %>
+            <span class="glyphicon glyphicon-remove"></span> <%= t(:delete) %>
+        <% end %>
+    </span>
+</div>
+<% end %>
+
+<%= link_to "Back", :back %>
