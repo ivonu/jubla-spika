@@ -66,3 +66,12 @@
 
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= link_to 'Bearbeiten', edit_entry_path(@entry) %>
+    <%= link_to 'Löschen', entry_path(@entry),
+              method: :delete,
+              data: { confirm: 'Wirklich löschen?' } %>
+  </div>
+</div>

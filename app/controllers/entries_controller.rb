@@ -10,13 +10,39 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.independent = true;
 
-    @entry.save
-    redirect_to @entry
+    if @entry.save
+      redirect_to @entry
+    else
+      render 'new'
+    end
   end
 
   def show
     @entry = Entry.find(params[:id])
+  end
+
+  def edit
+    @entry = Entry.find(params[:id])
+  end
+
+  def update
+    @entry = Entry.find(params[:id])
+    @entry.independent = true;
+   
+    if @entry.update(entry_params)
+      redirect_to @entry
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+   
+    redirect_to entries_path
   end
 
 
@@ -45,7 +71,8 @@ class EntriesController < ApplicationController
                                     :age_min,
                                     :age_max,
                                     :time_min,
-                                    :time_max)
+                                    :time_max,
+                                    :independent)
     end
 
     
