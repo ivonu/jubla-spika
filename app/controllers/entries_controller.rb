@@ -10,6 +10,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.independent = true;
 
     if @entry.save
       redirect_to @entry
@@ -28,6 +29,7 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
+    @entry.independent = true;
    
     if @entry.update(entry_params)
       redirect_to @entry
@@ -69,7 +71,8 @@ class EntriesController < ApplicationController
                                     :age_min,
                                     :age_max,
                                     :time_min,
-                                    :time_max)
+                                    :time_max,
+                                    :independent)
     end
 
     

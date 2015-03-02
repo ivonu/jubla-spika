@@ -9,6 +9,10 @@ de:
       attributes:
         user:
           name: 'Name'
+        entry:
+          title: 'Titel'
+          description: 'Beschreibung'
+          keywords: 'Stichwörter'
 
   helpers:
       submit:
