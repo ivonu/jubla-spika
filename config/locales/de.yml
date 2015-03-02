@@ -1,4 +1,6 @@
 de:
+  sure?: 'Bist du sicher?'
+
   activerecord:
       models:
         user: {

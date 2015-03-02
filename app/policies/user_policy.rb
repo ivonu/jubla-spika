@@ -1,10 +1,16 @@
 class UserPolicy < ApplicationPolicy
 
   def index?
-    user.admin? || user.moderator?
+    user.admin? or user.moderator?
   end
 
-  def update_role?
-    user.admin? || (user.moderator? && !record.admin?)
+  def update?
+    user.admin? or (user.moderator? and
+                    User.roles[record.role] != User.roles[:admin] and
+                    User.roles[record.role_was] != User.roles[:admin])
+  end
+
+  def destroy?
+    user.admin?
   end
 end

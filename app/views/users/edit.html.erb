@@ -1,0 +1,12 @@
+<h1>Edit <%= @user.name %></h1>
+
+<%= simple_form_for @user do |f| %>
+    <%= f.error_notification %>
+
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :role, include_blank: false %>
+    <%= f.button :submit, "Update" %>
+<% end %>
+
+<%= link_to "Back", :back %>

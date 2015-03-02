@@ -8,8 +8,4 @@ module UsersHelper
 
     ('<span class="label label-' + color + '">' + role + '</span>').html_safe
   end
-
-  def get_updatable_roles (user)
-    User.roles.select { |a| a.to_i <= user.role.to_int }
-  end
 end
