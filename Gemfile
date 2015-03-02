@@ -18,6 +18,8 @@ gem 'turbolinks'
 gem 'devise'
 gem 'pundit'
 
+gem 'figaro'
+
 group :development, :test do
   gem 'sqlite3'
 end
