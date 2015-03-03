@@ -23,9 +23,9 @@
   <%= f.input :act_calm, label: 'Ruhig' %>
   <%= f.input :act_creative, label: 'Kreativ' %>
 
-  <%= f.input :group_size, label: 'Gruppengrösse', as: :slider %>
-  <%= f.input :age, label: 'Alter', as: :slider %>
-  <%= f.input :time, label: 'Zeitaufwand', as: :slider %>
+  <%= f.input :group_size, label: 'Gruppengrösse', as: :slider, min: '2', max: '100', unit: 'Kinder' %>
+  <%= f.input :age, label: 'Alter', as: :slider, min: '5', max: '99', unit: 'Jahre' %>
+  <%= f.input :time, label: 'Zeitaufwand', as: :slider, min: '5', max: '180', setter: 'slider_set_time' %>
 
   <%= f.button :submit, 'Speichern' %>
 
