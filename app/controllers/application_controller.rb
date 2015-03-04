@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters_for_devise, if: :devise_controller?
 
+  def index
+
+  end
+
   def bootstrap
 
   end

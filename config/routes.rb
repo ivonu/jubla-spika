@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'application#bootstrap'
+  root 'application#index'
 
   devise_for :users
   resources :users, except: [:create, :new]
