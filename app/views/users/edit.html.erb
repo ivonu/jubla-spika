@@ -3,8 +3,6 @@
 <%= simple_form_for @user do |f| %>
     <%= f.error_notification %>
 
-    <%= f.input :name %>
-    <%= f.input :email %>
     <%= f.input :role, include_blank: false %>
     <%= f.button :submit, "Update" %>
 <% end %>
