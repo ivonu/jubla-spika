@@ -116,6 +116,16 @@ p a:hover {
   @include navbar-vertical-align(28px);
 }
 
-.navbar-menu-point:hover {
-  border-bottom: 1px #646464 dotted;
+.navbar-left {
+  padding: 5px 0px;
+
+  li {
+    padding-right: 20px;
+    a {
+      padding: 0px;
+    }
+    a:hover {
+      border-bottom: 1px #646464 dotted;
+    }
+  }
 }

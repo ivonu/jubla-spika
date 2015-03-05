@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def bootstrap
+  def about
+
+  end
+
+  def theory
 
   end
 

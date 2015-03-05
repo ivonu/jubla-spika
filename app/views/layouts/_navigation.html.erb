@@ -11,12 +11,12 @@
       </a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/"><span class="navbar-menu-point">Home</span></a></li>
-        <li><a href="/entries"><span class="navbar-menu-point">Suchen</span></a></li>
-        <li><a href="#"><span class="navbar-menu-point">Planen</span></a></li>
-        <li><a href="/entries/new"><span class="navbar-menu-point">Erstellen</span></a></li>
-        <li><a href="#"><span class="navbar-menu-point">Über</span></a></li>
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to root_path do %>Home<% end %></li>
+        <li><%= link_to entries_path do %><span>Suchen</span><% end %></li>
+        <li><%= link_to new_entry_path do %><span>Erstellen</span><% end %></li>
+        <li><%= link_to wissen_path do %><span>Wissen</span><% end %></li>
+        <li><%= link_to about_path do %><span>Über</span><% end %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? and (current_user.admin? or current_user.moderator?) %>
