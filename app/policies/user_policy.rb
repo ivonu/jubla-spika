@@ -1,16 +1,30 @@
-class UserPolicy < ApplicationPolicy
+class UserPolicy
+
+  attr_reader :current_user, :user
+
+  def initialize(current_user, user)
+    @current_user = current_user
+    @user = user
+  end
 
   def index?
-    user.admin? or user.moderator?
+    @current_user.is_moderator?
+  end
+
+  def show?
+    @current_user.is_moderator?
+  end
+
+  def edit?
+    @current_user.is_moderator?
   end
 
   def update?
-    user.admin? or (user.moderator? and
-                    User.roles[record.role] != User.roles[:admin] and
-                    User.roles[record.role_was] != User.roles[:admin])
+    @current_user.is_admin? or
+    (@current_user.is_moderator? and @user.role != 'admin' and @user.role_was != 'admin')
   end
 
   def destroy?
-    user.admin?
+    @current_user.is_admin?
   end
 end

@@ -1,9 +1,30 @@
-
 <div id="footer-skyline"></div>
 
 <div id="footer">
   <div class="container">
-    <div class="col-sm-3">
+    <div class="row">
+
+      <div class="col-xs-6 col-sm-2">
+        <ul>
+          <li class="sub-title">Spielkatapult</li>
+          <li><%= link_to wissen_path do %><span>Über uns</span><% end %></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-sm-2">
+        <ul>
+          <li class="sub-title">Links</li>
+          <li><a href="#">Jubla</a></li>
+        </ul>
+      </div>
+
+      <!-- Add the extra clearfix for only the required viewport -->
+      <div class="clearfix visible-xs-block"></div>
+
+      <div class="col-xs-6 col-sm-offset-3 col-sm-3">
         <ul>
           <li class="sub-title">Jungwacht Blauring Schweiz</li>
           <li>St. Karliquai 12</li>
@@ -11,16 +32,11 @@
           <li>041 419 47 47</li>
           <li><a href="mailto:info@jubla.ch" title="E-Mail">info@jubla.ch</a></li>
         </ul>
-    </div>
+      </div>
 
-    <div class="col-sm-3">
-    </div>
-
-    <div class="col-sm-3">
-    </div>
-
-    <div class="col-sm-3 text-right">
+      <div class="col-xs-6 col-sm-2 text-center">
         <img class="jubla-logo" src="http://www.jubla.ch/uploads/media/Jubla_Logo_weiss_01.png"/>
+      </div>
     </div>
   </div>
 </div>

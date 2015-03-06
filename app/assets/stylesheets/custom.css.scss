@@ -10,30 +10,33 @@
   background-color: #013888;
   padding-bottom: 30px;
   padding-top: 30px;
-}
 
-#footer .jubla-logo {
-  width: 100px;
-}
+  .jubla-logo {
+    width: 100px;
+  }
 
-#footer ul {
-  padding: 0px;
-  border-top: 1px solid #7092BE;
-  list-style: none;
-}
-#footer ul li {
-  padding: 3px 0px;
-  border-bottom: 1px solid #7092BE;
-  color: #C9D1E1;
-}
-#footer ul li.sub-title {
-  color: white;
-}
+  ul {
+    padding: 0px;
+    border-top: 1px solid #7092BE;
+    list-style: none;
 
-#footer ul li a {
-  color: #C9D1E1;
-}
-#footer ul li a:hover {
-  color: white;
-  font-weight: bold;
+    li {
+      padding: 3px 0px;
+      border-bottom: 1px solid #7092BE;
+      color: #C9D1E1;
+
+      a {
+        color: #C9D1E1;
+      }
+      a:hover {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+
+    li.sub-title {
+      color: white;
+    }
+  }
 }

@@ -116,6 +116,6 @@ p a:hover {
   @include navbar-vertical-align(28px);
 }
 
-.navbar-menu-point:hover {
+.navbar-left span:hover {
   border-bottom: 1px #646464 dotted;
 }

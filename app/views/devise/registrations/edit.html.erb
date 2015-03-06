@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Profil bearbeiten</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -8,21 +8,21 @@
     <%= f.input :email, required: true %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <p>Bestätigung ausstehend für: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+    <%= f.input :password, autocomplete: "off", hint: "leer lassen, falls du das Passwort nicht ändern willst", required: false %>
     <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+    <%= f.input :current_password, required: true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Account löschen</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unglücklich? <%= link_to "Account löschen", registration_path(resource_name), data: { confirm: t(:sure?) }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Zurück", :back %>
