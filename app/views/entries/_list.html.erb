@@ -1,0 +1,24 @@
+<div id="filterrific_results">
+
+  <table class="table table-striped result-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="hidden-xs">Beschreibung</th>
+      </tr>
+    </thead>
+    <% entries.each do |entry| %>
+      <tr>
+        <td><%= link_to(entry.title, entry_path(entry)) %></td>
+        <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <% if entries.empty? %>
+    <p>Leider keine Ergebnisse gefunden</p>
+  <% end %>
+
+  <%= will_paginate entries %>
+
+</div>

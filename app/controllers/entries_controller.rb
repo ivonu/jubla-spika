@@ -1,7 +1,30 @@
 class EntriesController < ApplicationController
 
   def index
-    @entries = Entry.all
+
+    @filterrific = initialize_filterrific(
+      Entry,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Entry.options_for_sorted_by,
+        num_group: Entry.options_for_num_group,
+        num_age: Entry.options_for_num_age,
+        num_time: Entry.options_for_num_time
+      },
+      persistence_id: 'shared_key'
+    ) or return
+
+    @entries = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    rescue ActiveRecord::RecordNotFound => e
+      puts "Ein Fehler ist aufgetreten und der Filter wurde zurueckgesetzt: #{ e.message }"
+      redirect_to(reset_filterrific_url(format: :html)) and return
+
   end
 
   def new
@@ -74,7 +97,5 @@ class EntriesController < ApplicationController
                                     :time_max,
                                     :independent)
     end
-
-    
 
 end

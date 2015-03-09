@@ -1,6 +1,10 @@
 de:
   sure?: 'Bist du sicher?'
 
+  will_paginate:
+    previous_label: "&#8592; Zurück"
+    next_label: "Weiter &#8594;"
+
   activerecord:
       models:
         user: {

@@ -1,15 +1,76 @@
-<h1>Alle Spielideen</h1>
+<h1>Suchen</h1>
 
-<table class="table">
-  <tr>
-    <th>Titel</th>
-    <th>Beschreibung</th>
-  </tr>
- 
-  <% @entries.each do |entry| %>
-    <tr>
-      <td><%= link_to entry.title, entry_path(entry) %></td>
-      <td><%= entry.description[0..100] + "..." %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="col-sm-3">
+
+    <h2>Filter</h2>
+
+    <div class="result-filter">
+      <%= form_for_filterrific @filterrific do |f| %>
+        <div>
+          <%= f.check_box :with_part_start %> Einleitung<br>
+          <%= f.check_box :with_part_main  %> Hauptteil<br>
+          <%= f.check_box :with_part_end   %> Schluss
+        </div>
+        <div>
+          <%= f.check_box :with_indoors  %> Drinnen<br>
+          <%= f.check_box :with_outdoors %> Draussen
+        </div>
+        <div>
+          <%= f.check_box :with_weather_snow %> Bei Schnee<br>
+          <%= f.check_box :with_weather_rain %> Bei Regen<br>
+          <%= f.check_box :with_weather_sun  %> Bei Sonne
+        </div>
+        <div>
+          <%= f.check_box :with_act_active   %> Aktiv<br>
+          <%= f.check_box :with_act_calm     %> Ruhig<br>
+          <%= f.check_box :with_act_creative %> Kreativ
+        </div>
+        <div>
+          Gruppengrösse:<br>
+          <%= f.select(:num_group_min, @filterrific.select_options[:num_group]) %> -
+          <%= f.select(:num_group_max, @filterrific.select_options[:num_group]) %> Kinder
+        </div>
+        <div>
+          Alter:<br>
+          <%= f.select(:num_age_min, @filterrific.select_options[:num_age]) %> -
+          <%= f.select(:num_age_max, @filterrific.select_options[:num_age]) %> Jahre
+        </div>
+        <div>
+          Zeit:<br>
+          <%= f.select(:num_time_min, @filterrific.select_options[:num_time]) %> -
+          <%= f.select(:num_time_max, @filterrific.select_options[:num_time]) %>
+        </div>
+        <div>
+          Suchen:<br>
+          <%= f.text_field(
+            :search_query,
+            class: 'filterrific-periodically-observed'
+          ) %>
+        </div>
+        <div>
+          Sortiert nach:<br>
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+        </div>
+        <div>
+          <%= link_to(
+            'Filter zurücksetzen',
+            reset_filterrific_url,
+          ) %>
+        </div>
+        <%= render_filterrific_spinner %>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="col-sm-9">
+  
+    <h2>Ergebnisse</h2>
+
+    <%= render(
+      partial: 'entries/list',
+      locals: { entries: @entries }
+    ) %>
+
+  </div>
+</div>
