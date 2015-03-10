@@ -12,7 +12,6 @@ class Entry < ActiveRecord::Base
   validates :age_max, presence: true, numericality: true
   validates :time_min, presence: true, numericality: true
   validates :time_max, presence: true, numericality: true
-  validates :independent, presence: true
 
   
   filterrific(

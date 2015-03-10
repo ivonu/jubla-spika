@@ -33,7 +33,6 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
-    @entry.independent = true;
 
     if @entry.save
       redirect_to @entry
@@ -52,7 +51,6 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
-    @entry.independent = true;
    
     if @entry.update(entry_params)
       redirect_to @entry
