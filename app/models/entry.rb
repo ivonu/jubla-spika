@@ -74,23 +74,15 @@ class Entry < ActiveRecord::Base
   scope :search_query, lambda { |query|
     return nil  if query.blank?
 
-    terms = query.downcase.split(/\s+/)
-    terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
-    }
-
-    num_or_conds = 7
     where(
-      terms.map { |term|
-        "(LOWER(entries.title) LIKE ?
-        OR LOWER(entries.title_other) LIKE ?
-        OR LOWER(entries.description) LIKE ?
-        OR LOWER(entries.material) LIKE ?
-        OR LOWER(entries.remarks) LIKE ?
-        OR LOWER(entries.preparation) LIKE ?
-        OR LOWER(entries.keywords) LIKE ?)"
-      }.join(' AND '),
-      *terms.map { |e| [e] * num_or_conds }.flatten
+      "(LOWER(entries.title) LIKE :q
+      OR LOWER(entries.title_other) LIKE :q
+      OR LOWER(entries.description) LIKE :q
+      OR LOWER(entries.material) LIKE :q
+      OR LOWER(entries.remarks) LIKE :q
+      OR LOWER(entries.preparation) LIKE :q
+      OR LOWER(entries.keywords) LIKE :q)",
+      :q => "%#{query}%"
     )
   }
 
