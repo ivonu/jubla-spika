@@ -16,4 +16,11 @@
 //= require filterrific/filterrific-jquery
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require data-confirm-modal
 //= require_tree .
+
+dataConfirmModal.setDefaults({
+  title: 'Bitte bestätigen',
+  commit: 'Fortfahren',
+  cancel: 'Abbrechen'
+});

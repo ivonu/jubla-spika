@@ -24,6 +24,8 @@ gem 'figaro'
 gem 'filterrific'
 gem 'will_paginate'
 
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
 group :development, :test do
   gem 'sqlite3'
 end

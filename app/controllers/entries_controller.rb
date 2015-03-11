@@ -66,6 +66,11 @@ class EntriesController < ApplicationController
     redirect_to entries_path
   end
 
+  def plan
+    flash[:success] = "Received #{params[:part]} (#{params[:entry]})"
+    redirect_to entries_path
+  end
+
 
   private
     def entry_params

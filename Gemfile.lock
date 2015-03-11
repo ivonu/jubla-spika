@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/ifad/data-confirm-modal.git
+  revision: c2c1e466c6b2d6065c1e2e16e37456813d32b348
+  specs:
+    data-confirm-modal (1.0.1)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -169,6 +176,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 4.1.0)
+  data-confirm-modal!
   devise
   enum_help
   figaro

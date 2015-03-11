@@ -13,4 +13,16 @@ module EntriesHelper
 
   end
 
+  def print_time (value)
+
+    if value > 60
+      "#{value/60} Stunden".html_safe
+    elsif value == 60
+      "1 Stunde".html_safe
+    else
+      "#{value} Minuten".html_safe
+    end
+    
+  end
+
 end
