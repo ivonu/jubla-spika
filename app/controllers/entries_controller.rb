@@ -14,7 +14,7 @@ class EntriesController < ApplicationController
       persistence_id: 'shared_key'
     ) or return
 
-    @entries = @filterrific.find.where(independent: true).page(params[:page])
+    @entries = @filterrific.find.where(independent: true).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html

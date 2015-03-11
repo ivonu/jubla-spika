@@ -1,6 +1,6 @@
 <div id="filterrific_results">
 
-  <table class="table table-striped result-table">
+  <table class="table result-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -12,6 +12,14 @@
         <td><%= link_to(entry.title, entry_path(entry)) %></td>
         <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
       </tr>
+      <% if not entry.programs.empty? %>
+        <% entry.programs.each do |program| %>
+          <tr class="active">
+            <td><%= link_to(program.title, program_path(program)) %></td>
+            <td class="hidden-xs">Gruppenstunden-Vorschlag mit dem Spiel "<%= entry.title %>"</td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </table>
 

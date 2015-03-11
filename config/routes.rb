@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :new]
 
   resources :entries
+  resources :programs
 end
