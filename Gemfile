@@ -8,6 +8,8 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'enum_help'
 gem 'bootstrap-wysihtml5-rails'
+gem 'bootstrap-tagsinput-rails'
+gem 'twitter-typeahead-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'

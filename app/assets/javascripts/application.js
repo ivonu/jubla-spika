@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/locales/de-DE
+//= require bootstrap-tagsinput
+//= require twitter/typeahead
 //= require filterrific/filterrific-jquery
 //= require turbolinks
 //= require bootstrap-sprockets

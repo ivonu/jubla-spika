@@ -27,8 +27,13 @@ class EntriesController < ApplicationController
 
   end
 
+
   def new
     @entry = Entry.new()
+    
+    #@keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(',')}.flatten.uniq
+    @keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(/[\s,]/)}.flatten.uniq
+    @keywords = @keywords.collect {|x| x.delete("'")}
   end
 
   def create
@@ -41,12 +46,17 @@ class EntriesController < ApplicationController
     end
   end
 
+
   def show
     @entry = Entry.find(params[:id])
   end
 
   def edit
     @entry = Entry.find(params[:id])
+
+    #@keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(',')}.flatten.uniq
+    @keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(/[\s,]/)}.flatten.uniq
+    @keywords = @keywords.collect {|x| x.delete("'")}
   end
 
   def update
