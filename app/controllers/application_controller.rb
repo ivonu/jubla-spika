@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters_for_devise, if: :devise_controller?
 
   def index
-
+    @entries = Entry.last(5).reverse
   end
 
   def about

@@ -119,3 +119,15 @@ p a:hover {
 .navbar-left span:hover {
   border-bottom: 1px #646464 dotted;
 }
+
+.btn-xlarge {
+  padding: 15px 23px;
+  font-size: 22px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-right: 10px;
+  width: 180px !important;
+}

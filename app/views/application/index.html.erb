@@ -1,52 +1,41 @@
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
+<div id="start-carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#start-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#start-carousel" data-slide-to="1"></li>
+    <li data-target="#start-carousel" data-slide-to="2"></li>
   </ol>
 
-  <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="http://www.jubla.ch/typo3temp/pics/64293be726.jpg">
-
-      <div class="carousel-caption">
-        ein typisches Bild
-      </div>
+      <img src="https://www.mysocialhq.com/images/homepage-header-banner-bg.jpg">
     </div>
     <div class="item">
-      <img src="http://www.jubla.ch/typo3temp/pics/64293be726.jpg">
-
-      <div class="carousel-caption">
-        und noch eines
-      </div>
+      <img src="https://www.mysocialhq.com/images/homepage-header-banner-bg.jpg">
+    </div>
+    <div class="item">
+      <img src="https://www.mysocialhq.com/images/homepage-header-banner-bg.jpg">
     </div>
   </div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#start-carousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
+    <span class="sr-only">Zurück</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  <a class="right carousel-control" href="#start-carousel" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
+    <span class="sr-only">Weiter</span>
   </a>
 </div>
 
 
 <div class="row">
   <div class="col-sm-8">
-    <br>
 
-    <p>
-      <button type="button" class="btn btn-primary btn-lg">Suchen</button>
-      Eine Gruppenstunde suchen
-    </p>
-    <p>
-      <button type="button" class="btn btn-primary btn-lg">Erstellen</button>
-      Eine Gruppenstunde erstellen
+    <p id="button-start-area" class="text-center">
+      <%= link_to 'Suchen', entries_path, class: "btn btn-primary btn-xlarge"%>
+      Nach einer Idee suchen<br>
+      <%= link_to 'Erstellen', new_entry_path, class: "btn btn-primary btn-xlarge"%>
+      Selber Einträge erstellen
     </p>
 
     <h1>News</h1>
@@ -87,10 +76,9 @@
 
     <h1>Neueste Gruppenstunden</h1>
     <ul>
-      <li>15, 14</li>
-      <li>Orangenfangen</li>
-      <li>Spass haben</li>
-      <li>Tralala</li>
+      <% @entries.each do |entry| %>
+        <li><%= link_to(entry.title, entry_path(entry)) %></li>
+      <% end %>
     </ul>
 
     <h1>Links</h1>
