@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/de-DE
 //= require filterrific/filterrific-jquery
 //= require turbolinks
 //= require bootstrap-sprockets

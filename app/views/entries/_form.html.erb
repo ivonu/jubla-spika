@@ -1,27 +1,47 @@
 <%= simple_form_for @entry do |f| %>
+    <div class="row">
+        <%= f.input :title, label: 'Titel', wrapper_html: { class: "col-sm-6" } %>
+        <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt', wrapper_html: { class: "col-sm-6" } %>
+    </div>
 
-  <%= f.input :title, label: 'Titel' %>
-  <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt' %>
-  <%= f.input :description, label: 'Spiel-Beschreibung' %>
-  <%= f.input :material, label: 'Material' %>
-  <%= f.input :remarks, label: 'Bemerkungen' %>
-  <%= f.input :preparation, label: 'Vorbereitungen' %>
-  <%= f.input :keywords, label: 'Stichwörter', hint: 'durch Komma getrennt' %>
+    <%= f.input :description, label: 'Spiel-Beschreibung' %>
 
-  <%= f.input :part_start, label: 'Einleitung' %>
-  <%= f.input :part_main, label: 'Hauptteil' %>
-  <%= f.input :part_end, label: 'Schluss' %>
+    <div class="row">
+        <%= f.input :material, label: 'Material', wrapper_html: { class: "col-sm-6" } %>
+        <%= f.input :preparation, label: 'Vorbereitungen', wrapper_html: { class: "col-sm-6" } %>
+    </div>
 
-  <%= f.input :indoors, label: 'Drinnen' %>
-  <%= f.input :outdoors, label: 'Draussen' %>
+    <%= f.input :keywords, label: 'Stichwörter', hint: 'durch Komma getrennt' %>
+    <%= f.input :remarks, label: 'Bemerkungen' %>
 
-  <%= f.input :weather_snow, label: 'Schnee' %>
-  <%= f.input :weather_rain, label: 'Regen' %>
-  <%= f.input :weather_sun, label: 'Sonne' %>
+    <div class="row">
+      <div class="col-sm-3 col-xs-6">
+        <label>Geeignet als:</label>
+        <%= f.input :part_start, label: 'Einleitung' %>
+        <%= f.input :part_main, label: 'Hauptteil' %>
+        <%= f.input :part_end, label: 'Schluss' %>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <label>Spielart:</label>
+        <%= f.input :act_active, label: 'Aktiv' %>
+        <%= f.input :act_calm, label: 'Ruhig' %>
+        <%= f.input :act_creative, label: 'Kreativ' %>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <label>Spielbar:</label>
+        <%= f.input :indoors, label: 'Drinnen' %>
+        <%= f.input :outdoors, label: 'Draussen' %>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <label>Wetter:</label>
+        <%= f.input :weather_snow, label: 'Schnee' %>
+        <%= f.input :weather_rain, label: 'Regen' %>
+        <%= f.input :weather_sun, label: 'Sonne' %>
+      </div>
+    </div>
 
-  <%= f.input :act_active, label: 'Aktiv' %>
-  <%= f.input :act_calm, label: 'Ruhig' %>
-  <%= f.input :act_creative, label: 'Kreativ' %>
+
+
 
   <%= f.input :group_size, label: 'Gruppengrösse', as: :slider, min: '2', max: '100', unit: 'Kinder' %>
   <%= f.input :age, label: 'Alter', as: :slider, min: '5', max: '99', unit: 'Jahre' %>
@@ -33,3 +53,19 @@
 <% end %>
 
 <script>init_slider();</script>
+<script>
+    $('#entry_description').wysihtml5({
+        locale: "de-DE",
+        toolbar: {
+            "font-styles": true,    //Font styling, e.g. h1, h2, etc. Default true
+            "emphasis": true,       //Italics, bold, etc. Default true
+            "lists": true,          //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+            "html": false,          //Button which allows you to edit the generated HTML. Default false
+            "link": false,          //Button to insert a link. Default true
+            "image": false,         //Button to insert an image. Default true,
+            "color": true,          //Button to change color of font
+            "blockquote": false,    //Blockquote
+            "size": "sm"            //default: none, other options are xs, sm, lg
+        }
+    });
+</script>
