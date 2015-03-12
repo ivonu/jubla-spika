@@ -27,17 +27,21 @@
   </a>
 </div>
 
+<div class="jumbotron">
+    <div class="row">
+      <div class="col-sm-6 text-center button-start-area">
+          <%= link_to 'Suchen', entries_path, class: "btn btn-primary btn-xlarge"%><br/>
+          Nach einer Idee suchen
+      </div>
+      <div class="col-sm-6 text-center button-start-area">
+          <%= link_to 'Erstellen', new_entry_path, class: "btn btn-primary btn-xlarge"%><br/>
+          Selber Einträge erstellen
+      </div>
+    </div>
+</div>
 
 <div class="row">
   <div class="col-sm-8">
-
-    <p id="button-start-area" class="text-center">
-      <%= link_to 'Suchen', entries_path, class: "btn btn-primary btn-xlarge"%>
-      Nach einer Idee suchen<br>
-      <%= link_to 'Erstellen', new_entry_path, class: "btn btn-primary btn-xlarge"%>
-      Selber Einträge erstellen
-    </p>
-
     <h1>News</h1>
 
     <h2>Blabla</h2>
