@@ -14,16 +14,17 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp.mandrillapp.com',
-      :domain         => 'spielkatapult.jubla.ch',
-      :port           => 587,
-      :user_name      => Figaro.env.mandrill_username,
-      :password       => Figaro.env.mandrill_apikey,
+      :address        => 'nerthus.metanet.ch',
+      :domain         => 'releibrugg.ch',
+      :port           => 465,
+      :user_name      => Figaro.env.smtp_username,
+      :password       => Figaro.env.smtp_password,
       :authentication => :login,
+      :ssl            => true,
       :enable_starttls_auto => true
   }
 
