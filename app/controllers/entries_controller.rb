@@ -1,7 +1,6 @@
 class EntriesController < ApplicationController
 
   def index
-
     @filterrific = initialize_filterrific(
       Entry,
       params[:filterrific],
@@ -27,13 +26,13 @@ class EntriesController < ApplicationController
 
   end
 
+  def show
+    @entry = Entry.find(params[:id])
+  end
+
 
   def new
     @entry = Entry.new()
-    
-    #@keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(',')}.flatten.uniq
-    @keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(/[\s,]/)}.flatten.uniq
-    @keywords = @keywords.collect {|x| x.delete("'")}
   end
 
   def create
@@ -47,16 +46,8 @@ class EntriesController < ApplicationController
   end
 
 
-  def show
-    @entry = Entry.find(params[:id])
-  end
-
   def edit
     @entry = Entry.find(params[:id])
-
-    #@keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(',')}.flatten.uniq
-    @keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(/[\s,]/)}.flatten.uniq
-    @keywords = @keywords.collect {|x| x.delete("'")}
   end
 
   def update
@@ -69,6 +60,7 @@ class EntriesController < ApplicationController
     end
   end
 
+
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
@@ -76,12 +68,21 @@ class EntriesController < ApplicationController
     redirect_to entries_path
   end
 
+
   def plan
     flash[:success] = "Received #{params[:part]} (#{params[:entry]})"
     
     redirect_to entries_path
   end
 
+  def tags
+    @keywords = Entry.uniq.pluck(:keywords).collect {|x| x.split(/[\s,]/)}.flatten.uniq
+    @keywords = @keywords.collect {|x| x.delete("'")}
+
+    respond_to do |format|
+      format.json { render json: @keywords }
+    end
+  end
 
   private
     def entry_params
@@ -111,5 +112,4 @@ class EntriesController < ApplicationController
                                     :time_max,
                                     :independent)
     end
-
 end

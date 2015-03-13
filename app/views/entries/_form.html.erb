@@ -68,9 +68,11 @@
 </script>
 <script>
     var tags = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: $.map(JSON.parse('<%= raw @keywords.to_json() %>'), function(tag) { return { value: tag }; })
+        prefetch: {
+            url: '<%= tags_entries_path %>'
+        }
     });
     tags.initialize();
 
@@ -79,9 +81,9 @@
         trimValue: true,
         typeaheadjs: {
             name: 'tags',
-            displayKey: 'value',
+            displayKey: 'name',
+            valueKey: 'name',
             source: tags.ttAdapter()
         }
     });
-
 </script>
