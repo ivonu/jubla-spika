@@ -11,7 +11,7 @@
         <%= f.input :preparation, label: 'Vorbereitungen', wrapper_html: { class: "col-sm-6" } %>
     </div>
 
-    <%= f.input :keywords, as: :string, label: 'Stichwörter', hint: 'durch Komma getrennt', input_html: { data: {role: "tagsinput" }} %>
+    <%= f.input :keywords, as: :string, label: 'Stichwörter', hint: 'durch Komma getrennt' %>
     <%= f.input :remarks, label: 'Bemerkungen' %>
 
     <div class="row">
@@ -67,23 +67,22 @@
     });
 </script>
 <script>
-    var tags = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: {
-            url: 'entries/tags.json'
-        }
-    });
-    tags.initialize();
-
-    $('#entry_keywords').tagsinput({
-        confirmKeys: [13, 32, 44],
-        trimValue: true,
-        typeaheadjs: {
-            name: 'tags',
-            displayKey: 'name',
-            valueKey: 'name',
-            source: tags.ttAdapter()
-        }
+    $.getJSON("<%= tags_entries_url(format: :json) %>", function (data) {
+        var tags = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: $.map(data, function (tag) { return {name: tag}; })
+        });
+        tags.initialize();
+        $('#entry_keywords').tagsinput({
+            confirmKeys: [13, 32, 44],
+            trimValue: true,
+            typeaheadjs: {
+                name: 'tags',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: tags.ttAdapter()
+            }
+        });
     });
 </script>
