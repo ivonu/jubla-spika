@@ -71,7 +71,7 @@
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         prefetch: {
-            url: '<%= tags_entries_path(format: :json) %>'
+            url: 'entries/tags.json'
         }
     });
     tags.initialize();
