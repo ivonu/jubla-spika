@@ -1,0 +1,13 @@
+<table class="plan-list">
+  <% list.each do |id| entry = Entry.find(id) %>
+    <tr>
+      <td>
+        <%= link_to(entry.title, entry_path(entry)) %>
+      </td>
+      <td>
+        <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe,
+          {:controller => :entries, :action => :plan, :entry => entry.id, :do => "del_#{part}"}, :method => :post %>
+      </td>
+    </tr>
+  <% end %>
+</table>
