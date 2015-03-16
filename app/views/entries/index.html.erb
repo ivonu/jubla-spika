@@ -63,7 +63,7 @@
     </div>
 
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-<%= if @plan then "6" else "9" end %>">
   
     <h2>Ergebnisse</h2>
 
@@ -73,4 +73,29 @@
     ) %>
 
   </div>
+  <% if @plan %>
+    <div class="col-sm-3">
+
+      <h2>Deine Gruppenstunde</h2>
+
+      <h3>Einleitung</h3>
+      <%= render(
+        partial: 'entries/plan',
+        locals: { list: @plan_start, part: 'start' }
+      ) %>
+
+      <h3>Hauptteil</h3>
+      <%= render(
+        partial: 'entries/plan',
+        locals: { list: @plan_main, part: 'main' }
+      ) %>
+
+      <h3>Schluss</h3>
+      <%= render(
+        partial: 'entries/plan',
+        locals: { list: @plan_end, part: 'end' }
+      ) %>
+
+    </div>
+  <% end %>
 </div>

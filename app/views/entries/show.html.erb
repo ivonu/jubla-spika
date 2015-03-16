@@ -14,9 +14,9 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><%= link_to 'Einleitung', {:controller => :entries, :action => :plan, :entry => @entry.id, :part => 'start'}, :method => :post %></li>
-          <li><%= link_to 'Hauptteil', {:controller => :entries, :action => :plan, :entry => @entry.id, :part => 'main'}, :method => :post %></li>
-          <li><%= link_to 'Schluss', {:controller => :entries, :action => :plan, :entry => @entry.id, :part => 'end'}, :method => :post %></li>
+          <li><%= link_to 'Einleitung', {:controller => :entries, :action => :plan, :entry => @entry.id, :do => 'add_start'}, :method => :post %></li>
+          <li><%= link_to 'Hauptteil', {:controller => :entries, :action => :plan, :entry => @entry.id, :do => 'add_main'}, :method => :post %></li>
+          <li><%= link_to 'Schluss', {:controller => :entries, :action => :plan, :entry => @entry.id, :do => 'add_end'}, :method => :post %></li>
         </ul>
       </div>
       <div class="btn-group">

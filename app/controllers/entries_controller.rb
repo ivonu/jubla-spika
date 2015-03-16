@@ -2,6 +2,12 @@ class EntriesController < ApplicationController
 
   def index
 
+    @plan_start = (session[:plan_start] == nil) ? [] : session[:plan_start]
+    @plan_main = (session[:plan_main] == nil) ? [] : session[:plan_main]
+    @plan_end = (session[:plan_end] == nil) ? [] : session[:plan_end]
+    @plan = (@plan_start.size() != 0) || (@plan_main.size() != 0) || (@plan_end.size() != 0)
+
+
     @filterrific = initialize_filterrific(
       Entry,
       params[:filterrific],
@@ -67,8 +73,26 @@ class EntriesController < ApplicationController
   end
 
   def plan
-    flash[:success] = "Received #{params[:part]} (#{params[:entry]})"
-    
+    if params[:do] == 'add_start'
+      unless (session[:plan_start] ||= []).include?(params[:entry]) 
+        session[:plan_start] << params[:entry]
+      end
+    elsif params[:do] == 'add_main'
+      unless (session[:plan_main] ||= []).include?(params[:entry]) 
+        session[:plan_main] << params[:entry]
+      end
+    elsif params[:do] == 'add_end'
+      unless (session[:plan_end] ||= []).include?(params[:entry]) 
+        session[:plan_end] << params[:entry]
+      end
+
+    elsif params[:do] == 'del_start'
+      session[:plan_start] -= [params[:entry]]
+    elsif params[:do] == 'del_main'
+      session[:plan_main] -= [params[:entry]]
+    elsif params[:do] == 'del_end'
+      session[:plan_end] -= [params[:entry]]
+
     redirect_to entries_path
   end
 
