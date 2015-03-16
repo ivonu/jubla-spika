@@ -96,6 +96,7 @@ class EntriesController < ApplicationController
       session[:plan_main] -= [params[:entry]]
     elsif params[:do] == 'del_end'
       session[:plan_end] -= [params[:entry]]
+    end
 
     redirect_to entries_path
   end
