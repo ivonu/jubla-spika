@@ -1,0 +1,21 @@
+<h2>Beschreibung</h2>
+<p><%= @entry.description.html_safe %></p>
+
+<% if not @entry.material.empty? %>
+  <h2>Material</h2>
+  <ul>
+    <% @entry.material.split(/\r?\n/).each do |t| %>
+      <li><%= "#{t}" %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if not @entry.remarks.empty? %>
+  <h2>Bemerkungen</h2>
+  <p><%= @entry.remarks %></p>
+<% end %>
+
+<% if not @entry.preparation.empty? %>
+  <h2>Vorbereitungen</h2>
+  <p><%= @entry.preparation %></p>
+<% end %>

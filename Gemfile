@@ -27,6 +27,9 @@ gem 'figaro'
 gem 'filterrific'
 gem 'will_paginate'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 group :development, :test do

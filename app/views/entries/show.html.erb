@@ -31,80 +31,16 @@
                 data: { confirm: 'Soll dieser Eintrag wirklich gelöscht werden?' } %></li>
         </ul>
       </div>
-      <button type="button" class="btn btn-primary">Drucken</button>
+      <%= link_to 'Drucken', entry_path(@entry, :format => 'pdf'), class: "btn btn-primary"%>
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-9">
-    
-    <h2>Beschreibung</h2>
-    <p><%= @entry.description.html_safe %></p>
-
-    <% if not @entry.material.empty? %>
-      <h2>Material</h2>
-      <ul>
-        <% @entry.material.split(/\r?\n/).each do |t| %>
-          <li><%= "#{t}" %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <% if not @entry.remarks.empty? %>
-      <h2>Bemerkungen</h2>
-      <p><%= @entry.remarks %></p>
-    <% end %>
-
-    <% if not @entry.preparation.empty? %>
-      <h2>Vorbereitungen</h2>
-      <p><%= @entry.preparation %></p>
-    <% end %>
-
+    <%= render 'description' %>
   </div>
   <div class="col-sm-3">
-    
-    <h3>Geeignet als</h3>
-    <p>
-      <%= checked_glyphicons(@entry.part_start) %> Einleitung<br>
-      <%= checked_glyphicons(@entry.part_main)  %> Hauptteil<br>
-      <%= checked_glyphicons(@entry.part_end)   %> Schluss
-    </p>
-
-    <h3>Spielbar</h3>
-    <p>
-      <%= checked_glyphicons(@entry.indoors)  %> Drinnen<br>
-      <%= checked_glyphicons(@entry.outdoors) %> Draussen<br>
-    </p>
-
-    <h3>Wetter</h3>
-    <p>
-      <%= checked_glyphicons(@entry.weather_snow) %> Schnee<br>
-      <%= checked_glyphicons(@entry.weather_rain) %> Regen<br>
-      <%= checked_glyphicons(@entry.weather_sun)  %> Sonne<br>
-    </p>
-
-    <h3>Spielart</h3>
-    <p>
-      <%= checked_glyphicons(@entry.act_active)   %> Aktiv<br>
-      <%= checked_glyphicons(@entry.act_calm)     %> Ruhig<br>
-      <%= checked_glyphicons(@entry.act_creative) %> Kreativ<br>
-    </p>
-
-    <h3>Gruppengrösse</h3>
-    <p>
-      <%= @entry.group_size_min %> - <%= @entry.group_size_max %> Kinder
-    </p>
-
-    <h3>Alter</h3>
-    <p>
-      <%= @entry.age_min %> - <%= @entry.age_max %> Jahre
-    </p>
-
-    <h3>Zeit</h3>
-    <p>
-      <%= print_time(@entry.time_min) %> - <%= print_time(@entry.time_max) %>
-    </p>
-
+    <%= render 'details' %>
   </div>
 </div>

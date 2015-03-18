@@ -1,0 +1,52 @@
+* {
+  font-family: "Century Gothic W01";
+}
+
+#logo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: -1;
+}
+
+#title {
+  width: 100%;
+  background-color: #BBBBBB;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+#description {
+  float: left;
+  width: 70%;
+}
+
+#details {
+  float: right;
+  width: 25%;
+}
+
+.glyphicon-ok:before {
+  content: "\e013";
+}
+
+.glyphicon-remove:before {
+  content: "\e014";
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

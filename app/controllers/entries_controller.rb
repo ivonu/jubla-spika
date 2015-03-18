@@ -35,6 +35,15 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  :pdf => "Spika_Eintrag",
+                :template => 'entries/show.pdf.erb',
+                :page_size => 'A4',
+                :footer => {:left => "spika.jubla.ch", :center => "Spielkatapult", :right => 'Seite [page] von [topage]' }
+      end
+    end
   end
 
 
