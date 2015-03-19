@@ -1,0 +1,9 @@
+<h1><%= @news.title %></h1>
+<p><%= @news.text.html_safe %></p>
+<br>
+
+<%= link_to 'Zurück', news_index_path, class: "btn btn-primary" %>
+<%= link_to 'Bearbeiten', edit_news_path(@news), class: "btn btn-primary" %>
+<%= link_to 'Löschen', news_path(@news), class: "btn btn-danger",
+  method: :delete,
+  data: { confirm: 'Soll dieser Eintrag wirklich gelöscht werden?' } %>

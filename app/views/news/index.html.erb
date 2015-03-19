@@ -1,0 +1,15 @@
+<h1>News</h1>
+ 
+<table class="table">
+  <tr>
+    <th>Bisherige News</th>
+  </tr>
+ 
+  <% @news.each do |news| %>
+    <tr>
+      <td><%= link_to(news.title, news_path(news)) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Erstellen', new_news_path, class: "btn btn-primary"%>
