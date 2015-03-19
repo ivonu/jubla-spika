@@ -42,37 +42,13 @@
 
 <div class="row">
   <div class="col-sm-8">
+
     <h1>News</h1>
-
-    <h2>Blabla</h2>
-
-    <p>Lorem ipsum Et occaecat et labore nisi eiusmod voluptate Excepteur incididunt magna velit esse aliqua occaecat
-      nostrud consequat ex dolor et voluptate commodo in in culpa consequat aute amet aliqua dolor amet Excepteur ut eu
-      aliquip velit velit dolor dolore deserunt ad est dolor anim pariatur magna non dolore eiusmod incididunt sint quis
-      eiusmod pariatur dolore ad commodo adipisicing elit fugiat laboris aliqua dolor adipisicing ad culpa commodo sint
-      cillum dolor eu officia enim velit in cillum aute mollit aliqua qui sed tempor mollit minim esse do quis commodo
-      ullamco nulla Duis voluptate aute amet ut quis ut in est ullamco incididunt consequat et non dolore laborum cillum
-      aute adipisicing esse eiusmod qui dolore do dolore pariatur in aute ut Ut sit sed cupidatat fugiat cupidatat Duis
-      nulla occaecat et non veniam Ut do do voluptate sed sint veniam consectetur veniam esse velit irure voluptate
-      cillum dolor mollit adipisicing veniam dolor sit mollit in aliquip adipisicing sit Excepteur ex cillum
-      exercitation aliqua nisi enim dolor Excepteur Duis aute eu veniam ut mollit pariatur dolore eiusmod ad officia
-      anim Duis in adipisicing dolore nisi sunt aliquip reprehenderit irure anim minim eu amet proident occaecat dolor
-      consectetur laboris cillum consequat.</p>
-
-    <h2>Blabla</h2>
-
-    <p>Lorem ipsum Et occaecat et labore nisi eiusmod voluptate Excepteur incididunt magna velit esse aliqua occaecat
-      nostrud consequat ex dolor et voluptate commodo in in culpa consequat aute amet aliqua dolor amet Excepteur ut eu
-      aliquip velit velit dolor dolore deserunt ad est dolor anim pariatur magna non dolore eiusmod incididunt sint quis
-      eiusmod pariatur dolore ad commodo adipisicing elit fugiat laboris aliqua dolor adipisicing ad culpa commodo sint
-      cillum dolor eu officia enim velit in cillum aute mollit aliqua qui sed tempor mollit minim esse do quis commodo
-      ullamco nulla Duis voluptate aute amet ut quis ut in est ullamco incididunt consequat et non dolore laborum cillum
-      aute adipisicing esse eiusmod qui dolore do dolore pariatur in aute ut Ut sit sed cupidatat fugiat cupidatat Duis
-      nulla occaecat et non veniam Ut do do voluptate sed sint veniam consectetur veniam esse velit irure voluptate
-      cillum dolor mollit adipisicing veniam dolor sit mollit in aliquip adipisicing sit Excepteur ex cillum
-      exercitation aliqua nisi enim dolor Excepteur Duis aute eu veniam ut mollit pariatur dolore eiusmod ad officia
-      anim Duis in adipisicing dolore nisi sunt aliquip reprehenderit irure anim minim eu amet proident occaecat dolor
-      consectetur laboris cillum consequat.</p>
+    <% @news.each do |news| %>
+      <h2><%= news.title %></h2>
+      <p><%= news.text.html_safe %></p>
+    <% end %>
+    <%= will_paginate @news %>
 
   </div>
 
