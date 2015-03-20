@@ -63,10 +63,9 @@
 
     <h1>Links</h1>
     <ul>
-      <li>Schub</li>
-      <li>Jubla</li>
-      <li>Grustu.ch</li>
-      <li>Berikon</li>
+      <% @links.each do |link| %>
+        <li><a href="<%= link.url %>" target="_blank"><%= link.title %></a></li>
+      <% end %>
     </ul>
 
   </div>

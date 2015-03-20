@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get 'about', to: 'application#about'
 
   devise_for :users
+  
   resources :users, except: [:create, :new]
+  resources :news
+  resources :links
+  resources :programs
 
   resources :entries do
     collection do
@@ -15,7 +19,4 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :news
-
-  resources :programs
 end

@@ -1,0 +1,10 @@
+<h1><%= @link.title %></h1>
+<h2><%= @link.url %></h2>
+<br>
+
+<%= link_to 'Zurück', links_path, class: "btn btn-primary" %>
+<a class="btn btn-primary" href="<%= @link.url %>" target="_blank" role="button">Öffnen</a>
+<%= link_to 'Bearbeiten', edit_link_path(@link), class: "btn btn-primary" %>
+<%= link_to 'Löschen', link_path(@link), class: "btn btn-danger",
+  method: :delete,
+  data: { confirm: 'Soll dieser Link wirklich gelöscht werden?' } %>
