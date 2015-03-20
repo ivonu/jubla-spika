@@ -9,10 +9,15 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters_for_devise, if: :devise_controller?
 
+  before_filter :load_links
+
+  def load_links
+    @links = Link.all()
+  end
+
   def index
     @entries = Entry.last(5).reverse
     @news = News.paginate(:page => params[:page], :per_page => 3).order('id DESC')
-    @links = Link.all()
   end
 
   def about
