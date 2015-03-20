@@ -43,7 +43,7 @@ class Entry < ActiveRecord::Base
 
   def self.check_boolean_attr attr_name, attr_value
     return nil  if 0 == attr_value
-    where("#{attr_name} = 't'")
+    where(attr_name.to_sym => true)
   end
 
   scope :with_part_start, lambda { |flag| check_boolean_attr "part_start", flag }
