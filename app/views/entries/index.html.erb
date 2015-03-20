@@ -53,6 +53,9 @@
           <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
         </div>
         <div>
+          <%= f.submit 'Suchen', class: "btn btn-primary" %>
+        </div>
+        <div>
           <%= link_to(
             'Filter zurücksetzen',
             reset_filterrific_url,
