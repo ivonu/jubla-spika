@@ -2,6 +2,7 @@ class Entry < ActiveRecord::Base
 
   has_many :program_entries
   has_many :programs, through: :program_entries
+  has_many :ratings
 
   validates :title, presence: true
   validates :description, presence: true
