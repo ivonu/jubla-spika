@@ -54,9 +54,17 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
-      redirect_to @entry
+      if @program_entry
+        @program_entry.entry = @entry
+        if @program_entry.save
+          redirect_to @program_entry.program
+        end
+      else
+        redirect_to @entry
+      end
     else
       render 'new'
     end
@@ -168,5 +176,9 @@ class EntriesController < ApplicationController
                                     :time_min,
                                     :time_max,
                                     :independent)
+    end
+
+    def program_entry_params
+      params.require(:program_entry).permit(:program_id, :order)
     end
 end

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-4">
+    <h1>
+      <%= @program.title %><br>
+    </h1>
+  </div>
+  <div class="col-sm-7 hidden-xs">
+    <%= render 'buttons' %>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-sm-9">
+
+    <%= render 'description' %>
+  </div>
+  <div class="col-sm-3">
+    <%= render 'details' %>
+  </div>
+</div>
+
+<div class="row visible-xs-block">
+  <div class="col-xs-12">
+    <%= render 'buttons' %>
+  </div>
+</div>

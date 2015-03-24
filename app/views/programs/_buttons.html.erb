@@ -1,0 +1,35 @@
+<div id="entry_button_area">
+
+  <div class="btn-group btn-space">
+    <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
+  </div>
+  <div class="btn-group btn-space">
+    <%= link_to 'Drucken', entry_path(@program, :format => 'pdf'), class: "btn btn-primary btn-space"%>
+  </div>
+
+  <div class="btn-group btn-space">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Ändern
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= link_to 'Bearbeiten', edit_program_path(@program) %></li>
+      <li><%= link_to 'Löschen', program_path(@program),
+            method: :delete,
+            data: { confirm: 'Soll dieser Eintrag wirklich gelöscht werden?' } %></li>
+    </ul>
+  </div>
+
+  <div class="btn-group btn-space">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Hinzufügen
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= link_to 'Einstieg', program_new_entry_path(@program, order: 100) %></li>
+      <li><%= link_to 'Hauptteil', program_new_entry_path(@program, order: 200) %></li>
+      <li><%= link_to 'Ausstieg', program_new_entry_path(@program, order: 300) %></li>
+    </ul>
+  </div>
+
+</div>

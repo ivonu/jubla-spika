@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def new_idea
+
+  end
+
   protected
   def configure_permitted_parameters_for_devise
     devise_parameter_sanitizer.for(:sign_up) << :name

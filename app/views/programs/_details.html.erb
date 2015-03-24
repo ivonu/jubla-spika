@@ -1,0 +1,34 @@
+<h3>Spielbar</h3>
+<p>
+  <%= checked_glyphicons(@combined.indoors)  %> Drinnen<br>
+  <%= checked_glyphicons(@combined.outdoors) %> Draussen<br>
+</p>
+
+<h3>Wetter</h3>
+<p>
+  <%= checked_glyphicons(@combined.weather_snow) %> Schnee<br>
+  <%= checked_glyphicons(@combined.weather_rain) %> Regen<br>
+  <%= checked_glyphicons(@combined.weather_sun)  %> Sonne<br>
+</p>
+
+<h3>Spielart</h3>
+<p>
+  <%= checked_glyphicons(@combined.act_active)   %> Aktiv<br>
+  <%= checked_glyphicons(@combined.act_calm)     %> Ruhig<br>
+  <%= checked_glyphicons(@combined.act_creative) %> Kreativ<br>
+</p>
+
+<h3>Gruppengrösse</h3>
+<p>
+  <%= @combined.group_size_min %> - <%= @combined.group_size_max %> Kinder
+</p>
+
+<h3>Alter</h3>
+<p>
+  <%= @combined.age_min %> - <%= @combined.age_max %> Jahre
+</p>
+
+<h3>Zeit</h3>
+<p>
+  <%= print_time(@combined.time_min) %> - <%= print_time(@combined.time_max) %>
+</p>
