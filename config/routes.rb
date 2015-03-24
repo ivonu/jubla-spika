@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'wissen', to: 'application#theory'
   get 'about', to: 'application#about'
+  get 'new_idea', to: 'application#new_idea'
 
   devise_for :users
   
