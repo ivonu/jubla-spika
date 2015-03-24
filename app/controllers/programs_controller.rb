@@ -42,6 +42,16 @@ class ProgramsController < ApplicationController
       @combined.act_calm = @combined.act_calm || entry.act_calm
       @combined.act_creative = @combined.act_creative || entry.act_creative
     end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  :pdf => "Spika_Program",
+                :template => 'programs/show.pdf.erb',
+                :page_size => 'A4',
+                :footer => {:left => "spika.jubla.ch", :center => "Spielkatapult", :right => 'Seite [page] von [topage]' }
+      end
+    end
   end
 
   def new

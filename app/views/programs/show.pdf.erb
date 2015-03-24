@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <%= wicked_pdf_stylesheet_link_tag 'pdf_fonts' %>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+  </head>
+  <body>
+
+    <%= wicked_pdf_image_tag 'logo_pdf.png', :id => 'logo' %>
+    <div id="title">
+      <%= @program.title %>
+    </div>
+
+    <div id="description">
+      <%= render :template => 'programs/_description.html.erb' %>
+    </div>
+
+    <div id="details">
+      <%= render :template => 'programs/_details.html.erb' %>
+    </div>
+
+  </body>
+</html>
