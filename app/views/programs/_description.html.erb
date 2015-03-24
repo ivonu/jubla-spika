@@ -1,0 +1,45 @@
+
+<h2>Einstieg</h2>
+<% @program.program_entries.order(:order).where(order: (100..199)).each do |pe| %>
+    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
+    <p><%= pe.entry.description.html_safe %></p>
+<% end %>
+
+<h2>Hauptteil</h2>
+<% @program.program_entries.order(:order).where(order: (200..299)).each do |pe| %>
+    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
+    <p><%= pe.entry.description.html_safe %></p>
+<% end %>
+
+<h2>Ausstieg</h2>
+<% @program.program_entries.order(:order).where(order: (300..399)).each do |pe| %>
+    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
+    <p><%= pe.entry.description.html_safe %></p>
+<% end %>
+
+<% if not @combined.material.empty? %>
+  <h2>Material</h2>
+  <ul>
+    <% @combined.material.flatten.uniq.each do |t| %>
+      <li><%= "#{t}" %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if not @combined.remarks.empty? %>
+  <h2>Bemerkungen</h2>
+    <ul>
+      <% @combined.remarks.each do |t| %>
+          <li><%= t %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<% if not @combined.preparation.empty? %>
+  <h2>Vorbereitungen</h2>
+    <ul>
+      <% @combined.preparation.each do |t| %>
+          <li><%= t %></li>
+      <% end %>
+    </ul>
+<% end %>
