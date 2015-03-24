@@ -44,7 +44,13 @@
   <%= f.input :age, label: 'Alter', as: :slider, min: '5', max: '99', unit: 'Jahre' %>
   <%= f.input :time, label: 'Zeitaufwand', as: :slider, min: '5', max: '180', setter: 'slider_set_time' %>
 
-  <%= f.input :independent, :as => :hidden, :input_html => {:value => '1'} %>
+  <% if @program_entry %>
+    <%= f.input :independent, label: 'Auch seperat durchführbar?', :input_html => {:value => '1'} %>
+    <input type="number" name="program_entry[program_id]" value="<%= @program_entry.program_id %>" hidden="hidden" />
+    <input type="number" name="program_entry[order]" value="<%= @program_entry.order %>" hidden="hidden" />
+  <% else %>
+    <%= f.input :independent, :as => :hidden, :input_html => {:value => '1'} %>
+  <% end %>
   <%= f.button :submit, 'Speichern' %>
 
 <% end %>

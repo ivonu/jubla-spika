@@ -48,6 +48,18 @@ class ProgramsController < ApplicationController
     @program = Program.new
   end
 
+  def new_entry
+    @entry = Entry.new
+
+    order = params[:order].to_i
+    program_id = params[:program_id].to_i
+    last_program_entry = ProgramEntry.where(program_id: program_id).where(order: (order..(order+99))).order(:order).last
+    order = last_program_entry.order+1 if last_program_entry
+    @program_entry = ProgramEntry.new(program_id: program_id.to_i, order: order)
+
+    render 'entries/new'
+  end
+
   def create
     @program = Program.new(program_params)
 
@@ -62,5 +74,4 @@ class ProgramsController < ApplicationController
   def program_params
     params.require(:program).permit(:title)
   end
-
 end

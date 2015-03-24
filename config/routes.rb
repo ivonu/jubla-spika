@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :new]
   resources :news
   resources :links
-  resources :programs
+  resources :programs do
+    get :new_entry
+  end
 
   resources :entries do
     collection do
