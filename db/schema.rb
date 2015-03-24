@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323161556) do
+ActiveRecord::Schema.define(version: 20150324160601) do
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150323161556) do
     t.boolean  "independent"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.float    "rating"
   end
 
   create_table "links", force: :cascade do |t|

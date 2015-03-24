@@ -1,5 +1,7 @@
 class EntriesController < ApplicationController
 
+  before_filter :authenticate_user!, :only => :rate
+
   def index
 
     @plan_start = (session[:plan_start] == nil) ? [] : session[:plan_start]
@@ -46,7 +48,6 @@ class EntriesController < ApplicationController
     end
   end
 
-
   def new
     @entry = Entry.new()
   end
@@ -84,7 +85,6 @@ class EntriesController < ApplicationController
     redirect_to entries_path
   end
 
-
   def plan
     if params[:do] == 'add_start'
       unless (session[:plan_start] ||= []).include?(params[:entry]) 
@@ -108,6 +108,28 @@ class EntriesController < ApplicationController
     end
 
     redirect_to entries_path
+  end
+
+  def rate
+    @entry = Entry.find(params[:entry])
+
+    if @entry.ratings.where(user: current_user).exists?
+      flash[:error] = "Du hast diesen Eintrag bereits bewertet"
+    else
+      value = params[:rating].to_f
+      if((value >= 1) && (value <= 5))
+        @entry.ratings.create(:user=>current_user, :value=>value)
+        tot_rate = 0
+        @entry.ratings.each do |rating|
+          tot_rate += rating.value
+        end
+        @entry.rating = (tot_rate.to_f / @entry.ratings.count).round(2)
+        @entry.save
+        flash[:success] = "Bewertet mit #{params[:rating]} Sternen"
+      end
+    end
+
+    redirect_to Entry.find(params[:entry])
   end
 
   def tags

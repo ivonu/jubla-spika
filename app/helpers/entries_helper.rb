@@ -25,4 +25,16 @@ module EntriesHelper
     
   end
 
+  def rating_comp (value, comp)
+
+    if(value.is_a? Numeric)
+      if(value <= comp)
+        '-empty'
+      end
+    else
+      '-empty'
+    end
+
+  end
+
 end
