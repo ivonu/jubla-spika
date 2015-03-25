@@ -114,6 +114,27 @@ class ProgramsController < ApplicationController
       render 'new'
     end
   end
+  
+  def edit
+    @program = Program.find(params[:id])
+  end
+
+  def update
+    @program = Program.find(params[:id])
+
+    if @program.update(program_params)
+      redirect_to @program
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @program = Program.find(params[:id])
+    @program.destroy
+
+    redirect_to entries_path
+  end
 
   def rate
     @program = Program.find(params[:program])
