@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325145115) do
+ActiveRecord::Schema.define(version: 20150325145114) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"

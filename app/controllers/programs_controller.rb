@@ -3,7 +3,37 @@ class ProgramsController < ApplicationController
   before_filter :authenticate_user!, :only => :rate
   
   def show
-    @program = Program.find(params[:id])
+    if params[:id].to_i == 0
+
+      @plan = true
+      @program = Program.new
+      @program.id = 0
+      @program.title = "Deine Gruppenstunde"
+
+      @plan_start = []
+      @plan_main = []
+      @plan_end = []
+
+      session[:plan_start].each do |id|
+        entry = Entry.find(id)
+        @program.entries << entry
+        @plan_start << entry
+      end
+      session[:plan_main].each do |id|
+        entry = Entry.find(id)
+        @program.entries << entry
+        @plan_main << entry
+      end
+      session[:plan_end].each do |id|
+        entry = Entry.find(id)
+        @program.entries << entry
+        @plan_end << entry
+      end
+
+    else
+      @plan = false
+      @program = Program.find(params[:id])
+    end
 
     @combined = OpenStruct.new
 

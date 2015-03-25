@@ -1,0 +1,45 @@
+
+<h2>Einstieg</h2>
+<% @plan_start.each do |entry| %>
+    <h3><%= link_to  entry.title, entry %></h3>
+    <p><%= entry.description.html_safe %></p>
+<% end %>
+
+<h2>Hauptteil</h2>
+<% @plan_main.each do |entry| %>
+    <h3><%= link_to  entry.title, entry %></h3>
+    <p><%= entry.description.html_safe %></p>
+<% end %>
+
+<h2>Ausstieg</h2>
+<% @plan_end.each do |entry| %>
+    <h3><%= link_to  entry.title, entry %></h3>
+    <p><%= entry.description.html_safe %></p>
+<% end %>
+
+<% if not @combined.material.empty? %>
+  <h2>Material</h2>
+  <ul>
+    <% @combined.material.flatten.uniq.each do |t| %>
+      <li><%= "#{t}" %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if not @combined.remarks.empty? %>
+  <h2>Bemerkungen</h2>
+    <ul>
+      <% @combined.remarks.each do |t| %>
+          <li><%= t %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<% if not @combined.preparation.empty? %>
+  <h2>Vorbereitungen</h2>
+    <ul>
+      <% @combined.preparation.each do |t| %>
+          <li><%= t %></li>
+      <% end %>
+    </ul>
+<% end %>

@@ -13,36 +13,43 @@
 
 <div class="row">
   <div class="col-sm-9">
-
-    <%= render 'description' %>
+    <% if @plan %>
+      <%= render 'description_plan' %>
+    <% else %>
+      <%= render 'description' %>
+    <% end %>
   </div>
   <div class="col-sm-3">
     <%= render 'details' %>
-    <h3>Bewertung</h3>
-    <p class='rating-area'>
-      <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '1'}, {:method => :post}) do %>
-        <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 0.5) %>"></span>
-      <% end %>
-      <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '2'}, {:method => :post}) do %>
-        <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 1.5) %>"></span>
-      <% end %>
-      <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '3'}, {:method => :post}) do %>
-        <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 2.5) %>"></span>
-      <% end %>
-      <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '4'}, {:method => :post}) do %>
-        <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 3.5) %>"></span>
-      <% end %>
-      <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '5'}, {:method => :post}) do %>
-        <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 4.5) %>"></span>
-      <% end %><br>
-      <% if @program.ratings.exists? %>
-        <%= @program.rating %> Sterne
-        (<%= @program.ratings.count %>
-        <%= if@program.ratings.count == 1 then 'Bewertung' else 'Bewertungen' end %>)
-      <% else %>
-        Noch keine Bewertungen
-      <% end %>
-    </p>
+
+    <% if not @plan %>
+      <h3>Bewertung</h3>
+      <p class='rating-area'>
+        <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '1'}, {:method => :post}) do %>
+          <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 0.5) %>"></span>
+        <% end %>
+        <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '2'}, {:method => :post}) do %>
+          <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 1.5) %>"></span>
+        <% end %>
+        <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '3'}, {:method => :post}) do %>
+          <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 2.5) %>"></span>
+        <% end %>
+        <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '4'}, {:method => :post}) do %>
+          <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 3.5) %>"></span>
+        <% end %>
+        <%= link_to({:controller => :programs, :action => :rate, :program => @program.id, :rating => '5'}, {:method => :post}) do %>
+          <span class="glyphicon glyphicon-star<%= rating_comp(@program.rating, 4.5) %>"></span>
+        <% end %><br>
+        <% if @program.ratings.exists? %>
+          <%= @program.rating %> Sterne
+          (<%= @program.ratings.count %>
+          <%= if@program.ratings.count == 1 then 'Bewertung' else 'Bewertungen' end %>)
+        <% else %>
+          Noch keine Bewertungen
+        <% end %>
+      </p>
+    <% end %>
+    
   </div>
 </div>
 

@@ -13,7 +13,11 @@
     </div>
 
     <div id="description">
-      <%= render :template => 'programs/_description.html.erb' %>
+      <% if @plan %>
+        <%= render :template => 'programs/_description_plan.html.erb' %>>
+      <% else %>
+        <%= render :template => 'programs/_description.html.erb' %>
+      <% end %>
     </div>
 
     <div id="details">
