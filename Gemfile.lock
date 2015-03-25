@@ -47,6 +47,11 @@ GEM
     autoprefixer-rails (5.0.0.3)
       execjs
       json
+    aws-sdk (1.63.0)
+      aws-sdk-v1 (= 1.63.0)
+    aws-sdk-v1 (1.63.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
@@ -56,6 +61,10 @@ GEM
     bootstrap-wysihtml5-rails (0.3.3.6)
       railties (>= 3.0)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -103,6 +112,11 @@ GEM
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     rack (1.6.0)
@@ -187,6 +201,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk (< 2.0)
   bootstrap-sass
   bootstrap-tagsinput-rails
   bootstrap-wysihtml5-rails
@@ -200,6 +215,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   mysql2
+  paperclip
   pundit
   rails (= 4.2.0)
   rails_12factor

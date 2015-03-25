@@ -23,6 +23,8 @@ gem 'turbolinks'
 gem 'devise'
 gem 'pundit'
 
+gem 'paperclip'
+
 gem 'figaro'
 
 gem 'filterrific'
@@ -40,5 +42,6 @@ end
 group :production do
   gem 'mysql2'
   gem 'rails_12factor'
+  gem 'aws-sdk', '< 2.0'
 end
 

@@ -76,6 +76,7 @@ class ProgramsController < ApplicationController
     @program = Program.new(program_params)
 
     if @program.save
+      flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden."
       redirect_to @program
     else
       render 'new'
