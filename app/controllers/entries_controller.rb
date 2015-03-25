@@ -9,7 +9,6 @@ class EntriesController < ApplicationController
     @plan_end = (session[:plan_end] == nil) ? [] : session[:plan_end]
     @plan = (@plan_start.size() != 0) || (@plan_main.size() != 0) || (@plan_end.size() != 0)
 
-
     @filterrific = initialize_filterrific(
       Entry,
       params[:filterrific],
@@ -24,6 +23,23 @@ class EntriesController < ApplicationController
 
     @entries = @filterrific.find.where(independent: true).paginate(:page => params[:page], :per_page => 20)
     @shown_programs = []
+    @hide_programs = false
+    @only_programs = false
+    if params[:filterrific] != nil
+      if params[:filterrific]["with_part_start"] == "1" then @hide_programs = true end
+      if params[:filterrific]["with_part_main"] == "1" then @hide_programs = true end
+      if params[:filterrific]["with_part_end"] == "1" then @hide_programs = true end
+      if params[:filterrific]["only_programs"] == "1"
+        @only_programs = true
+        @programs = []
+        @filterrific.find.each do |entry|
+          entry.programs.each do |program|
+            @programs << program unless @programs.include?(program)
+          end
+        end
+        @programs = @programs.paginate(:page => params[:page], :per_page => 20)
+      end
+    end
 
     respond_to do |format|
       format.html

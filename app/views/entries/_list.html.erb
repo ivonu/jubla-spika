@@ -8,20 +8,40 @@
       </tr>
     </thead>
 
-    <% entries.each do |entry| %>
-      <tr>
-        <td><%= link_to(entry.title, entry_path(entry)) %></td>
-        <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
-      </tr>
-      <% entry.programs.each do |program| %>
-        <% if not @shown_programs.include? program %>
-          <tr class="active">
-            <td><%= link_to(program.title, program_path(program)) %></td>
-            <td class="hidden-xs">Gruppenstunden-Vorschlag mit dem Spiel "<%= entry.title %>"</td>
-          </tr>
-          <% @shown_programs << program %>
+    <% if not only_programs %>
+      <% entries.each do |entry| %>
+        <tr>
+          <td><%= link_to(entry.title, entry_path(entry)) %></td>
+          <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
+        </tr>
+        <% if not hide_programs %>
+          <% shown_programs = [] %>
+          <% entry.programs.each do |program| %>
+            <% if not shown_programs.include? program %>
+              <tr class="active">
+                <td><%= link_to(program.title, program_path(program)) %></td>
+                <td class="hidden-xs">Gruppenstunden-Vorschlag mit dem Spiel "<%= entry.title %>"</td>
+              </tr>
+              <% shown_programs << program %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
+
+      <% else %>
+        <% programs.each do |program| %>
+          <tr class="active">
+            <td><%= link_to(program.title, program_path(program)) %></td>
+            <td class="hidden-xs">
+              <% first = true %>
+              <% program.entries.each do |entry| %>
+                <%= if first then first=false; '' else ', ' end %>
+                <%= entry.title %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+
     <% end %>
 
   </table>
@@ -30,6 +50,10 @@
     <p>Leider keine Ergebnisse gefunden</p>
   <% end %>
 
-  <%= will_paginate entries %>
+  <% if not only_programs %>
+    <%= will_paginate entries %>
+  <% else %>
+    <%= will_paginate programs %>
+  <% end %>
 
 </div>

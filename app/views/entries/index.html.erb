@@ -8,9 +8,10 @@
     <div class="result-filter">
       <%= form_for_filterrific @filterrific do |f| %>
         <div>
-          <%= f.check_box :with_part_start %> Einleitung<br>
-          <%= f.check_box :with_part_main  %> Hauptteil<br>
-          <%= f.check_box :with_part_end   %> Schluss
+          <%= f.check_box :only_programs   %> Komplette Gruppenstunde<br>
+          <%= f.check_box :with_part_start %> Spiel für Einleitung<br>
+          <%= f.check_box :with_part_main  %> Spiel für Hauptteil<br>
+          <%= f.check_box :with_part_end   %> Spiel für Schluss
         </div>
         <div>
           <%= f.check_box :with_indoors  %> Drinnen<br>
@@ -72,7 +73,10 @@
 
     <%= render(
       partial: 'entries/list',
-      locals: { entries: @entries }
+      locals: { entries: @entries,
+                programs: @programs,
+                hide_programs: @hide_programs,
+                only_programs: @only_programs }
     ) %>
 
   </div>

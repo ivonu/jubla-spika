@@ -26,6 +26,7 @@ class Entry < ActiveRecord::Base
       :with_part_start,
       :with_part_main,
       :with_part_end,
+      :only_programs,
       :with_indoors,
       :with_outdoors,
       :with_weather_snow,
@@ -48,6 +49,7 @@ class Entry < ActiveRecord::Base
     where(attr_name.to_sym => true)
   end
 
+  scope :only_programs, lambda { |flag| }
   scope :with_part_start, lambda { |flag| check_boolean_attr "part_start", flag }
   scope :with_part_main, lambda { |flag| check_boolean_attr "part_main", flag }
   scope :with_part_end, lambda { |flag| check_boolean_attr "part_end", flag }
