@@ -1,5 +1,7 @@
 class ProgramsController < ApplicationController
 
+  before_filter :authenticate_user!, :only => :rate
+  
   def show
     @program = Program.find(params[:id])
 
@@ -83,6 +85,27 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def rate
+    @program = Program.find(params[:program])
+
+    if @program.ratings.where(user: current_user).exists?
+      flash[:error] = "Du hast diesen Eintrag bereits bewertet"
+    else
+      value = params[:rating].to_f
+      if((value >= 1) && (value <= 5))
+        @program.ratings.create(:user=>current_user, :value=>value)
+        tot_rate = 0
+        @program.ratings.each do |rating|
+          tot_rate += rating.value
+        end
+        @program.rating = (tot_rate.to_f / @program.ratings.count).round(2)
+        @program.save
+        flash[:success] = "Bewertet mit #{params[:rating]} Sternen"
+      end
+    end
+
+    redirect_to Program.find(params[:program])
+  end
 
   def program_params
     params.require(:program).permit(:title)
