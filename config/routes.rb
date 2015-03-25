@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :new]
   resources :news
   resources :links
+
   resources :programs do
+    collection do
+      post :rate
+    end
     get :new_entry
   end
 
