@@ -13,23 +13,7 @@
 <div class="row">
   <div class="col-sm-9">
     <%= render 'description' %>
-
-    <div id="attachments">
-        <h2>Anhänge</h2>
-        <% @entry.attachments.order(:file_content_type).each do |attachment| %>
-
-          <div class="attachment">
-              <%= link_to attachment.file.url do %>
-                <% if attachment.file.content_type =~ /\Aimage\/.*\z/ %>
-                    <%= image_tag attachment.file.url(:thumb), height: '100' %>
-                <% else %>
-                    <span class="glyphicon glyphicon-download-alt"></span>
-                <% end %>
-              <% end %>
-              <%= attachment.file.original_filename %>
-          </div>
-        <% end %>
-    </div>
+    <%= render 'attachments' unless @entry.attachments.empty? %>
   </div>
   <div class="col-sm-3">
     <%= render 'details' %>
