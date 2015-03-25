@@ -150,12 +150,8 @@ class EntriesController < ApplicationController
     else
       value = params[:rating].to_f
       if((value >= 1) && (value <= 5))
-        @entry.ratings.create(:user=>current_user, :value=>value)
-        tot_rate = 0
-        @entry.ratings.each do |rating|
-          tot_rate += rating.value
-        end
-        @entry.rating = (tot_rate.to_f / @entry.ratings.count).round(2)
+        @entry.ratings.create(user: current_user, value: value)
+        @entry.rating = @entry.ratings.average(:value).round(2)
         @entry.save
         flash[:success] = "Bewertet mit #{params[:rating]} Sternen"
       end

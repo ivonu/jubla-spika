@@ -144,12 +144,8 @@ class ProgramsController < ApplicationController
     else
       value = params[:rating].to_f
       if((value >= 1) && (value <= 5))
-        @program.ratings.create(:user=>current_user, :value=>value)
-        tot_rate = 0
-        @program.ratings.each do |rating|
-          tot_rate += rating.value
-        end
-        @program.rating = (tot_rate.to_f / @program.ratings.count).round(2)
+        @program.ratings.create(user: current_user, value: value)
+        @program.rating = @program.rating.average(:value).round(2)
         @program.save
         flash[:success] = "Bewertet mit #{params[:rating]} Sternen"
       end
