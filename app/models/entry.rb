@@ -17,7 +17,7 @@ class Entry < ActiveRecord::Base
   
   filterrific(
     default_filter_params: {
-      sorted_by: 'title_asc'
+      sorted_by: 'rating_desc'
     },
     available_filters: [
       :sorted_by,
@@ -91,6 +91,8 @@ class Entry < ActiveRecord::Base
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
 
     case sort_option.to_s
+    when /^rating_/
+      order("LOWER(entries.rating) #{ direction }")
     when /^title_/
       order("LOWER(entries.title) #{ direction }")
     when /^duration_/
@@ -161,6 +163,7 @@ class Entry < ActiveRecord::Base
 
   def self.options_for_sorted_by
     [
+      ['Bewertung', 'rating_desc'],
       ['Titel', 'title_asc'],
       ['Dauer', 'duration_asc'],
       ['Neuigkeit', 'created_at_desc']
