@@ -23,6 +23,8 @@ gem 'turbolinks'
 gem 'devise'
 gem 'pundit'
 
+gem 'paperclip'
+
 gem 'figaro'
 
 gem 'filterrific'

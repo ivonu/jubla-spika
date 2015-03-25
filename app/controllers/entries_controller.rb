@@ -57,6 +57,13 @@ class EntriesController < ApplicationController
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
+
+      if params[:entry][:attachments]
+        params[:entry][:attachments].each { |attachment|
+          @entry.attachments.create(file: attachment)
+        }
+      end
+
       if @program_entry
         @program_entry.entry = @entry
         if @program_entry.save
