@@ -1,0 +1,12 @@
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require jquery.ui.touch-punch
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/de-DE
+//= require bootstrap-tagsinput
+//= require twitter/typeahead
+//= require filterrific/filterrific-jquery
+//= require turbolinks
+//= require bootstrap-sprockets
+//= require data-confirm-modal
