@@ -15,14 +15,13 @@
           <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
         </tr>
         <% if not hide_programs %>
-          <% shown_programs = [] %>
           <% entry.programs.each do |program| %>
-            <% if not shown_programs.include? program %>
+            <% if not @shown_programs.include? program %>
               <tr class="active">
                 <td><%= link_to(program.title, program_path(program)) %></td>
                 <td class="hidden-xs">Gruppenstunden-Vorschlag mit dem Spiel "<%= entry.title %>"</td>
               </tr>
-              <% shown_programs << program %>
+              <% @shown_programs << program %>
             <% end %>
           <% end %>
         <% end %>
@@ -33,10 +32,8 @@
           <tr class="active">
             <td><%= link_to(program.title, program_path(program)) %></td>
             <td class="hidden-xs">
-              <% first = true %>
-              <% program.entries.each do |entry| %>
-                <%= if first then first=false; '' else ', ' end %>
-                <%= entry.title %>
+              <% program.entries.each_with_index do |entry, i| %>
+                <%= if i==program.entries.count-1 then entry.title else "#{entry.title}, " end %>
               <% end %>
             </td>
           </tr>
