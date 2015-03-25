@@ -23,6 +23,8 @@ class ProgramsController < ApplicationController
     @combined.act_calm = false
     @combined.act_creative = false
 
+    @combined.attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
+
     @program.entries.each do |entry|
       @combined.material << entry.material.split(/\r?\n/) unless entry.material.empty?
       @combined.preparation << entry.preparation unless entry.preparation.empty?

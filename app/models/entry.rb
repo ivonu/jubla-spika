@@ -1,9 +1,9 @@
 class Entry < ActiveRecord::Base
 
-  has_many :program_entries
+  has_many :program_entries, dependent: :destroy
   has_many :programs, through: :program_entries
-  has_many :ratings
-  has_many :attachments
+  has_many :ratings, dependent: :destroy
+  has_many :attachments, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true
