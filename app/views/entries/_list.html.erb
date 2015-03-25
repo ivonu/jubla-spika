@@ -7,20 +7,23 @@
         <th class="hidden-xs">Beschreibung</th>
       </tr>
     </thead>
+
     <% entries.each do |entry| %>
       <tr>
         <td><%= link_to(entry.title, entry_path(entry)) %></td>
         <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
       </tr>
-      <% if not entry.programs.empty? %>
-        <% entry.programs.each do |program| %>
+      <% entry.programs.each do |program| %>
+        <% if not @shown_programs.include? program %>
           <tr class="active">
             <td><%= link_to(program.title, program_path(program)) %></td>
             <td class="hidden-xs">Gruppenstunden-Vorschlag mit dem Spiel "<%= entry.title %>"</td>
           </tr>
+          <% @shown_programs << program %>
         <% end %>
       <% end %>
     <% end %>
+
   </table>
 
   <% if entries.empty? %>

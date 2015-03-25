@@ -23,6 +23,7 @@ class EntriesController < ApplicationController
     ) or return
 
     @entries = @filterrific.find.where(independent: true).paginate(:page => params[:page], :per_page => 20)
+    @shown_programs = []
 
     respond_to do |format|
       format.html
