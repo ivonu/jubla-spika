@@ -55,6 +55,9 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    if not @entry.published
+      flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Suche erscheint."
+    end
     respond_to do |format|
       format.html
       format.pdf do
@@ -100,14 +103,19 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
-    authorize_entry_owner @entry
+    if Entry.where(edited_entry: @entry).count != 0
+      flash[:error] = "Dieser Eintrag wurde bereits bearbeitet, aber noch nicht freigeschaltet und kann daher zurzeit nicht bearbeitet werden."
+      redirect_to @entry
+    end
   end
 
   def update
-    @entry = Entry.find(params[:id])
-    authorize_entry_owner @entry
+    @entry = Entry.new(entry_params)
+    @entry.user = current_user
+    @entry.published = false
+    @entry.edited_entry = Entry.find(params[:id])
    
-    if @entry.update(entry_params)
+    if @entry.save
       redirect_to @entry
     else
       render 'edit'
@@ -177,7 +185,15 @@ class EntriesController < ApplicationController
 
   def publish
     @entry = Entry.find(params[:entry])
+
+    if @entry.edited_entry != nil
+      @entry.id = @entry.edited_entry.id
+      @entry.edited_entry.delete
+      @entry.edited_entry = nil
+    end
+
     @entry.update(published: true)
+    flash[:success] = "Veroeffentlicht"
     redirect_to @entry
   end
 

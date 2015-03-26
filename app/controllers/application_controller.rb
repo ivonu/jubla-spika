@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   private
     def user_not_authorized
-      flash[:alert] = 'Leider bist du nicht angemeldet.'
+      flash[:alert] = 'Leider bist du nicht angemeldet oder hast keine Berechtigung fuer diese Aktion.'
       redirect_to(request.referrer || root_path)
     end
 end

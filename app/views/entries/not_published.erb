@@ -2,14 +2,16 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th class="hidden-xs">Autor</th>
+      <th>Autor</th>
+      <th>Status</th>
     </tr>
   </thead>
 
   <% @entries.each do |entry| %>
     <tr>
       <td><%= link_to(entry.title, entry_path(entry)) %></td>
-      <td class="hidden-xs"><%= entry.user.name %></td>
+      <td><%= entry.user.name %></td>
+      <td><%= if entry.edited_entry == nil then 'Neuer Eintrag' else 'Bearbeiteter Eintrag' end %></td>
     </tr>
   <% end %>
 
