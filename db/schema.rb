@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325181536) do
+ActiveRecord::Schema.define(version: 20150326095024) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -67,7 +67,10 @@ ActiveRecord::Schema.define(version: 20150325181536) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.float    "rating"
+    t.integer  "user_id"
   end
+
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id"
 
   create_table "links", force: :cascade do |t|
     t.string   "title"
@@ -99,7 +102,10 @@ ActiveRecord::Schema.define(version: 20150325181536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float    "rating"
+    t.integer  "user_id"
   end
+
+  add_index "programs", ["user_id"], name: "index_programs_on_user_id"
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "value"

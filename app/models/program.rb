@@ -5,6 +5,7 @@ class Program < ActiveRecord::Base
   has_many :entries, through: :program_entries
   has_many :ratings, dependent: :destroy
   has_many :comments, dependent: :destroy
+  belongs_to :user
 
   validates :title, presence: true
 

@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
 
-  before_filter :authenticate_user!, :only => :rate
+  before_action :authorize_user, only: [:rate]
 
   def index
 
@@ -71,6 +71,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.user = current_user
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
@@ -97,10 +98,12 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    authorize_entry_owner @entry
   end
 
   def update
     @entry = Entry.find(params[:id])
+    authorize_entry_owner @entry
    
     if @entry.update(entry_params)
       redirect_to @entry
@@ -112,6 +115,8 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
+    authorize_entry_owner @entry
+
     @entry.destroy
    
     redirect_to entries_path
@@ -200,5 +205,11 @@ class EntriesController < ApplicationController
 
     def program_entry_params
       params.require(:program_entry).permit(:program_id, :order)
+    end
+
+
+    def authorize_entry_owner (entry)
+      raise AuthorizationError unless current_user.try(:is_moderator?) or
+                                      (entry.user == current_user and entry.user)
     end
 end

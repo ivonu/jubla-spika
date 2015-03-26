@@ -5,6 +5,7 @@ class Entry < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :attachments, dependent: :destroy
+  belongs_to :user
 
   validates :title, presence: true
   validates :description, presence: true

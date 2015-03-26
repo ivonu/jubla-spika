@@ -1,4 +1,7 @@
 class LinksController < ApplicationController
+
+  before_filter :authorize_moderator
+
   def index
     @links = Link.all()
   end

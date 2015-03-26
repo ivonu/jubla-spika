@@ -1,4 +1,7 @@
 class NewsController < ApplicationController
+
+  before_filter :authorize_moderator
+
   def index
     @news = News.all().reverse
   end

@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  include Pundit
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  include AuthorizationHelper
+  rescue_from AuthorizationError, with: :user_not_authorized
 
   before_action :configure_permitted_parameters_for_devise, if: :devise_controller?
 

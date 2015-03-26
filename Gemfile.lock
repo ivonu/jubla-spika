@@ -117,8 +117,6 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    pundit (0.3.0)
-      activesupport (>= 3.0.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -216,7 +214,6 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   paperclip
-  pundit
   rails (= 4.2.0)
   rails_12factor
   sass-rails (~> 5.0)

@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
 
-  before_filter :authenticate_user!, :only => :rate
+  before_action :authorize_user, only: [:rate]
   
   def show
     if params[:id].to_i == 0
@@ -106,6 +106,7 @@ class ProgramsController < ApplicationController
 
   def create
     @program = Program.new(program_params)
+    @program.user = current_user
 
     if @program.save
       flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden."
@@ -117,10 +118,12 @@ class ProgramsController < ApplicationController
   
   def edit
     @program = Program.find(params[:id])
+    authorize_program_owner @program
   end
 
   def update
     @program = Program.find(params[:id])
+    authorize_program_owner @program
 
     if @program.update(program_params)
       redirect_to @program
@@ -131,6 +134,8 @@ class ProgramsController < ApplicationController
 
   def destroy
     @program = Program.find(params[:id])
+    authorize_program_owner @program
+
     @program.destroy
 
     redirect_to entries_path
@@ -156,5 +161,10 @@ class ProgramsController < ApplicationController
 
   def program_params
     params.require(:program).permit(:title)
+  end
+
+  def authorize_program_owner (program)
+    raise AuthorizationError unless current_user.try(:is_moderator?) or
+                                    (program.user == current_user and program.user)
   end
 end

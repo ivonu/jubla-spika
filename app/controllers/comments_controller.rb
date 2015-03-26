@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authorize_user
 
   def create
     if params.has_key?(:entry_id)
