@@ -16,7 +16,6 @@
         <li><%= link_to entries_path do %><span>Suchen</span><% end %></li>
         <li><%= link_to new_idea_path do %><span>Erstellen</span><% end %></li>
         <li><%= link_to wissen_path do %><span>Wissen</span><% end %></li>
-        <li><%= link_to about_path do %><span>Über</span><% end %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? and current_user.is_moderator? %>
