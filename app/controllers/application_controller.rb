@@ -10,9 +10,16 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters_for_devise, if: :devise_controller?
 
   before_filter :load_links
+  before_filter :publish_num
 
   def load_links
     @links = Link.all()
+  end
+
+  def publish_num
+    if user_signed_in? and current_user.is_moderator?
+      @publish_num = Entry.where(published: false).count
+    end
   end
 
   def index
@@ -40,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   private
     def user_not_authorized
-      flash[:alert] = 'You are not authorized to perform this action.'
+      flash[:alert] = 'Leider bist du nicht angemeldet.'
       redirect_to(request.referrer || root_path)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326095024) do
+ActiveRecord::Schema.define(version: 20150326143814) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150326095024) do
     t.datetime "updated_at",     null: false
     t.float    "rating"
     t.integer  "user_id"
+    t.boolean  "published"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"

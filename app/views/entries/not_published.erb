@@ -1,0 +1,16 @@
+<table class="table result-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="hidden-xs">Autor</th>
+    </tr>
+  </thead>
+
+  <% @entries.each do |entry| %>
+    <tr>
+      <td><%= link_to(entry.title, entry_path(entry)) %></td>
+      <td class="hidden-xs"><%= entry.user.name %></td>
+    </tr>
+  <% end %>
+
+</table>

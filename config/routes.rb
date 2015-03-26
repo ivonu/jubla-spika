@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       post :plan
       post :rate
       get :tags
+      get :not_published
+      post :publish
     end
     resources :comments
   end

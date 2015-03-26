@@ -1,5 +1,13 @@
 <div id="entry_button_area">
 
+  <% if user_signed_in? and current_user.is_moderator? %>
+    <% if not @entry.published %>
+      <div class="btn-group btn-space">
+        <%= link_to 'Veröffentlichen', {:controller => :entries, :action => :publish, :entry => @entry.id}, :method => :post, class: "btn btn-danger btn-space"%>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="btn-group btn-space">
     <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
   </div>

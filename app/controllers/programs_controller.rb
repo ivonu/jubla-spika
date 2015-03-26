@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
 
-  before_action :authorize_user, only: [:rate]
+  before_action :authorize_user, except: [:show, :plan]
   
   def show
     if params[:id].to_i == 0

@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
 
-  before_action :authorize_user, only: [:rate]
+  before_action :authorize_user, except: [:index, :show, :plan]
+  before_action :authorize_moderator, only: [:not_published, :publish]
 
   def index
 
@@ -21,7 +22,7 @@ class EntriesController < ApplicationController
       persistence_id: 'shared_key'
     ) or return
 
-    @entries = @filterrific.find.where(independent: true).paginate(:page => params[:page], :per_page => 20)
+    @entries = @filterrific.find.where(independent: true, published: true).paginate(:page => params[:page], :per_page => 20)
     @shown_programs = []
     @hide_programs = false
     @only_programs = false
@@ -72,6 +73,7 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     @entry.user = current_user
+    @entry.published = false
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
@@ -123,16 +125,20 @@ class EntriesController < ApplicationController
   end
 
   def plan
+    session[:plan_start] ||= []
+    session[:plan_main] ||= []
+    session[:plan_end] ||= []
+
     if params[:do] == 'add_start'
-      unless (session[:plan_start] ||= []).include?(params[:entry]) 
+      unless session[:plan_start].include?(params[:entry]) 
         session[:plan_start] << params[:entry]
       end
     elsif params[:do] == 'add_main'
-      unless (session[:plan_main] ||= []).include?(params[:entry]) 
+      unless session[:plan_main].include?(params[:entry]) 
         session[:plan_main] << params[:entry]
       end
     elsif params[:do] == 'add_end'
-      unless (session[:plan_end] ||= []).include?(params[:entry]) 
+      unless session[:plan_end].include?(params[:entry]) 
         session[:plan_end] << params[:entry]
       end
 
@@ -162,7 +168,17 @@ class EntriesController < ApplicationController
       end
     end
 
-    redirect_to Entry.find(params[:entry])
+    redirect_to @entry
+  end
+
+  def not_published
+    @entries = Entry.where(published: false)
+  end
+
+  def publish
+    @entry = Entry.find(params[:entry])
+    @entry.update(published: true)
+    redirect_to @entry
   end
 
   def tags
