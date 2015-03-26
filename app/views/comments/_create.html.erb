@@ -1,0 +1,22 @@
+<h2>Kommentare</h2>
+
+<table class="table table-responsive">
+  <% res.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.name %></td>
+        <td><%= comment.text %></td>
+      </tr>
+  <% end %>
+</table>
+
+<a data-toggle="collapse" href="#collapseComment">
+  Kommentar verfassen
+</a>
+<div class="collapse" id="collapseComment">
+  <div class="well">
+    <%= simple_form_for [res, res.comments.build] do |f| %>
+      <%= f.input :text, label: 'Kommentar' %>
+      <%= f.button :submit, 'Kommentieren' %>
+    <% end %>
+  </div>
+</div>

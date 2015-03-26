@@ -21,6 +21,8 @@
     <% end %>
 
     <%= render 'attachments' unless @combined.attachments.empty? %>
+    <%= render  :partial => 'comments/create',
+                :locals => { res: @program } %>
 
   </div>
   <div class="col-sm-3">

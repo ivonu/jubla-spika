@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post :rate
     end
     get :new_entry
+    resources :comments
   end
 
   resources :entries do
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
       post :rate
       get :tags
     end
+    resources :comments
   end
 
 end
