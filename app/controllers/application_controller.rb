@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    @entries = Entry.last(5).reverse
+    @entries = Entry.where(published: true).last(5).reverse
     @news = News.paginate(:page => params[:page], :per_page => 3).order('id DESC')
   end
 
