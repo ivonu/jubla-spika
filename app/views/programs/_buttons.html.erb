@@ -4,7 +4,9 @@
     <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
   </div>
   <div class="btn-group btn-space">
-    <%= link_to 'Drucken', program_path(@program, :format => 'pdf'), class: "btn btn-primary btn-space"%>
+    <%= link_to program_path(@program, :format => 'pdf'), class: "btn btn-primary btn-space" do %>
+        <span class="glyphicon glyphicon-print"></span> PDF
+    <% end %>
   </div>
 
   <div class="btn-group btn-space">

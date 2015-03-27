@@ -12,7 +12,9 @@
     <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
   </div>
   <div class="btn-group btn-space">
-    <%= link_to 'Drucken', entry_path(@entry, :format => 'pdf'), class: "btn btn-primary btn-space"%>
+    <%= link_to entry_path(@entry, :format => 'pdf'), class: "btn btn-primary btn-space" do %>
+        <span class="glyphicon glyphicon-print"></span> PDF
+    <% end %>
   </div>
 
   <div class="btn-group btn-space">
