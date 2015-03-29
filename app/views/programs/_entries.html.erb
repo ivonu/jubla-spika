@@ -1,0 +1,20 @@
+<div class="program-entries">
+    <div class="row">
+      <div class="col-xs-9"><h2><%= title %></h2></div>
+      <div class="col-xs-3 text-right add-button"><%= render partial: 'add_button', locals: {order: start_order} if program_owner?(@program) %></div>
+    </div>
+
+    <% @program.program_entries.order(:order).where(order: (start_order..end_order)).each do |pe| %>
+        <div class="row">
+          <div class="col-xs-9"><h3><%= link_to  pe.entry.title, pe.entry %></h3></div>
+          <div class="col-xs-3 text-right move-buttons">
+            <% if program_owner?(@program) %>
+                <%= link_to move_up_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-up"/><% end %>
+                <%= link_to move_down_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-down"/><% end %>
+                <%= link_to program_entry_path(pe), method: :delete do %><span class="glyphicon glyphicon-remove"/><% end %>
+            <% end %>
+          </div>
+        </div>
+        <p><%= pe.entry.description.html_safe %></p>
+    <% end %>
+</div>

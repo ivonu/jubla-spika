@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   resources :programs do
     member do
       post :rate
+      get :add_existing_entry, controller: :program_entries
+      get :add_new_entry, controller: :program_entries
     end
 
-    get :new_entry
-    get :existing_entry
-    resources :comments
+    resources :comments, only: [:create]
   end
 
   resources :entries do
@@ -35,8 +35,15 @@ Rails.application.routes.draw do
       post :publish
     end
 
-    resources :comments
+    resources :comments, only: [:create]
     resources :attachments, only: [:create, :destroy]
+  end
+
+  resources :program_entries, only: [:destroy] do
+    member do
+      post :move_up
+      post :move_down
+    end
   end
 
 end

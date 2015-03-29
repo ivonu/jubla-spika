@@ -1,25 +1,6 @@
-
-<h2>Einstieg</h2>
-<% @program.program_entries.order(:order).where(order: (100..199)).each do |pe| %>
-    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
-    <p><%= pe.entry.description.html_safe %></p>
-<% end %>
-<%= render partial: 'add_button', locals: {order: 100} if program_owner?(@program) %>
-
-<h2>Hauptteil</h2>
-<% @program.program_entries.order(:order).where(order: (200..299)).each do |pe| %>
-    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
-    <p><%= pe.entry.description.html_safe %></p>
-<% end %>
-<%= render partial: 'add_button', locals: {order: 200} if program_owner?(@program) %>
-
-
-<h2>Ausstieg</h2>
-<% @program.program_entries.order(:order).where(order: (300..399)).each do |pe| %>
-    <h3><%= link_to  pe.entry.title, pe.entry %></h3>
-    <p><%= pe.entry.description.html_safe %></p>
-<% end %>
-<%= render partial: 'add_button', locals: {order: 300} if program_owner?(@program) %>
+<%= render partial: 'programs/entries', locals: {title: 'Einstieg',  start_order: 100, end_order: 199} %>
+<%= render partial: 'programs/entries', locals: {title: 'Hauptteil', start_order: 200, end_order: 299} %>
+<%= render partial: 'programs/entries', locals: {title: 'Ausstieg',  start_order: 300, end_order: 399} %>
 
 
 <% if not @combined.material.empty? %>

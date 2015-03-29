@@ -160,11 +160,12 @@ class ProgramsController < ApplicationController
     redirect_to Program.find(params[:program])
   end
 
-  def program_params
-    params.require(:program).permit(:title)
-  end
+  private
+    def program_params
+      params.require(:program).permit(:title)
+    end
 
-  def authorize_program_owner (program)
-    raise AuthorizationError unless program_owner?(program)
-  end
+    def authorize_program_owner (program)
+      raise AuthorizationError unless program_owner?(program)
+    end
 end

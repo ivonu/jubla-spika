@@ -1,0 +1,5 @@
+<% if program_owner?(@program) %>
+    <%= link_to move_up_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-up"/><% end %>
+    <%= link_to move_down_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-down"/><% end %>
+    <%= link_to program_entry_path(pe), method: :delete do %><span class="glyphicon glyphicon-remove"/><% end %>
+<% end %>
