@@ -20,7 +20,7 @@
       <%= render 'description' %>
     <% end %>
 
-    <%= render partial: 'attachments/list', locals: { attachments: @combined.attachments } %>
+    <%= render partial: 'attachments/list', locals: { attachments: @combined.attachments } unless @combined.attachments.empty? %>
 
   </div>
   <div class="col-sm-3">
