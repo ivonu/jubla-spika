@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post :rate
     end
     get :new_entry
+    get :existing_entry
     resources :comments
   end
 

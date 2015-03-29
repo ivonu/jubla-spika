@@ -94,12 +94,13 @@ class ProgramsController < ApplicationController
 
   def new_entry
     @entry = Entry.new
+    program = Program.find(params[:program_id])
+    authorize_program_owner(program)
 
     order = params[:order].to_i
-    program_id = params[:program_id].to_i
-    last_program_entry = ProgramEntry.where(program_id: program_id).where(order: (order..(order+99))).order(:order).last
+    last_program_entry = ProgramEntry.where(program: program).where(order: (order..(order+99))).order(:order).last
     order = last_program_entry.order+1 if last_program_entry
-    @program_entry = ProgramEntry.new(program_id: program_id.to_i, order: order)
+    @program_entry = ProgramEntry.new(program: program, order: order)
 
     render 'entries/new'
   end
@@ -164,7 +165,6 @@ class ProgramsController < ApplicationController
   end
 
   def authorize_program_owner (program)
-    raise AuthorizationError unless current_user.try(:is_moderator?) or
-                                    (program.user == current_user and program.user)
+    raise AuthorizationError unless program_owner?(program)
   end
 end
