@@ -143,7 +143,7 @@ class ProgramsController < ApplicationController
   end
 
   def rate
-    @program = Program.find(params[:program])
+    @program = Program.find(params[:id])
 
     if @program.ratings.where(user: current_user).exists?
       flash[:error] = "Du hast diesen Eintrag bereits bewertet"

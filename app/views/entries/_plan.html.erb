@@ -5,8 +5,9 @@
         <%= link_to(entry.title, entry_path(entry)) %>
       </td>
       <td>
-        <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe,
-          {:controller => :entries, :action => :plan, :entry => entry.id, :do => "del_#{part}"}, :method => :post %>
+        <%= link_to plan_entry_path(entry, do: "del_#{part}"), method: :post do %>
+            <span class='glyphicon glyphicon-remove'></span>
+        <% end %>
       </td>
     </tr>
   <% end %>

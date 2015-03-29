@@ -10,7 +10,7 @@
   </span>
 
   <%= attachment.file.original_filename %>
-  <% if entry_owner?(attachment.entry) %>
+  <% if entry_owner?(attachment.entry) and not @program %>
       <%= link_to entry_attachment_path(attachment.entry, attachment), method: :delete do %>
           <span class="glyphicon glyphicon-remove"></span>
       <% end %>

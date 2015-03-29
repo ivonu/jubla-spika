@@ -132,31 +132,31 @@ class EntriesController < ApplicationController
     session[:plan_end] ||= []
 
     if params[:do] == 'add_start'
-      unless session[:plan_start].include?(params[:entry]) 
-        session[:plan_start] << params[:entry]
+      unless session[:plan_start].include?(params[:id])
+        session[:plan_start] << params[:id]
       end
     elsif params[:do] == 'add_main'
-      unless session[:plan_main].include?(params[:entry]) 
-        session[:plan_main] << params[:entry]
+      unless session[:plan_main].include?(params[:id])
+        session[:plan_main] << params[:id]
       end
     elsif params[:do] == 'add_end'
-      unless session[:plan_end].include?(params[:entry]) 
-        session[:plan_end] << params[:entry]
+      unless session[:plan_end].include?(params[:id])
+        session[:plan_end] << params[:id]
       end
 
     elsif params[:do] == 'del_start'
-      session[:plan_start] -= [params[:entry]]
+      session[:plan_start] -= [params[:id]]
     elsif params[:do] == 'del_main'
-      session[:plan_main] -= [params[:entry]]
+      session[:plan_main] -= [params[:id]]
     elsif params[:do] == 'del_end'
-      session[:plan_end] -= [params[:entry]]
+      session[:plan_end] -= [params[:id]]
     end
 
     redirect_to entries_path
   end
 
   def rate
-    @entry = Entry.find(params[:entry])
+    @entry = Entry.find(params[:id])
 
     if @entry.ratings.where(user: current_user).exists?
       flash[:error] = "Du hast diesen Eintrag bereits bewertet"
@@ -178,7 +178,7 @@ class EntriesController < ApplicationController
   end
 
   def publish
-    @entry = Entry.find(params[:entry])
+    @entry = Entry.find(params[:id])
 
     if @entry.edited_entry != nil
       @entry.id = @entry.edited_entry.id

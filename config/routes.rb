@@ -14,9 +14,10 @@ Rails.application.routes.draw do
   resources :links
 
   resources :programs do
-    collection do
+    member do
       post :rate
     end
+
     get :new_entry
     get :existing_entry
     resources :comments
@@ -24,12 +25,16 @@ Rails.application.routes.draw do
 
   resources :entries do
     collection do
-      post :plan
-      post :rate
       get :tags
       get :not_published
+    end
+
+    member do
+      post :plan
+      post :rate
       post :publish
     end
+
     resources :comments
     resources :attachments, only: [:create, :destroy]
   end
