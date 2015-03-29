@@ -157,7 +157,7 @@ class ProgramsController < ApplicationController
       end
     end
 
-    redirect_to Program.find(params[:program])
+    redirect_to @program
   end
 
   private
