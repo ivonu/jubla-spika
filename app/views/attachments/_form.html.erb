@@ -1,0 +1,16 @@
+<div>
+  <%= simple_form_for [entry, entry.attachments.build], :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+    <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Dateien hinzufügen...</span>
+        <!-- The file input field used as target for the file upload widget -->
+        <input id="fileupload" type="file" name="file" multiple="">
+    </span>
+  <% end %>
+</div>
+
+<script>
+    $('#fileupload').fileupload({
+        dataType: 'script'
+    });
+</script>

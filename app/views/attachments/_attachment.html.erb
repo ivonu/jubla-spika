@@ -1,0 +1,18 @@
+<div class="attachment">
+  <span class="attachment_image">
+      <%= link_to attachment.file.url do %>
+          <% if attachment.file.content_type =~ /\Aimage\/.*\z/ %>
+              <%= image_tag attachment.file.url(:thumb), height: '100' %>
+          <% else %>
+              <span class="glyphicon glyphicon-download-alt"></span>
+          <% end %>
+      <% end %>
+  </span>
+
+  <%= attachment.file.original_filename %>
+  <% if entry_owner?(attachment.entry) %>
+      <%= link_to entry_attachment_path(attachment.entry, attachment), method: :delete do %>
+          <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+  <% end %>
+</div>

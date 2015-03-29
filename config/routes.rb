@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       post :publish
     end
     resources :comments
+    resources :attachments, only: [:create, :destroy]
   end
 
 end

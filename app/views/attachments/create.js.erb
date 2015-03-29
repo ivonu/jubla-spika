@@ -1,0 +1,3 @@
+<% if not @attachment.new_record? %>
+    $('#attachments').append("<%= j render(@attachment) %>");
+<% end %>

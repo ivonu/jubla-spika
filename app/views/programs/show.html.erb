@@ -20,9 +20,7 @@
       <%= render 'description' %>
     <% end %>
 
-    <%= render 'attachments' unless @combined.attachments.empty? %>
-    <%= render  :partial => 'comments/create',
-                :locals => { res: @program } %>
+    <%= render partial: 'attachments/list', locals: { attachments: @combined.attachments } %>
 
   </div>
   <div class="col-sm-3">
@@ -57,6 +55,9 @@
     <% end %>
     
   </div>
+</div>
+<div class="row">
+  <%= render  partial: 'comments/create', locals: { res: @program } %>
 </div>
 
 <div class="row visible-xs-block">

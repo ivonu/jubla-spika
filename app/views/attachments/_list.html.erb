@@ -1,0 +1,7 @@
+<div id="attachments">
+  <h2>Anhänge</h2>
+  <% attachments.each do |attachment| %>
+    <%= render partial: 'attachments/attachment', locals: {attachment: attachment} %>
+  <% end %>
+</div>
+

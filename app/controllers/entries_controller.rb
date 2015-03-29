@@ -81,12 +81,6 @@ class EntriesController < ApplicationController
 
     if @entry.save
 
-      if params[:entry][:attachments]
-        params[:entry][:attachments].each { |attachment|
-          @entry.attachments.create(file: attachment)
-        }
-      end
-
       if @program_entry
         @program_entry.entry = @entry
         if @program_entry.save
@@ -240,8 +234,7 @@ class EntriesController < ApplicationController
     end
 
 
-    def authorize_entry_owner (entry)
-      raise AuthorizationError unless current_user.try(:is_moderator?) or
-                                      (entry.user == current_user and entry.user)
+    def authorize_entry_owner(entry)
+      raise AuthorizationError unless entry_owner?(entry)
     end
 end

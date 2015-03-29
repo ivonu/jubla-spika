@@ -5,6 +5,10 @@ module AuthorizationHelper
   end
 
 
+  def entry_owner?(entry)
+    current_user.try(:is_moderator?) or (entry.user == current_user and entry.user)
+  end
+
 
   def authorize_user
     if not current_user.try(:is_user?)
