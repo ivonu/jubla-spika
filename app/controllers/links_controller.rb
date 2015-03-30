@@ -54,7 +54,7 @@ class LinksController < ApplicationController
     end
 
     def cleaned_link (url)
-      if url[0..6] != "http://"
+      if url[0..6] != "http://" and url[0..7] != "https://"
         url = "http://#{url}"
       end
       return url
