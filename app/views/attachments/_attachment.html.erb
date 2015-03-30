@@ -11,7 +11,8 @@
 
   <%= attachment.file.original_filename %>
   <% if entry_owner?(attachment.entry) and not @program %>
-      <%= link_to entry_attachment_path(attachment.entry, attachment), method: :delete do %>
+      <%= link_to entry_attachment_path(attachment.entry, attachment),
+                  method: :delete, data: { confirm: 'Soll diese Datei wirklich gelöscht werden?' } do %>
           <span class="glyphicon glyphicon-remove"></span>
       <% end %>
   <% end %>
