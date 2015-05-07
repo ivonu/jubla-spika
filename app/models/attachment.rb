@@ -8,7 +8,7 @@ class Attachment < ActiveRecord::Base
           { }
     }
 
-  validates_attachment_content_type :file, content_type: %w(application/pdf'
+  validates_attachment_content_type :file, content_type: %w(application/pdf
                                                             image/gif
                                                             image/jpg
                                                             image/jpeg
