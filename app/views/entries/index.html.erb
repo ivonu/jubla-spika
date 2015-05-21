@@ -28,6 +28,13 @@
           <%= f.check_box :with_act_creative %> Kreativ
         </div>
         <div>
+          <%= f.check_box :with_cat_pocket  %> Hosensackspiel<br>
+          <%= f.check_box :with_cat_craft   %> Basteln<br>
+          <%= f.check_box :with_cat_cook    %> Kochen<br>
+          <%= f.check_box :with_cat_pioneer %> Pioniertechnik<br>
+          <%= f.check_box :with_cat_night   %> Nachtspiel<br>
+        </div>
+        <div>
           Gruppengrösse:<br>
           <%= f.select(:num_group_min, @filterrific.select_options[:num_group]) %> -
           <%= f.select(:num_group_max, @filterrific.select_options[:num_group]) %> Kinder

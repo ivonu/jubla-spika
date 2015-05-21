@@ -38,6 +38,11 @@ class Entry < ActiveRecord::Base
       :with_act_active,
       :with_act_calm,
       :with_act_creative,
+      :with_cat_pocket, 
+      :with_cat_craft,
+      :with_cat_cook,
+      :with_cat_pioneer,
+      :with_cat_night,
       :num_group_min,
       :num_group_max,
       :num_age_min,
@@ -64,6 +69,11 @@ class Entry < ActiveRecord::Base
   scope :with_act_active, lambda { |flag| check_boolean_attr "act_active", flag }
   scope :with_act_calm, lambda { |flag| check_boolean_attr "act_calm", flag }
   scope :with_act_creative, lambda { |flag| check_boolean_attr "act_creative", flag }
+  scope :with_cat_pocket, lambda { |flag| check_boolean_attr "cat_pocket", flag }
+  scope :with_cat_craft, lambda { |flag| check_boolean_attr "cat_craft", flag }
+  scope :with_cat_cook, lambda { |flag| check_boolean_attr "cat_cook", flag }
+  scope :with_cat_pioneer, lambda { |flag| check_boolean_attr "cat_pioneer", flag }
+  scope :with_cat_night, lambda { |flag| check_boolean_attr "cat_night", flag }
 
   def self.check_integer_attr attr_name, attr_value, comp
     return nil  if attr_value.blank?
