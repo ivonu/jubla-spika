@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326153025) do
+ActiveRecord::Schema.define(version: 20150521045704) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -70,6 +70,11 @@ ActiveRecord::Schema.define(version: 20150326153025) do
     t.integer  "user_id"
     t.boolean  "published"
     t.integer  "edited_entry"
+    t.boolean  "cat_pocket"
+    t.boolean  "cat_craft"
+    t.boolean  "cat_cook"
+    t.boolean  "cat_pioneer"
+    t.boolean  "cat_night"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
