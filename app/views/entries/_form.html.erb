@@ -15,28 +15,36 @@
     <%= f.input :remarks, label: 'Bemerkungen' %>
 
     <div class="row">
-      <div class="col-sm-3 col-xs-6">
+      <div class="col-sm-2 col-xs-6">
         <label>Geeignet als:</label>
         <%= f.input :part_start, label: 'Einleitung' %>
         <%= f.input :part_main, label: 'Hauptteil' %>
         <%= f.input :part_end, label: 'Schluss' %>
       </div>
-      <div class="col-sm-3 col-xs-6">
+      <div class="col-sm-2 col-xs-6">
         <label>Spielart:</label>
         <%= f.input :act_active, label: 'Aktiv' %>
         <%= f.input :act_calm, label: 'Ruhig' %>
         <%= f.input :act_creative, label: 'Kreativ' %>
       </div>
-      <div class="col-sm-3 col-xs-6">
+      <div class="col-sm-2 col-xs-6">
         <label>Spielbar:</label>
         <%= f.input :indoors, label: 'Drinnen' %>
         <%= f.input :outdoors, label: 'Draussen' %>
       </div>
-      <div class="col-sm-3 col-xs-6">
+      <div class="col-sm-2 col-xs-6">
         <label>Wetter:</label>
         <%= f.input :weather_snow, label: 'Schnee' %>
         <%= f.input :weather_rain, label: 'Regen' %>
         <%= f.input :weather_sun, label: 'Sonne' %>
+      </div>
+      <div class="col-sm-2 col-xs-12">
+        <label>Kategorie:</label>
+        <%= f.input :cat_pocket, label: 'Hosensackspiel' %>
+        <%= f.input :cat_craft, label: 'Basteln' %>
+        <%= f.input :cat_cook, label: 'Kochen' %>
+        <%= f.input :cat_pioneer, label: 'Pioniertechnik' %>
+        <%= f.input :cat_night, label: 'Nachtspiel' %>
       </div>
     </div>
 

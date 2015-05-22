@@ -54,6 +54,11 @@ class ProgramsController < ApplicationController
     @combined.act_active = false
     @combined.act_calm = false
     @combined.act_creative = false
+    @combined.cat_pocket = false
+    @combined.cat_craft = false
+    @combined.cat_cook = false
+    @combined.cat_pioneer = false
+    @combined.cat_night = false
 
     @combined.attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
 
@@ -75,6 +80,11 @@ class ProgramsController < ApplicationController
       @combined.act_active = @combined.act_active || entry.act_active
       @combined.act_calm = @combined.act_calm || entry.act_calm
       @combined.act_creative = @combined.act_creative || entry.act_creative
+      @combined.cat_pocket = @combined.cat_pocket || entry.cat_pocket
+      @combined.cat_craft = @combined.cat_craft || entry.cat_craft
+      @combined.cat_cook = @combined.cat_cook || entry.cat_cook
+      @combined.cat_pioneer = @combined.cat_pioneer || entry.cat_pioneer
+      @combined.cat_night = @combined.cat_night || entry.cat_night
     end
 
     respond_to do |format|

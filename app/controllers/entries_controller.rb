@@ -226,6 +226,11 @@ class EntriesController < ApplicationController
                                     :age_max,
                                     :time_min,
                                     :time_max,
+                                    :cat_pocket,
+                                    :cat_craft,
+                                    :cat_cook,
+                                    :cat_pioneer,
+                                    :cat_night,
                                     :independent)
     end
 
