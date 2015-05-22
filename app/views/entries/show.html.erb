@@ -48,7 +48,9 @@
 </div>
 
 <div class="row">
-  <%= render partial: 'comments/create', locals: { res: @entry } %>
+  <div class="col-sm-12">
+    <%= render partial: 'comments/create', locals: { res: @entry } %>
+  </div>
 </div>
 
 <div class="row visible-xs-block">
