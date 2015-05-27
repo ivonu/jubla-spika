@@ -115,7 +115,9 @@ class ProgramEntriesController < ApplicationController
   end
 
   def add_existing_entry
-
+    session[:add_ex_entry] = params[:id].to_i
+    session[:add_ex_entry_order] = params[:order].to_i
+    redirect_to entries_url
   end
 
   private

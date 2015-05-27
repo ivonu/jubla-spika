@@ -55,16 +55,30 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    if not @entry.published
-      flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Suche erscheint."
-    end
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render  :pdf => "Spika_Eintrag",
-                :template => 'entries/show.pdf.erb',
-                :page_size => 'A4',
-                :footer => {:left => "spika.jubla.ch", :center => "Spielkatapult", :right => 'Seite [page] von [topage]' }
+
+    if session[:add_ex_entry]
+      program = Program.find(session[:add_ex_entry])
+      order = session[:add_ex_entry_order]
+      session.delete(:add_ex_entry)
+      session.delete(:add_ex_entry_order)
+
+      last_program_entry = ProgramEntry.where(program: program).where(order: (order..(order+99))).order(:order).last
+      order = last_program_entry.order+1 if last_program_entry
+      @program_entry = ProgramEntry.create(program: program, order: order, entry: @entry)
+      redirect_to @program_entry.program
+    else
+      if not @entry.published
+        flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Suche erscheint."
+      end
+
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render  :pdf => "Spika_Eintrag",
+                  :template => 'entries/show.pdf.erb',
+                  :page_size => 'A4',
+                  :footer => {:left => "spika.jubla.ch", :center => "Spielkatapult", :right => 'Seite [page] von [topage]' }
+        end
       end
     end
   end
