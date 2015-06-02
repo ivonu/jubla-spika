@@ -10,7 +10,7 @@ class ProgramsController < ApplicationController
       @program.id = 0
       @program.title = "Deine Gruppenstunde"
 
-      @plan_start = []
+      @plan_start = [] # TODO: noetig?
       @plan_main = []
       @plan_end = []
 
@@ -29,6 +29,8 @@ class ProgramsController < ApplicationController
         @program.entries << entry
         @plan_end << entry
       end
+
+      @program = update_program_attributes(@program)
 
     else
       @plan = false
