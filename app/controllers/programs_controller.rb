@@ -10,7 +10,7 @@ class ProgramsController < ApplicationController
       @program.id = 0
       @program.title = "Deine Gruppenstunde"
 
-      @plan_start = [] # TODO: noetig?
+      @plan_start = []
       @plan_main = []
       @plan_end = []
 
