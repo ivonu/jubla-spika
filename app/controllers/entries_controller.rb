@@ -65,6 +65,8 @@ class EntriesController < ApplicationController
       last_program_entry = ProgramEntry.where(program: program).where(order: (order..(order+99))).order(:order).last
       order = last_program_entry.order+1 if last_program_entry
       @program_entry = ProgramEntry.create(program: program, order: order, entry: @entry)
+      program = update_program_attributes(program)
+      program.save
       redirect_to @program_entry.program
     else
       if not @entry.published
@@ -98,6 +100,9 @@ class EntriesController < ApplicationController
       if @program_entry
         @program_entry.entry = @entry
         if @program_entry.save
+          program = @program_entry.program
+          program = update_program_attributes(program)
+          program.save
           redirect_to @program_entry.program
         end
       else
@@ -251,7 +256,6 @@ class EntriesController < ApplicationController
     def program_entry_params
       params.require(:program_entry).permit(:program_id, :order)
     end
-
 
     def authorize_entry_owner(entry)
       raise AuthorizationError unless entry_owner?(entry)

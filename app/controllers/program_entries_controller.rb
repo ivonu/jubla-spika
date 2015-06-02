@@ -97,6 +97,9 @@ class ProgramEntriesController < ApplicationController
     end
     program_entry.destroy
 
+    program = update_program_attributes(program)
+    program.save
+    
     redirect_to program
   end
 

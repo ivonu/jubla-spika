@@ -35,57 +35,7 @@ class ProgramsController < ApplicationController
       @program = Program.find(params[:id])
     end
 
-    @combined = OpenStruct.new
-
-    @combined.material = []
-    @combined.preparation = []
-    @combined.remarks = []
-    @combined.group_size_min = 0
-    @combined.group_size_max = 1/0.0
-    @combined.age_min = 0
-    @combined.age_max = 1/0.0
-    @combined.time_min = 0
-    @combined.time_max = 0
-    @combined.indoors = false
-    @combined.outdoors = false
-    @combined.weather_snow = false
-    @combined.weather_rain = false
-    @combined.weather_sun = false
-    @combined.act_active = false
-    @combined.act_calm = false
-    @combined.act_creative = false
-    @combined.cat_pocket = false
-    @combined.cat_craft = false
-    @combined.cat_cook = false
-    @combined.cat_pioneer = false
-    @combined.cat_night = false
-
-    @combined.attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
-
-    @program.entries.each do |entry|
-      @combined.material << entry.material.split(/\r?\n/) unless entry.material.empty?
-      @combined.preparation << entry.preparation unless entry.preparation.empty?
-      @combined.remarks << entry.remarks unless entry.remarks.empty?
-      @combined.group_size_min = [@combined.group_size_min, entry.group_size_min].max
-      @combined.group_size_max = [@combined.group_size_max, entry.group_size_max].min
-      @combined.age_min = [@combined.age_min, entry.age_min].max
-      @combined.age_max = [@combined.age_max, entry.age_max].min
-      @combined.time_min += entry.time_min
-      @combined.time_max += entry.time_max
-      @combined.indoors = @combined.indoors || entry.indoors
-      @combined.outdoors = @combined.outdoors || entry.outdoors
-      @combined.weather_snow = @combined.weather_snow || entry.weather_snow
-      @combined.weather_rain = @combined.weather_rain || entry.weather_rain
-      @combined.weather_sun = @combined.weather_sun || entry.weather_sun
-      @combined.act_active = @combined.act_active || entry.act_active
-      @combined.act_calm = @combined.act_calm || entry.act_calm
-      @combined.act_creative = @combined.act_creative || entry.act_creative
-      @combined.cat_pocket = @combined.cat_pocket || entry.cat_pocket
-      @combined.cat_craft = @combined.cat_craft || entry.cat_craft
-      @combined.cat_cook = @combined.cat_cook || entry.cat_cook
-      @combined.cat_pioneer = @combined.cat_pioneer || entry.cat_pioneer
-      @combined.cat_night = @combined.cat_night || entry.cat_night
-    end
+    @attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
 
     respond_to do |format|
       format.html
@@ -118,6 +68,29 @@ class ProgramsController < ApplicationController
   def create
     @program = Program.new(program_params)
     @program.user = current_user
+    @program.search_text = ""
+    @program.material = ""
+    @program.preparation = ""
+    @program.remarks = ""
+    @program.group_size_min = 0
+    @program.group_size_max = 0
+    @program.age_min = 0
+    @program.age_max = 0
+    @program.time_min = 0
+    @program.time_max = 0
+    @program.indoors = false
+    @program.outdoors = false
+    @program.weather_snow = false
+    @program.weather_rain = false
+    @program.weather_sun = false
+    @program.act_active = false
+    @program.act_calm = false
+    @program.act_creative = false
+    @program.cat_pocket = false
+    @program.cat_craft = false
+    @program.cat_cook = false
+    @program.cat_pioneer = false
+    @program.cat_night = false
 
     if @program.save
       flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden."

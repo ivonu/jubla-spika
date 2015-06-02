@@ -1,43 +1,43 @@
 <h3>Spielbar</h3>
 <p>
-  <%= checked_glyphicons(@combined.indoors)  %> Drinnen<br>
-  <%= checked_glyphicons(@combined.outdoors) %> Draussen<br>
+  <%= checked_glyphicons(@program.indoors)  %> Drinnen<br>
+  <%= checked_glyphicons(@program.outdoors) %> Draussen<br>
 </p>
 
 <h3>Wetter</h3>
 <p>
-  <%= checked_glyphicons(@combined.weather_snow) %> Schnee<br>
-  <%= checked_glyphicons(@combined.weather_rain) %> Regen<br>
-  <%= checked_glyphicons(@combined.weather_sun)  %> Sonne<br>
+  <%= checked_glyphicons(@program.weather_snow) %> Schnee<br>
+  <%= checked_glyphicons(@program.weather_rain) %> Regen<br>
+  <%= checked_glyphicons(@program.weather_sun)  %> Sonne<br>
 </p>
 
 <h3>Spielart</h3>
 <p>
-  <%= checked_glyphicons(@combined.act_active)   %> Aktiv<br>
-  <%= checked_glyphicons(@combined.act_calm)     %> Ruhig<br>
-  <%= checked_glyphicons(@combined.act_creative) %> Kreativ<br>
+  <%= checked_glyphicons(@program.act_active)   %> Aktiv<br>
+  <%= checked_glyphicons(@program.act_calm)     %> Ruhig<br>
+  <%= checked_glyphicons(@program.act_creative) %> Kreativ<br>
 </p>
 
 <h3>Kategorie</h3>
 <p>
-  <%= checked_glyphicons(@combined.cat_pocket)  %> Hosensackspiel<br>
-  <%= checked_glyphicons(@combined.cat_craft)   %> Basteln<br>
-  <%= checked_glyphicons(@combined.cat_cook)    %> Kochen<br>
-  <%= checked_glyphicons(@combined.cat_pioneer) %> Pioniertechnik<br>
-  <%= checked_glyphicons(@combined.cat_night)   %> Nachtspiel<br>
+  <%= checked_glyphicons(@program.cat_pocket)  %> Hosensackspiel<br>
+  <%= checked_glyphicons(@program.cat_craft)   %> Basteln<br>
+  <%= checked_glyphicons(@program.cat_cook)    %> Kochen<br>
+  <%= checked_glyphicons(@program.cat_pioneer) %> Pioniertechnik<br>
+  <%= checked_glyphicons(@program.cat_night)   %> Nachtspiel<br>
 </p>
 
 <h3>Gruppengrösse</h3>
 <p>
-  <%= @combined.group_size_min %> - <%= @combined.group_size_max %> Kinder
+  <%= @program.group_size_min %> - <%= @program.group_size_max %> Kinder
 </p>
 
 <h3>Alter</h3>
 <p>
-  <%= @combined.age_min %> - <%= @combined.age_max %> Jahre
+  <%= @program.age_min %> - <%= @program.age_max %> Jahre
 </p>
 
 <h3>Zeit</h3>
 <p>
-  <%= print_time(@combined.time_min) %> - <%= print_time(@combined.time_max) %>
+  <%= print_time(@program.time_min) %> - <%= print_time(@program.time_max) %>
 </p>
