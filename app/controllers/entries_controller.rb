@@ -10,36 +10,42 @@ class EntriesController < ApplicationController
     @plan_end = (session[:plan_end] == nil) ? [] : session[:plan_end]
     @plan = (@plan_start.size() != 0) || (@plan_main.size() != 0) || (@plan_end.size() != 0)
 
-    @filterrific = initialize_filterrific(
-      Entry,
-      params[:filterrific],
-      select_options: {
-        sorted_by: Entry.options_for_sorted_by,
-        num_group: Entry.options_for_num_group,
-        num_age: Entry.options_for_num_age,
-        num_time: Entry.options_for_num_time
-      },
-      persistence_id: 'shared_key'
-    ) or return
-
-    @entries = @filterrific.find.where(independent: true, published: true).paginate(:page => params[:page], :per_page => 20)
-    @shown_programs = []
     @hide_programs = false
     @only_programs = false
+    @shown_programs = []
     if params[:filterrific] != nil
       if params[:filterrific]["with_part_start"] == "1" then @hide_programs = true end
       if params[:filterrific]["with_part_main"] == "1" then @hide_programs = true end
       if params[:filterrific]["with_part_end"] == "1" then @hide_programs = true end
-      if params[:filterrific]["only_programs"] == "1"
-        @only_programs = true
-        @programs = []
-        @filterrific.find.each do |entry|
-          entry.programs.each do |program|
-            @programs << program unless @programs.include?(program)
-          end
-        end
-        @programs = @programs.paginate(:page => params[:page], :per_page => 20)
-      end
+      if params[:filterrific]["only_programs"] == "1" then @only_programs = true end
+    end
+
+    if @only_programs
+      @filterrific = initialize_filterrific(
+        Program,
+        params[:filterrific],
+        select_options: {
+          sorted_by: Entry.options_for_sorted_by,
+          num_group: Entry.options_for_num_group,
+          num_age: Entry.options_for_num_age,
+          num_time: Entry.options_for_num_time
+        },
+        persistence_id: 'shared_key'
+      ) or return 
+      @entries = @filterrific.find.paginate(:page => params[:page], :per_page => 20)
+    else
+      @filterrific = initialize_filterrific(
+        Entry,
+        params[:filterrific],
+        select_options: {
+          sorted_by: Entry.options_for_sorted_by,
+          num_group: Entry.options_for_num_group,
+          num_age: Entry.options_for_num_age,
+          num_time: Entry.options_for_num_time
+        },
+        persistence_id: 'shared_key'
+      ) or return
+      @entries = @filterrific.find.where(independent: true, published: true).paginate(:page => params[:page], :per_page => 20)
     end
 
     respond_to do |format|

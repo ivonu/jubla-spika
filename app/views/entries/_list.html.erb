@@ -27,17 +27,17 @@
         <% end %>
       <% end %>
 
-      <% else %>
-        <% programs.each do |program| %>
-          <tr class="active">
-            <td><%= link_to(program.title, program_path(program)) %></td>
-            <td class="hidden-xs">
-              <% program.entries.each_with_index do |entry, i| %>
-                <%= if i==program.entries.count-1 then entry.title else "#{entry.title}, " end %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
+    <% else %>
+      <% entries.each do |program| %>
+        <tr class="active">
+          <td><%= link_to(program.title, program_path(program)) %></td>
+          <td class="hidden-xs">
+            <% program.entries.each_with_index do |entry, i| %>
+              <%= if i==program.entries.count-1 then entry.title else "#{entry.title}, " end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
 
     <% end %>
 
