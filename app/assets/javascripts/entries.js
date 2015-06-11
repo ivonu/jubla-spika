@@ -26,3 +26,26 @@ function minutes_to_string (time) {
   }
   return time;
 }
+
+function update_checkboxes () {
+
+  if(document.getElementsByName("filterrific[only_programs]")[1].checked) {
+    document.getElementsByName("filterrific[with_part_start]")[1].disabled = true;
+    document.getElementsByName("filterrific[with_part_main]")[1].disabled = true;
+    document.getElementsByName("filterrific[with_part_end]")[1].disabled = true;
+  }
+  else if(document.getElementsByName("filterrific[with_part_start]")[1].checked ||
+          document.getElementsByName("filterrific[with_part_main]")[1].checked ||
+          document.getElementsByName("filterrific[with_part_end]")[1].checked) {
+    document.getElementsByName("filterrific[only_programs]")[1].disabled = true;
+  }
+  else {
+    document.getElementsByName("filterrific[only_programs]")[1].disabled = false;
+    document.getElementsByName("filterrific[with_part_start]")[1].disabled = false;
+    document.getElementsByName("filterrific[with_part_main]")[1].disabled = false;
+    document.getElementsByName("filterrific[with_part_end]")[1].disabled = false;
+
+  }
+
+
+}

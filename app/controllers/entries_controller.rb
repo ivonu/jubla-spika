@@ -19,6 +19,9 @@ class EntriesController < ApplicationController
       if params[:filterrific]["with_part_end"] == "1" then @hide_programs = true end
       if params[:filterrific]["only_programs"] == "1" then @only_programs = true end
     elsif session[:shared_key] != nil
+      if session[:shared_key]["with_part_start"] == 1 then @hide_programs = true end
+      if session[:shared_key]["with_part_main"] == 1 then @hide_programs = true end
+      if session[:shared_key]["with_part_end"] == 1 then @hide_programs = true end
       if session[:shared_key]["only_programs"] == 1 then @only_programs = true end
     end
 

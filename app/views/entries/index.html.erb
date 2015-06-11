@@ -8,10 +8,10 @@
     <div class="result-filter">
       <%= form_for_filterrific @filterrific do |f| %>
         <div>
-          <%= f.check_box :only_programs   %> Komplette Gruppenstunde<br>
-          <%= f.check_box :with_part_start %> Spiel für Einleitung<br>
-          <%= f.check_box :with_part_main  %> Spiel für Hauptteil<br>
-          <%= f.check_box :with_part_end   %> Spiel für Schluss
+          <%= f.check_box :only_programs, disabled: @hide_programs, onclick: "update_checkboxes();" %> Komplette Gruppenstunde<br>
+          <%= f.check_box :with_part_start, disabled: @only_programs, onclick: "update_checkboxes();" %> Spiel für Einleitung<br>
+          <%= f.check_box :with_part_main, disabled: @only_programs, onclick: "update_checkboxes();" %> Spiel für Hauptteil<br>
+          <%= f.check_box :with_part_end, disabled: @only_programs, onclick: "update_checkboxes();" %> Spiel für Schluss
         </div>
         <div>
           <%= f.check_box :with_indoors  %> Drinnen<br>
