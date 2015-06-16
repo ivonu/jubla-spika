@@ -1,4 +1,4 @@
-<table class="table result-table">
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -7,11 +7,18 @@
     </tr>
   </thead>
 
-  <% @entries.each do |entry| %>
+  <% @entries_pub.each do |entry| %>
     <tr>
       <td><%= link_to(entry.title, entry_path(entry)) %></td>
       <td><%= entry.user.name %></td>
       <td><%= if entry.edited_entry == nil then 'Neuer Eintrag' else 'Bearbeiteter Eintrag' end %></td>
+    </tr>
+  <% end %>
+  <% @entries_del.each do |entry| %>
+    <tr>
+      <td><%= link_to(entry.title, entry_path(entry)) %></td>
+      <td><%= entry.user.name %></td>
+      <td>Zum löschen markiert (Grund: <%= entry.delete_comment %>)</td>
     </tr>
   <% end %>
 

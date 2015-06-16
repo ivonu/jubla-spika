@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       post :plan
       post :rate
       post :publish
+      post :destroy_final
+      post :keep
     end
 
     resources :comments, only: [:create]

@@ -1,7 +1,7 @@
 class EntriesController < ApplicationController
 
   before_action :authorize_user, except: [:index, :show, :plan]
-  before_action :authorize_moderator, only: [:not_published, :publish]
+  before_action :authorize_moderator, only: [:not_published, :publish, :keep, :destroy_final]
 
   def index
 
@@ -149,10 +149,27 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
-    
-    # todo: mark entry as deleted
-   
+    if @entry.delete_comment != nil
+      flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    else
+      @entry.delete_comment = params[:hint]
+      @entry.save
+      flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+    end
     redirect_to @entry
+  end
+
+  def keep
+    @entry = Entry.find(params[:id])
+    @entry.delete_comment = nil;
+    @entry.save
+    redirect_to @entry
+  end
+
+  def destroy_final
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+    redirect_to entries_path
   end
 
   def plan
@@ -203,7 +220,8 @@ class EntriesController < ApplicationController
   end
 
   def not_published
-    @entries = Entry.where(published: false)
+    @entries_pub = Entry.where(published: false)
+    @entries_del = Entry.where.not(delete_comment: nil)
   end
 
   def publish
