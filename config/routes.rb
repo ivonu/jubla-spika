@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post :rate
       get :add_existing_entry, controller: :program_entries
       get :add_new_entry, controller: :program_entries
+      post :done
     end
 
     resources :comments, only: [:create]

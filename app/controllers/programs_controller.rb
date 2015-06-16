@@ -3,6 +3,8 @@ class ProgramsController < ApplicationController
   before_action :authorize_user, except: [:show, :plan]
   
   def show
+    @show_done = false
+
     if params[:id].to_i == 0
 
       @plan = true
@@ -35,6 +37,10 @@ class ProgramsController < ApplicationController
     else
       @plan = false
       @program = Program.find(params[:id])
+      if not @program.done
+        authorize_program_owner @program
+        @show_done = true;
+      end
     end
 
     @attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
@@ -93,9 +99,10 @@ class ProgramsController < ApplicationController
     @program.cat_cook = false
     @program.cat_pioneer = false
     @program.cat_night = false
+    @program.done = false
 
     if @program.save
-      flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden."
+      flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden. Sobald du fertig bist, kannst du auf den Knopf 'Fertig' druecken."
       redirect_to @program
     else
       render 'new'
@@ -105,6 +112,15 @@ class ProgramsController < ApplicationController
   def edit
     @program = Program.find(params[:id])
     authorize_program_owner @program
+  end
+
+  def done
+    @program = Program.find(params[:id])
+    authorize_program_owner @program
+    @program.done = true
+    @program.save
+    flash[:info] = "Deine Gruppenstunde muss nun noch von einem Moderator freigeschaltet werden, dann ist sie online."
+    redirect_to @program
   end
 
   def update

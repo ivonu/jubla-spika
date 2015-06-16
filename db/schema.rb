@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616144637) do
+ActiveRecord::Schema.define(version: 20150616153339) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20150616144637) do
     t.boolean  "cat_cook"
     t.boolean  "cat_pioneer"
     t.boolean  "cat_night"
+    t.boolean  "done"
   end
 
   add_index "programs", ["user_id"], name: "index_programs_on_user_id"

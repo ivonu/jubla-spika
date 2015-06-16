@@ -1,11 +1,17 @@
 <div class="entry_button_area text-right">
 
+  <% if @show_done %>
+    <div class="btn-group btn-space">
+      <%= link_to 'Fertig', done_program_path(@program), method: :post, class: "btn btn-success btn-space"%>
+    </div>
+  <% end %>
+
   <div class="btn-group btn-space">
     <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
   </div>
   <div class="btn-group btn-space">
     <%= link_to program_path(@program, :format => 'pdf'), class: "btn btn-primary btn-space" do %>
-        <span class="glyphicon glyphicon-print"></span> PDF
+      <span class="glyphicon glyphicon-print"></span> PDF
     <% end %>
   </div>
 
