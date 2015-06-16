@@ -149,11 +149,10 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
-    authorize_entry_owner @entry
-
-    @entry.destroy
+    
+    # todo: mark entry as deleted
    
-    redirect_to entries_path
+    redirect_to @entry
   end
 
   def plan
