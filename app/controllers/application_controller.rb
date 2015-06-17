@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :load_links
   before_filter :publish_num
+  before_filter :unfinished_programs
 
   def load_links
     @links = Link.all()
@@ -20,6 +21,16 @@ class ApplicationController < ActionController::Base
     if user_signed_in? and current_user.is_moderator?
       @publish_num = Entry.where(published: false).count
       @publish_num += Entry.where.not(delete_comment: nil).count;
+    end
+  end
+
+  def unfinished_programs
+    @unfin_programs = false
+    if user_signed_in?
+      if current_user.programs.where(done: false).count > 0
+        @unfin_programs = true
+        @unfin_programs_ref = current_user.programs.where(done: false);
+      end
     end
   end
 
