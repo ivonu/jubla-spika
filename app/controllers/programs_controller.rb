@@ -51,6 +51,12 @@ class ProgramsController < ApplicationController
       @edit = true;
     end
 
+    if user_signed_in? and current_user.is_moderator?
+      if not @program.edited_title == nil
+        @program.title = "#{@program.edited_title} (bisher: #{@program.title})"
+      end
+    end
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -118,7 +124,6 @@ class ProgramsController < ApplicationController
   
   def edit
     @program = Program.find(params[:id])
-    authorize_program_owner @program
   end
 
   def done
@@ -139,7 +144,12 @@ class ProgramsController < ApplicationController
     end
 
     if not_ok == nil
-      @program.update(published: true)
+      @program.published = true;
+      if not @program.edited_title == nil
+        @program.title = @program.edited_title
+        @program.edited_title = nil
+      end
+      @program.save
       flash[:success] = "Veroeffentlicht"
     else
       flash[:error] = "Das Spiel #{not_ok} gehoert zu dieser Gruppenstunde, wurde aber noch nicht veroeffentlicht. Darum kann die Gruppenstunde auch noch nicht veroeffentlicht werden."
@@ -149,9 +159,10 @@ class ProgramsController < ApplicationController
 
   def update
     @program = Program.find(params[:id])
-    authorize_program_owner @program
+    @program.edited_title = params[:program][:title]
 
-    if @program.update(program_params)
+    if @program.save
+      flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
       redirect_to @program
     else
       render 'edit'

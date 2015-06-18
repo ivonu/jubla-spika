@@ -1,7 +1,7 @@
 <div class="entry_button_area text-right">
 
   <% if user_signed_in? and current_user.is_moderator? %>
-    <% if not @program.published and @program.done %>
+    <% if (not @program.published and @program.done) or (not @program.edited_title == nil) %>
       <div class="btn-group btn-space">
         <%= link_to 'Veröffentlichen', publish_program_path(@program), method: :post, class: "btn btn-danger btn-space"%>
       </div>
