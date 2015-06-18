@@ -15,7 +15,7 @@
           <td class="hidden-xs"><%= sanitize(entry.description[0..200], :tags=>[]) %></td>
         </tr>
         <% if not hide_programs %>
-          <% entry.programs.each do |program| %>
+          <% entry.programs.where(done: true, published: true).each do |program| %>
             <% if not @shown_programs.include? program %>
               <tr class="active">
                 <td><%= link_to(program.title, program_path(program)) %></td>

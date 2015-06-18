@@ -37,7 +37,7 @@ class EntriesController < ApplicationController
         },
         persistence_id: 'shared_key'
       ) or return 
-      @entries = @filterrific.find.where(done: true).paginate(:page => params[:page], :per_page => 20)
+      @entries = @filterrific.find.where(done: true, published: true).paginate(:page => params[:page], :per_page => 20)
     else
       @filterrific = initialize_filterrific(
         Entry,
@@ -222,6 +222,7 @@ class EntriesController < ApplicationController
   def not_published
     @entries_pub = Entry.where(published: false)
     @entries_del = Entry.where.not(delete_comment: nil)
+    @programs_pub = Program.where(published: false)
   end
 
   def publish

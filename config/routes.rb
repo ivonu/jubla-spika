@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get :add_existing_entry, controller: :program_entries
       get :add_new_entry, controller: :program_entries
       post :done
+      post :publish
     end
 
     resources :comments, only: [:create]

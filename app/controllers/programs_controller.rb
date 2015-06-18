@@ -3,10 +3,12 @@ class ProgramsController < ApplicationController
   before_action :authorize_user, except: [:show, :plan]
   
   def show
+    @edit = false;
     @show_done = false
 
     if params[:id].to_i == 0
 
+      @edit = true
       @plan = true
       @program = Program.new
       @program.id = 0
@@ -44,6 +46,10 @@ class ProgramsController < ApplicationController
     end
 
     @attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
+
+    if params[:edit]
+      @edit = true;
+    end
 
     respond_to do |format|
       format.html
@@ -100,6 +106,7 @@ class ProgramsController < ApplicationController
     @program.cat_pioneer = false
     @program.cat_night = false
     @program.done = false
+    @program.published = false
 
     if @program.save
       flash[:info] = "Gruppenstunde erstellt. Du kannst nun neue Spiele erfassen oder bestehende verwenden. Sobald du fertig bist, kannst du auf den Knopf 'Fertig' druecken."
@@ -120,6 +127,23 @@ class ProgramsController < ApplicationController
     @program.done = true
     @program.save
     flash[:info] = "Deine Gruppenstunde muss nun noch von einem Moderator freigeschaltet werden, dann ist sie online."
+    redirect_to @program
+  end
+
+  def publish
+    @program = Program.find(params[:id])
+
+    not_ok = nil;
+    @program.entries.each do |entry|
+      if not entry.published then not_ok = entry.title; end
+    end
+
+    if not_ok == nil
+      @program.update(published: true)
+      flash[:success] = "Veroeffentlicht"
+    else
+      flash[:error] = "Das Spiel #{not_ok} gehoert zu dieser Gruppenstunde, wurde aber noch nicht veroeffentlicht. Darum kann die Gruppenstunde auch noch nicht veroeffentlicht werden."
+    end
     redirect_to @program
   end
 
