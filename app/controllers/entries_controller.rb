@@ -218,6 +218,67 @@ class EntriesController < ApplicationController
       session[:plan_main] -= [params[:id]]
     elsif params[:do] == 'del_end'
       session[:plan_end] -= [params[:id]]
+
+    elsif params[:do] == 'down'
+      if session[:plan_start].include?(params[:id])
+        index = session[:plan_start].find_index(params[:id])
+        if (index + 1) == session[:plan_start].count
+          session[:plan_start] -= [params[:id]]
+          session[:plan_main].unshift(params[:id]) unless session[:plan_main].include?(params[:id])
+        else
+          tmp = session[:plan_start][index]
+          session[:plan_start][index] = session[:plan_start][index+1]
+          session[:plan_start][index+1] = tmp
+        end
+      elsif session[:plan_main].include?(params[:id])
+        index = session[:plan_main].find_index(params[:id])
+        if (index + 1) == session[:plan_main].count
+          session[:plan_main] -= [params[:id]]
+          session[:plan_end].unshift(params[:id]) unless session[:plan_end].include?(params[:id])
+        else
+          tmp = session[:plan_main][index]
+          session[:plan_main][index] = session[:plan_main][index+1]
+          session[:plan_main][index+1] = tmp
+        end
+      elsif session[:plan_end].include?(params[:id])
+        index = session[:plan_end].find_index(params[:id])
+        if (index + 1) != session[:plan_end].count
+          tmp = session[:plan_end][index]
+          session[:plan_end][index] = session[:plan_end][index+1]
+          session[:plan_end][index+1] = tmp
+        end
+      end
+      
+    elsif params[:do] == 'up'
+      if session[:plan_start].include?(params[:id])
+        index = session[:plan_start].find_index(params[:id])
+        if index != 0
+          tmp = session[:plan_start][index]
+          session[:plan_start][index] = session[:plan_start][index-1]
+          session[:plan_start][index-1] = tmp
+        end
+      elsif session[:plan_main].include?(params[:id])
+        index = session[:plan_main].find_index(params[:id])
+        if index == 0
+          session[:plan_main] -= [params[:id]]
+          session[:plan_start] << params[:id] unless session[:plan_start].include?(params[:id])
+        else
+          tmp = session[:plan_main][index]
+          session[:plan_main][index] = session[:plan_main][index-1]
+          session[:plan_main][index-1] = tmp
+        end
+      elsif session[:plan_end].include?(params[:id])
+        index = session[:plan_end].find_index(params[:id])
+        if index == 0
+          session[:plan_end] -= [params[:id]]
+          session[:plan_main] << params[:id] unless session[:plan_main].include?(params[:id])
+        else
+          tmp = session[:plan_end][index]
+          session[:plan_end][index] = session[:plan_end][index-1]
+          session[:plan_end][index-1] = tmp
+        end
+      end
+      
     end
 
     redirect_to entries_path

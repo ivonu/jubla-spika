@@ -5,9 +5,9 @@
         <%= link_to(entry.title, entry_path(entry)) %>
       </td>
       <td>
-        <%= link_to plan_entry_path(entry, do: "del_#{part}"), method: :post do %>
-            <span class='glyphicon glyphicon-remove'></span>
-        <% end %>
+        <%= link_to plan_entry_path(entry, do: "up"), method: :post do %><span class="glyphicon glyphicon-arrow-up"/><% end %>
+        <%= link_to plan_entry_path(entry, do: "down"), method: :post do %><span class="glyphicon glyphicon-arrow-down"/><% end %>
+        <%= link_to plan_entry_path(entry, do: "del_#{part}"), method: :post do %><span class='glyphicon glyphicon-remove'></span><% end %>
       </td>
     </tr>
   <% end %>
