@@ -54,4 +54,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments, only: [:destroy] do
+    member do
+      post :publish
+    end
+  end
+
 end

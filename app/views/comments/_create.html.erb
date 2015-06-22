@@ -1,11 +1,25 @@
 <h2>Kommentare</h2>
 
 <table class="table table-responsive table-comment">
-  <% res.comments.each do |comment| %>
-      <tr>
-        <td><%= comment.user.name %></td>
-        <td><%= comment.text %></td>
-      </tr>
+  <% if user_signed_in? and current_user.is_moderator? %>
+    <% res.comments.each do |comment| %>
+        <tr>
+          <td><%= comment.user.name %></td>
+          <td><%= comment.text %></td>
+          <td>
+            <% if not comment.published %>
+              <%= link_to 'Veröffentlichen', publish_comment_path(comment), method: :post, class: "btn btn-danger btn-space" %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+  <% else %>
+    <% res.comments.where(published: true).each do |comment| %>
+        <tr>
+          <td><%= comment.user.name %></td>
+          <td><%= comment.text %></td>
+        </tr>
+    <% end %>
   <% end %>
 </table>
 

@@ -10,26 +10,26 @@
   <% @entries_pub.each do |entry| %>
     <tr>
       <td><%= link_to(entry.title, entry_path(entry)) %></td>
-      <td><%= entry.user.name %></td>
+      <td><%= entry.user.first_name %> <%= entry.user.last_name %></td>
       <td><%= if entry.edited_entry == nil then 'Neuer Eintrag' else 'Bearbeiteter Eintrag' end %></td>
     </tr>
   <% end %>
   <% @entries_del.each do |entry| %>
     <td><%= link_to(entry.title, entry_path(entry)) %></td>
-    <td><%= entry.user.name %></td>
+    <td></td>
     <td>Zum löschen markiert (Grund: <%= entry.delete_comment %>)</td>
   <% end %>
   <% @programs_pub.each do |program| %>
     <tr>
       <td><%= link_to(program.title, program_path(program)) %></td>
-      <td><%= program.user.name %></td>
+      <td><%= program.user.first_name %> <%= program.user.last_name %></td>
       <td>Neue Gruppenstunde</td>
     </tr>
   <% end %>
   <% @programs_edit.each do |program| %>
     <tr>
       <td><%= link_to(program.title, program_path(program)) %></td>
-      <td><%= program.user.name %></td>
+      <td></td>
       <td>Bearbeiteter Titel</td>
     </tr>
   <% end %>
@@ -40,8 +40,19 @@
   <% end %>
   <% @programs_del.each do |program| %>
     <td><%= link_to(program.title, program_path(program)) %></td>
-    <td><%= program.user.name %></td>
+    <td></td>
     <td>Zum löschen markiert (Grund: <%= program.delete_comment %>)</td>
+  <% end %>
+  <% @comments_pub.each do |comment| %>
+    <tr>
+      <% if not comment.program == nil %>
+        <td><%= link_to(comment.program.title, program_path(comment.program)) %></td>
+      <% else %>
+        <td><%= link_to(comment.entry.title, entry_path(comment.entry)) %></td>
+      <% end %>
+      <td><%= comment.user.first_name %> <%= comment.user.last_name %></td>
+      <td>Neuer Kommentar</td>
+    </tr>
   <% end %>
 
 </table>

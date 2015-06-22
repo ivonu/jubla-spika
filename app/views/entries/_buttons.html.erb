@@ -3,13 +3,13 @@
   <% if user_signed_in? and current_user.is_moderator? %>
     <% if not @entry.published %>
       <div class="btn-group btn-space">
-        <%= link_to 'Veröffentlichen', publish_entry_path(@entry), method: :post, class: "btn btn-danger btn-space"%>
+        <%= link_to 'Veröffentlichen', publish_entry_path(@entry), method: :post, class: "btn btn-danger btn-space" %>
       </div>
     <% end %>
     <% if @entry.delete_comment != nil %>
       <div class="btn-group btn-space">
         <%= link_to 'Löschen', destroy_final_entry_path(@entry), method: :post, class: "btn btn-danger btn-space"%>
-        <%= link_to 'Behalten', keep_entry_path(@entry), method: :post, class: "btn btn-success btn-space"%>
+        <%= link_to 'Behalten', keep_entry_path(@entry), method: :post, class: "btn btn-success btn-space" %>
       </div>
     <% end %>
   <% end %>
