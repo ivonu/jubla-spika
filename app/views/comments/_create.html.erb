@@ -1,6 +1,6 @@
 <h2>Kommentare</h2>
 
-<table class="table table-responsive">
+<table class="table table-responsive table-comment">
   <% res.comments.each do |comment| %>
       <tr>
         <td><%= comment.user.name %></td>
@@ -15,7 +15,7 @@
 <div class="collapse" id="collapseComment">
   <div class="well">
     <%= simple_form_for [res, res.comments.build] do |f| %>
-      <%= f.input :text, label: 'Kommentar' %>
+      <%= f.input :text, label: 'Kommentar', hint: 'Spitzname wird angezeigt' %>
       <%= f.button :submit, 'Kommentieren' %>
     <% end %>
   </div>
