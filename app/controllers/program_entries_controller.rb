@@ -1,7 +1,7 @@
 class ProgramEntriesController < ApplicationController
 
   before_action :authorize_user
-  before_action :authorize_moderator, only: [:destroy_final]
+  before_action :authorize_moderator, only: [:keep, :destroy_final]
 
   def move_up
     program_entry = ProgramEntry.find(params[:id])

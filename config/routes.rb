@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get :add_new_entry, controller: :program_entries
       post :done
       post :publish
+      post :destroy_final
+      post :keep
     end
 
     resources :comments, only: [:create]

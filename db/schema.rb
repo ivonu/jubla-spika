@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622134311) do
+ActiveRecord::Schema.define(version: 20150622142041) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20150622134311) do
     t.boolean  "done"
     t.boolean  "published"
     t.string   "edited_title"
+    t.string   "delete_comment"
   end
 
   add_index "programs", ["user_id"], name: "index_programs_on_user_id"

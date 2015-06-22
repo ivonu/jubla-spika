@@ -1,6 +1,7 @@
 class ProgramsController < ApplicationController
 
   before_action :authorize_user, except: [:show, :plan]
+  before_action :authorize_moderator, only: [:publish, :keep, :destroy_final]
   
   def show
     @edit = false;
@@ -176,7 +177,25 @@ class ProgramsController < ApplicationController
 
   def destroy
     @program = Program.find(params[:id])
-    authorize_program_owner @program
+    if @program.delete_comment != nil
+      flash[:error] = "Diese Gruppenstunde wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    else
+      @program.delete_comment = params[:hint]
+      @program.save
+      flash[:alert] = "Die Gruppenstunde wurde markiert. Ein Moderator wird den Antrag pruefen und sie gegebenenfalls entfernen."
+    end
+    redirect_to @program
+  end
+
+  def keep
+    @program = Program.find(params[:id])
+    @program.delete_comment = nil;
+    @program.save
+    redirect_to @program
+  end
+
+  def destroy_final
+    @program = Program.find(params[:id])
 
     @program.destroy
 

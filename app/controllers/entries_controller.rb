@@ -230,6 +230,7 @@ class EntriesController < ApplicationController
     @programs_pub = Program.where(done: true, published: false)
     @programs_edit = Program.where.not(edited_title: nil)
     @program_entry_del = ProgramEntry.where.not(delete_comment: nil)
+    @programs_del = Program.where.not(delete_comment: nil)
   end
 
   def publish

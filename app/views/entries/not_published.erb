@@ -38,5 +38,10 @@
     <td></td>
     <td>Zum entfernen von Grustu "<%= program_entry.program.title %>" markiert (Grund: <%= program_entry.delete_comment %>)</td>
   <% end %>
+  <% @programs_del.each do |program| %>
+    <td><%= link_to(program.title, program_path(program)) %></td>
+    <td><%= program.user.name %></td>
+    <td>Zum löschen markiert (Grund: <%= program.delete_comment %>)</td>
+  <% end %>
 
 </table>
