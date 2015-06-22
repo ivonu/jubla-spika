@@ -195,9 +195,15 @@ class ProgramsController < ApplicationController
   end
 
   def destroy_final
-    @program = Program.find(params[:id])
+    program = Program.find(params[:id])
 
-    @program.destroy
+    program.entries.each do |entry|
+      if entry.programs.count == 1 and not entry.independent
+        entry.destroy
+      end
+    end
+
+    program.destroy
 
     redirect_to entries_path
   end
