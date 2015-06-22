@@ -54,5 +54,14 @@
       <td>Neuer Kommentar</td>
     </tr>
   <% end %>
+  <% @comments_del.each do |comment| %>
+    <% if not comment.program == nil %>
+      <td><%= link_to(comment.program.title, program_path(comment.program)) %></td>
+    <% else %>
+      <td><%= link_to(comment.entry.title, entry_path(comment.entry)) %></td>
+    <% end %>
+    <td></td>
+    <td>Zum löschen markiert (Grund: <%= comment.delete_comment %>)</td>
+  <% end %>
 
 </table>

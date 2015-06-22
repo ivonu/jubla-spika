@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622170509) do
+ActiveRecord::Schema.define(version: 20150622174041) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20150622170509) do
     t.integer  "entry_id"
     t.integer  "program_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.boolean  "published"
+    t.string   "delete_comment"
   end
 
   add_index "comments", ["entry_id"], name: "index_comments_on_entry_id"

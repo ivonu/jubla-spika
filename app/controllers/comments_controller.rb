@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   before_filter :authorize_user
-  before_action :authorize_moderator, only: [:publish, :destroy]
+  before_action :authorize_moderator, only: [:publish, :destroy_final, :keep]
 
   def create
     flash[:alert] = "Der Kommentar muss noch von einem Moderator veroeffentlicht werden, bis er hier erscheint."
@@ -33,7 +33,40 @@ class CommentsController < ApplicationController
     end
   end
 
+  def keep
+    comment = Comment.find(params[:id])
+    comment.delete_comment = nil;
+    comment.save
+    if not comment.entry == nil
+      redirect_to comment.entry
+    else
+      redirect_to comment.program
+    end
+  end
+
   def destroy
+    comment = Comment.find(params[:comment_id])
+    if not comment.published
+      if current_user.is_moderator?
+        comment.destroy
+      end
+    else
+      if comment.delete_comment != nil
+        flash[:error] = "Dieser Kommentar wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+      else
+        comment.delete_comment = params[:hint]
+        comment.save
+        flash[:alert] = "Der Kommentar wurde markiert. Ein Moderator wird den Antrag pruefen und den Kommentar gegebenenfalls entfernen."
+      end
+    end
+    if not comment.entry == nil
+      redirect_to comment.entry
+    else
+      redirect_to comment.program
+    end
+  end
+
+  def destroy_final
     comment = Comment.find(params[:id])
     if not comment.entry == nil
       @entry = comment.entry

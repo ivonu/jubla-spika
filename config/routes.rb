@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   resources :comments, only: [:destroy] do
     member do
       post :publish
+      post :destroy_final
+      post :keep
     end
   end
 

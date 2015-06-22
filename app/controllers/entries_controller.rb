@@ -162,7 +162,6 @@ class EntriesController < ApplicationController
     end
   end
 
-
   def destroy
     @entry = Entry.find(params[:id])
     if not @entry.published
@@ -250,6 +249,7 @@ class EntriesController < ApplicationController
     @program_entry_del = ProgramEntry.where.not(delete_comment: nil)
     @programs_del = Program.where.not(delete_comment: nil)
     @comments_pub = Comment.where(published: false)
+    @comments_del = Comment.where.not(delete_comment: nil)
   end
 
   def publish

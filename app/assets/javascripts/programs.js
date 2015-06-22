@@ -1,4 +1,4 @@
-function init_delete_modal () {
+function init_delete_modal_program_entry () {
   $('#delete-modal-entry').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
