@@ -84,6 +84,10 @@ class EntriesController < ApplicationController
         flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Suche erscheint."
       end
 
+      if not @entry.delete_comment == nil and @entry.programs.count > 0
+        flash[:error] = "Achtung: Dieser Eintrag kommt in Gruppenstunden vor. Falls er geloescht wird, fehlen diesen Gruppenstunden eventuell wichtige Teile!"
+      end
+
       respond_to do |format|
         format.html
         format.pdf do
@@ -114,6 +118,7 @@ class EntriesController < ApplicationController
           program = @program_entry.program
           program = update_program_attributes(program)
           program.save
+          flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Gruppenstunde erscheint."
           redirect_to @program_entry.program
         end
       else
@@ -222,7 +227,7 @@ class EntriesController < ApplicationController
   def not_published
     @entries_pub = Entry.where(published: false)
     @entries_del = Entry.where.not(delete_comment: nil)
-    @programs_pub = Program.where(published: false)
+    @programs_pub = Program.where(done: true, published: false)
     @programs_edit = Program.where.not(edited_title: nil)
   end
 

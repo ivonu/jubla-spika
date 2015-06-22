@@ -90,7 +90,6 @@ class ProgramEntriesController < ApplicationController
   def destroy
     program_entry = ProgramEntry.find(params[:id])
     program = program_entry.program
-    authorize_program_owner(program)
 
     if not program_entry.entry.independent
       program_entry.destroy
@@ -107,7 +106,6 @@ class ProgramEntriesController < ApplicationController
   def add_new_entry
     @entry = Entry.new
     program = Program.find(params[:id])
-    authorize_program_owner(program)
 
     order = params[:order].to_i
     last_program_entry = ProgramEntry.where(program: program).where(order: (order..(order+99))).order(:order).last

@@ -6,11 +6,11 @@ module AuthorizationHelper
 
 
   def entry_owner?(entry)
-    current_user.try(:is_moderator?) or (entry.user == current_user and entry.user)
+    (entry.user == current_user and entry.user)
   end
 
   def program_owner?(program)
-    current_user.try(:is_moderator?) or (program.user == current_user and program.user)
+    (program.user == current_user and program.user)
   end
 
 

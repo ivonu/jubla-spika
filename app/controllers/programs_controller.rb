@@ -47,7 +47,7 @@ class ProgramsController < ApplicationController
 
     @attachments = @program.entries.collect{|x| x.attachments.order(:file_content_type)}.flatten
 
-    if params[:edit]
+    if params[:edit] or not @program.done
       @edit = true;
     end
 
@@ -75,7 +75,6 @@ class ProgramsController < ApplicationController
   def new_entry
     @entry = Entry.new
     program = Program.find(params[:program_id])
-    authorize_program_owner(program)
 
     order = params[:order].to_i
     last_program_entry = ProgramEntry.where(program: program).where(order: (order..(order+99))).order(:order).last
@@ -159,13 +158,19 @@ class ProgramsController < ApplicationController
 
   def update
     @program = Program.find(params[:id])
-    @program.edited_title = params[:program][:title]
 
-    if @program.save
-      flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
+    if not @program.edited_title == nil
+      flash[:error] = "Der Titel wurde bereits bearbeitet, die Aenderung aber noch nicht akzeptiert. Deshalb kann der Titel zurzeit nicht nochmals bearbeitet werden."
       redirect_to @program
     else
-      render 'edit'
+      @program.edited_title = params[:program][:title]
+
+      if @program.save
+        flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
+        redirect_to @program
+      else
+        render 'edit'
+      end
     end
   end
 

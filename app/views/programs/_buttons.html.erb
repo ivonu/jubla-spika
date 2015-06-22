@@ -15,7 +15,7 @@
   <% end %>
 
   <div class="btn-group btn-space">
-    <% if @edit %>
+    <% if @edit and @program.done %>
       <%= link_to 'Fertig', program_path(@program), class: "btn btn-success btn-space"%>
     <% else %>
       <button onclick="window.history.back();" type="button" class="btn btn-primary">Zurück</button>
@@ -27,7 +27,7 @@
     <% end %>
   </div>
 
-  <% if @program.id != 0 && program_owner?(@program) %>
+  <% if @program.id != 0 %>
       <div class="btn-group btn-space">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           Ändern
