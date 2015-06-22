@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :entries
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable
 
   enum role: { user: 0, writer: 1, moderator: 2, admin: 3 }
   after_initialize :set_default_role, if: :new_record?
