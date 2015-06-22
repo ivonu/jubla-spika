@@ -160,31 +160,60 @@ class ProgramsController < ApplicationController
   def update
     @program = Program.find(params[:id])
 
-    if not @program.edited_title == nil
-      flash[:error] = "Der Titel wurde bereits bearbeitet, die Aenderung aber noch nicht akzeptiert. Deshalb kann der Titel zurzeit nicht nochmals bearbeitet werden."
-      redirect_to @program
-    else
-      @program.edited_title = params[:program][:title]
-
+    if not @program.published
+      if not @program.done
+        authorize_program_owner @program
+      else
+        if not current_user.is_moderator?
+          authorize_program_owner @program
+        end
+      end
+      @program.title = params[:program][:title]
       if @program.save
-        flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
         redirect_to @program
       else
         render 'edit'
+      end
+    else
+      if not @program.edited_title == nil
+        flash[:error] = "Der Titel wurde bereits bearbeitet, die Aenderung aber noch nicht akzeptiert. Deshalb kann der Titel zurzeit nicht nochmals bearbeitet werden."
+        redirect_to @program
+      else
+        @program.edited_title = params[:program][:title]
+
+        if @program.save
+          flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
+          redirect_to @program
+        else
+          render 'edit'
+        end
       end
     end
   end
 
   def destroy
     @program = Program.find(params[:id])
-    if @program.delete_comment != nil
-      flash[:error] = "Diese Gruppenstunde wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    if not @program.published
+      if not @program.done
+        authorize_program_owner @program
+      else
+        if not current_user.is_moderator?
+          authorize_program_owner @program
+        end
+      end
+      destroy_program
+      redirect_to entries_path
     else
-      @program.delete_comment = params[:hint]
-      @program.save
-      flash[:alert] = "Die Gruppenstunde wurde markiert. Ein Moderator wird den Antrag pruefen und sie gegebenenfalls entfernen."
+      @program = Program.find(params[:id])
+      if @program.delete_comment != nil
+        flash[:error] = "Diese Gruppenstunde wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+      else
+        @program.delete_comment = params[:hint]
+        @program.save
+        flash[:alert] = "Die Gruppenstunde wurde markiert. Ein Moderator wird den Antrag pruefen und sie gegebenenfalls entfernen."
+      end
+      redirect_to @program
     end
-    redirect_to @program
   end
 
   def keep
@@ -195,16 +224,7 @@ class ProgramsController < ApplicationController
   end
 
   def destroy_final
-    program = Program.find(params[:id])
-
-    program.entries.each do |entry|
-      if entry.programs.count == 1 and not entry.independent
-        entry.destroy
-      end
-    end
-
-    program.destroy
-
+    destroy_program
     redirect_to entries_path
   end
 
@@ -229,6 +249,16 @@ class ProgramsController < ApplicationController
   private
     def program_params
       params.require(:program).permit(:title)
+    end
+
+    def destroy_program
+      program = Program.find(params[:id])
+      program.entries.each do |entry|
+        if entry.programs.count == 1 and not entry.independent
+          entry.destroy
+        end
+      end
+      program.destroy
     end
 
     def authorize_program_owner (program)

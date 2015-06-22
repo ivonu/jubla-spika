@@ -87,15 +87,32 @@ class ProgramEntriesController < ApplicationController
   end
 
   def destroy
-    program_entry = ProgramEntry.find(params[:program_entry_id])
-    if program_entry.delete_comment != nil
-      flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    if(params.has_key?(:program_entry_id))
+      program_entry = ProgramEntry.find(params[:program_entry_id])
     else
-      program_entry.delete_comment = params[:hint]
-      program_entry.save
-      flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+      program_entry = ProgramEntry.find(params[:id])
     end
-    redirect_to program_entry.program
+    program = program_entry.program
+    if not program.published
+      if not program.done
+        authorize_program_owner program
+      else
+        if not current_user.is_moderator?
+          authorize_program_owner program
+        end
+      end
+      destroy_program_entry
+      redirect_to program
+    else
+      if program_entry.delete_comment != nil
+        flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+      else
+        program_entry.delete_comment = params[:hint]
+        program_entry.save
+        flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+      end
+      redirect_to program_entry.program
+    end
   end
 
   def keep
@@ -107,17 +124,8 @@ class ProgramEntriesController < ApplicationController
   
   def destroy_final
     program_entry = ProgramEntry.find(params[:id])
-    program = program_entry.program
-
-    if not program_entry.entry.independent
-      program_entry.destroy
-    end
-    program_entry.destroy
-
-    program = update_program_attributes(program)
-    program.save
-    
-    redirect_to program
+    destroy_program_entry
+    redirect_to program_entry.program
   end
 
 
@@ -142,5 +150,15 @@ class ProgramEntriesController < ApplicationController
   private
     def authorize_program_owner (program)
       raise AuthorizationError unless program_owner?(program)
+    end
+    def destroy_program_entry
+      program_entry = ProgramEntry.find(params[:id])
+      program = program_entry.program
+      if not program_entry.entry.independent
+        program_entry.destroy
+      end
+      program_entry.destroy
+      program = update_program_attributes(program)
+      program.save
     end
 end

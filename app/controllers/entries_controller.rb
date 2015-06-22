@@ -118,7 +118,9 @@ class EntriesController < ApplicationController
           program = @program_entry.program
           program = update_program_attributes(program)
           program.save
-          flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Gruppenstunde erscheint."
+          if program.published
+            flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Gruppenstunde erscheint."
+          end
           redirect_to @program_entry.program
         end
       else
@@ -139,29 +141,46 @@ class EntriesController < ApplicationController
   end
 
   def update
-    @entry = Entry.new(entry_params)
-    @entry.user = current_user
-    @entry.published = false
-    @entry.edited_entry = Entry.find(params[:id])
-   
-    if @entry.save
+    @entry = Entry.find(params[:id])
+    if not @entry.published
+      if not current_user.is_moderator?
+        authorize_entry_owner @entry
+      end
+      @entry.update(entry_params)
       redirect_to @entry
     else
-      render 'edit'
+      @entry = Entry.new(entry_params)
+      @entry.user = current_user
+      @entry.published = false
+      @entry.edited_entry = Entry.find(params[:id])
+     
+      if @entry.save
+        redirect_to @entry
+      else
+        render 'edit'
+      end
     end
   end
 
 
   def destroy
     @entry = Entry.find(params[:id])
-    if @entry.delete_comment != nil
-      flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    if not @entry.published
+      if not current_user.is_moderator?
+        authorize_entry_owner @entry
+      end
+      destroy_entry
+      redirect_to entries_path
     else
-      @entry.delete_comment = params[:hint]
-      @entry.save
-      flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+      if @entry.delete_comment != nil
+        flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+      else
+        @entry.delete_comment = params[:hint]
+        @entry.save
+        flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+      end
+      redirect_to @entry
     end
-    redirect_to @entry
   end
 
   def keep
@@ -172,8 +191,7 @@ class EntriesController < ApplicationController
   end
 
   def destroy_final
-    @entry = Entry.find(params[:id])
-    @entry.destroy
+    destroy_entry
     redirect_to entries_path
   end
 
@@ -244,6 +262,10 @@ class EntriesController < ApplicationController
 
     @entry.update(published: true)
     flash[:success] = "Veroeffentlicht"
+    @entry.programs.each do |program|
+      program = update_program_attributes(program)
+      program.save
+    end
     redirect_to @entry
   end
 
@@ -292,6 +314,20 @@ class EntriesController < ApplicationController
 
     def program_entry_params
       params.require(:program_entry).permit(:program_id, :order)
+    end
+
+    def destroy_entry
+      entry = Entry.find(params[:id])
+      programs = []
+      entry.programs.each do |program|
+        programs << program.id
+      end
+      entry.destroy
+      programs.each do |id|
+        program = Program.find(id)
+        program = update_program_attributes(program)
+        program.save
+      end
     end
 
     def authorize_entry_owner(entry)
