@@ -1,11 +1,11 @@
 class ProgramEntriesController < ApplicationController
 
   before_action :authorize_user
+  before_action :authorize_moderator, only: [:destroy_final]
 
   def move_up
     program_entry = ProgramEntry.find(params[:id])
     program = program_entry.program
-    authorize_program_owner(program)
     above_entry = program.program_entries.where('"program_entries"."order" < ?', program_entry.order).order(:order).last
 
     if not above_entry and program_entry.order < 200
@@ -44,7 +44,6 @@ class ProgramEntriesController < ApplicationController
 
     program_entry = ProgramEntry.find(params[:id])
     program = program_entry.program
-    authorize_program_owner(program)
     below_entry = program.program_entries.where('"program_entries"."order" > ?', program_entry.order).order(:order).first
 
     if not below_entry and program_entry.order >= 300
@@ -88,6 +87,25 @@ class ProgramEntriesController < ApplicationController
   end
 
   def destroy
+    program_entry = ProgramEntry.find(params[:program_entry_id])
+    if program_entry.delete_comment != nil
+      flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
+    else
+      program_entry.delete_comment = params[:hint]
+      program_entry.save
+      flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
+    end
+    redirect_to program_entry.program
+  end
+
+  def keep
+    program_entry = ProgramEntry.find(params[:id])
+    program_entry.delete_comment = nil;
+    program_entry.save
+    redirect_to program_entry.program
+  end
+  
+  def destroy_final
     program_entry = ProgramEntry.find(params[:id])
     program = program_entry.program
 

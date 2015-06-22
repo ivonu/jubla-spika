@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
       @publish_num += Entry.where.not(delete_comment: nil).count;
       @publish_num += Program.where(done: true, published: false).count;
       @publish_num += Program.where.not(edited_title: nil).count;
+      @publish_num += ProgramEntry.where.not(delete_comment: nil).count;
     end
   end
 

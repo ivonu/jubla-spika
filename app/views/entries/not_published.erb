@@ -33,5 +33,10 @@
       <td>Bearbeiteter Titel</td>
     </tr>
   <% end %>
+  <% @program_entry_del.each do |program_entry| %>
+    <td><%= link_to(program_entry.entry.title, program_path(program_entry.program)) %></td>
+    <td></td>
+    <td>Zum entfernen von Grustu "<%= program_entry.program.title %>" markiert (Grund: <%= program_entry.delete_comment %>)</td>
+  <% end %>
 
 </table>
