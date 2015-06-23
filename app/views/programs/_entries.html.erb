@@ -35,28 +35,30 @@
   <% end %>
 </div>
 
-<%= form_tag(url_for(controller: "program_entries", action: "destroy"), method: "delete") do %>
-  <div class="modal fade" id="delete-modal-entry" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Entfernung eines Eintrages beantragen</h4>
-        </div>
-        <div class="modal-body">
-          <p>Bitte gib einen Grund an, warum der Eintrag aus dieser Gruppenstunde entfernt werden soll. Die Moderatoren werden deinen Antrag prüfen und gegebenenfalls den Eintrag entfernen.</p>
-          <p>Hinweis: Der Eintrag selbst wird damit nicht gelöscht, er wird nur nicht mehr in dieser Gruppenstunde angezeigt.</p>
-          <%= label_tag(:hint, "Löschgrund:") %>
-          <%= text_field_tag(:hint, '', size: 75) %>
-          <%= hidden_field_tag(:program_entry_id, '') %>
-          <i>Beispiel: Ich habe einen passenderen Eintrag hinzugefügt</i>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-          <%= submit_tag("Entfernung beantragen", class: "btn btn-danger") %>
+<% unless request.format.to_sym == :pdf %>
+  <%= form_tag(url_for(controller: "program_entries", action: "destroy"), method: "delete") do %>
+    <div class="modal fade" id="delete-modal-entry" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Entfernung eines Eintrages beantragen</h4>
+          </div>
+          <div class="modal-body">
+            <p>Bitte gib einen Grund an, warum der Eintrag aus dieser Gruppenstunde entfernt werden soll. Die Moderatoren werden deinen Antrag prüfen und gegebenenfalls den Eintrag entfernen.</p>
+            <p>Hinweis: Der Eintrag selbst wird damit nicht gelöscht, er wird nur nicht mehr in dieser Gruppenstunde angezeigt.</p>
+            <%= label_tag(:hint, "Löschgrund:") %>
+            <%= text_field_tag(:hint, '', size: 75) %>
+            <%= hidden_field_tag(:program_entry_id, '') %>
+            <i>Beispiel: Ich habe einen passenderen Eintrag hinzugefügt</i>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+            <%= submit_tag("Entfernung beantragen", class: "btn btn-danger") %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
+  <script>init_delete_modal_program_entry()</script>
 <% end %>
-<script>init_delete_modal_program_entry()</script>
