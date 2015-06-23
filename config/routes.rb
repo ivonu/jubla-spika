@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :new]
   resources :news
   resources :links
+  resources :pages, except: [:create, :show, :new, :destroy]
 
   resources :programs do
     member do

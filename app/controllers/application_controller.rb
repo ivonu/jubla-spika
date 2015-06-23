@@ -47,15 +47,15 @@ class ApplicationController < ActionController::Base
   end
 
   def about
-
+    @page = Page.where(title: 'Ueber uns').first
   end
 
   def contact
-
+    @page = Page.where(title: 'Kontakt').first
   end
 
   def theory
-
+    @page = Page.where(title: 'Wissen').first
   end
 
   def new_idea
