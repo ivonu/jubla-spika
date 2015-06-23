@@ -1,19 +1,17 @@
 <div class="attachment">
   <span class="attachment_image">
-      <%= link_to attachment.file.url do %>
-          <% if attachment.file.content_type =~ /\Aimage\/.*\z/ %>
-              <%= image_tag attachment.file.url(:thumb), height: '100' %>
-          <% else %>
-              <span class="glyphicon glyphicon-download-alt"></span>
-          <% end %>
+    <%= link_to attachment.file.url do %>
+      <% if attachment.file.content_type =~ /\Aimage\/.*\z/ %>
+        <%= image_tag attachment.file.url(:thumb), height: '100' %>
+      <% else %>
+        <span class="glyphicon glyphicon-download-alt"></span>
       <% end %>
+    <% end %>
   </span>
 
-  <%= attachment.file.original_filename %>
-  <% if entry_owner?(attachment.entry) and not @program %>
-      <%= link_to entry_attachment_path(attachment.entry, attachment),
-                  method: :delete, data: { confirm: 'Soll diese Datei wirklich gelöscht werden?' } do %>
-          <span class="glyphicon glyphicon-remove"></span>
-      <% end %>
+  <span class="attachment_name"><%= attachment.file.original_filename %></span>
+  <%= link_to entry_attachment_path(attachment.entry, attachment),
+        method: :delete, data: { confirm: 'Soll diese Datei wirklich gelöscht werden?' } do %>
+    <span class="glyphicon glyphicon-remove"></span>
   <% end %>
 </div>

@@ -111,6 +111,12 @@ class EntriesController < ApplicationController
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
+      params[:entry][:file].each do |file|
+        @attachment = Attachment.create(file: file, entry: @entry)
+        if @attachment.new_record?
+          flash[:error] = "Fehler beim Dateiupload!"
+        end
+      end
 
       if @program_entry
         @program_entry.entry = @entry
@@ -147,14 +153,26 @@ class EntriesController < ApplicationController
         authorize_entry_owner @entry
       end
       @entry.update(entry_params)
+      params[:entry][:file].each do |file|
+        @attachment = Attachment.create(file: file, entry: @entry)
+        if @attachment.new_record?
+          flash[:error] = "Fehler beim Dateiupload!"
+        end
+      end
       redirect_to @entry
     else
       @entry = Entry.new(entry_params)
       @entry.user = current_user
       @entry.published = false
       @entry.edited_entry = Entry.find(params[:id])
-     
+
       if @entry.save
+        params[:entry][:file].each do |file|
+          @attachment = Attachment.create(file: file, entry: @entry)
+          if @attachment.new_record?
+            flash[:error] = "Fehler beim Dateiupload!"
+          end
+        end
         redirect_to @entry
       else
         render 'edit'
@@ -317,6 +335,10 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
 
     if @entry.edited_entry != nil
+      @entry.attachments.each do |file|
+        file.entry = @entry.edited_entry
+        file.save
+      end
       @entry.id = @entry.edited_entry.id
       @entry.edited_entry.delete
       @entry.edited_entry = nil

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [:create]
-    resources :attachments, only: [:create, :destroy]
+    resources :attachments, only: [:destroy, :destroy_final]
   end
 
   resources :program_entries, only: [:destroy] do

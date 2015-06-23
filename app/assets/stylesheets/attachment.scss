@@ -27,8 +27,9 @@
         }
 
         .glyphicon {
-          display: inline;
+          display: inline-block;
           font-size: 3.0em;
+          padding-top: 30px;
         }
       }
 
@@ -38,6 +39,12 @@
         display: inline-block;
         vertical-align: middle;
       }
+    }
+    .attachment_name {
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

@@ -1,5 +1,9 @@
 <div id="attachments">
-  <h2>Anhänge</h2>
+  <% if not published %>
+    <h2>Neue Anhänge</h2>
+  <% else %>
+    <h2>Anhänge</h2>
+  <% end %>
   <% attachments.each do |attachment| %>
     <%= render partial: 'attachments/attachment', locals: {attachment: attachment} %>
   <% end %>

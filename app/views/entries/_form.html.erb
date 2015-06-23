@@ -1,4 +1,4 @@
-<%= simple_form_for @entry do |f| %>
+<%= simple_form_for @entry, :html => { :multipart => true } do |f| %>
     <div class="row">
         <%= f.input :title, label: 'Titel', wrapper_html: { class: "col-sm-6" } %>
         <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt', wrapper_html: { class: "col-sm-6" } %>
@@ -51,6 +51,14 @@
   <%= f.input :group_size, label: 'Gruppengrösse', as: :slider, min: '2', max: '100', unit: 'Kinder' %>
   <%= f.input :age, label: 'Alter', as: :slider, min: '5', max: '99', unit: 'Jahre' %>
   <%= f.input :time, label: 'Zeitaufwand', as: :slider, min: '5', max: '180', setter: 'slider_set_time' %>
+
+  <div>
+    <span class="btn btn-default fileinput-button">
+      <span class="glyphicon glyphicon-plus"></span>Anhänge hinzufügen
+      <%= f.file_field :file, multiple: true %>
+    </span>
+  </div>
+  <br>
 
   <% if @program_entry || (not @entry.programs.empty?) %>
       <%= f.input :independent, label: 'Auch seperat durchführbar?', :input_html => {:value => '1'} %>
