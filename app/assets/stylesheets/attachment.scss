@@ -4,9 +4,10 @@
     display: inline-block;
     width: 100px;
     text-align: center;
+    vertical-align: top;
 
     .glyphicon-remove {
-      color: red;
+      color: white;
     }
 
     .attachment_image {
@@ -45,6 +46,11 @@
       display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+  .attachment:hover {
+    .glyphicon-remove {
+      color: red;
     }
   }
 }

@@ -111,10 +111,12 @@ class EntriesController < ApplicationController
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
-      params[:entry][:file].each do |file|
-        @attachment = Attachment.create(file: file, entry: @entry)
-        if @attachment.new_record?
-          flash[:error] = "Fehler beim Dateiupload!"
+      if params[:entry][:file]
+        params[:entry][:file].each do |file|
+          @attachment = Attachment.create(file: file, entry: @entry)
+          if @attachment.new_record?
+            flash[:error] = "Fehler beim Dateiupload!"
+          end
         end
       end
 
@@ -153,10 +155,12 @@ class EntriesController < ApplicationController
         authorize_entry_owner @entry
       end
       @entry.update(entry_params)
-      params[:entry][:file].each do |file|
-        @attachment = Attachment.create(file: file, entry: @entry)
-        if @attachment.new_record?
-          flash[:error] = "Fehler beim Dateiupload!"
+      if params[:entry][:file]
+        params[:entry][:file].each do |file|
+          @attachment = Attachment.create(file: file, entry: @entry)
+          if @attachment.new_record?
+            flash[:error] = "Fehler beim Dateiupload!"
+          end
         end
       end
       redirect_to @entry
@@ -167,10 +171,12 @@ class EntriesController < ApplicationController
       @entry.edited_entry = Entry.find(params[:id])
 
       if @entry.save
-        params[:entry][:file].each do |file|
-          @attachment = Attachment.create(file: file, entry: @entry)
-          if @attachment.new_record?
-            flash[:error] = "Fehler beim Dateiupload!"
+        if params[:entry][:file]
+          params[:entry][:file].each do |file|
+            @attachment = Attachment.create(file: file, entry: @entry)
+            if @attachment.new_record?
+              flash[:error] = "Fehler beim Dateiupload!"
+            end
           end
         end
         redirect_to @entry
@@ -193,6 +199,7 @@ class EntriesController < ApplicationController
         flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
       else
         @entry.delete_comment = params[:hint]
+        @entry.delete_user = current_user
         @entry.save
         flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
       end
@@ -329,6 +336,7 @@ class EntriesController < ApplicationController
     @programs_del = Program.where.not(delete_comment: nil)
     @comments_pub = Comment.where(published: false)
     @comments_del = Comment.where.not(delete_comment: nil)
+    @attachments_del = Attachment.where.not(delete_comment: nil)
   end
 
   def publish

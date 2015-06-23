@@ -7,6 +7,7 @@ class Entry < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   belongs_to :user
   belongs_to :edited_entry, :class_name => 'Entry', :foreign_key => 'edited_entry'
+  belongs_to :delete_user, :class_name => 'User', :foreign_key => 'delete_user'
 
   validates :title, presence: true
   validates :description, presence: true

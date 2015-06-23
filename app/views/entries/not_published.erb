@@ -1,46 +1,47 @@
+<h2>Anträge</h2>
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Autor</th>
-      <th>Status</th>
+      <th>Betrifft</th>
+      <th>Von</th>
+      <th>Details</th>
     </tr>
   </thead>
 
   <% @entries_pub.each do |entry| %>
     <tr>
       <td><%= link_to(entry.title, entry_path(entry)) %></td>
-      <td><%= entry.user.first_name %> <%= entry.user.last_name %></td>
+      <td><%= link_to(entry.user.name, user_path(entry.user)) %></td>
       <td><%= if entry.edited_entry == nil then 'Neuer Eintrag' else 'Bearbeiteter Eintrag' end %></td>
     </tr>
   <% end %>
   <% @entries_del.each do |entry| %>
     <td><%= link_to(entry.title, entry_path(entry)) %></td>
-    <td></td>
+    <td><%= link_to(entry.delete_user.name, user_path(entry.delete_user)) %></td>
     <td>Zum löschen markiert (Grund: <%= entry.delete_comment %>)</td>
   <% end %>
   <% @programs_pub.each do |program| %>
     <tr>
       <td><%= link_to(program.title, program_path(program)) %></td>
-      <td><%= program.user.first_name %> <%= program.user.last_name %></td>
+      <td><%= link_to(program.user.name, user_path(program.user)) %></td>
       <td>Neue Gruppenstunde</td>
     </tr>
   <% end %>
   <% @programs_edit.each do |program| %>
     <tr>
       <td><%= link_to(program.title, program_path(program)) %></td>
-      <td></td>
+      <td><%= link_to(program.user.name, user_path(program.user)) %></td>
       <td>Bearbeiteter Titel</td>
     </tr>
   <% end %>
   <% @program_entry_del.each do |program_entry| %>
     <td><%= link_to(program_entry.entry.title, program_path(program_entry.program)) %></td>
-    <td></td>
+    <td><%= link_to(program_entry.delete_user.name, user_path(program_entry.delete_user)) %></td>
     <td>Zum entfernen von Grustu "<%= program_entry.program.title %>" markiert (Grund: <%= program_entry.delete_comment %>)</td>
   <% end %>
   <% @programs_del.each do |program| %>
     <td><%= link_to(program.title, program_path(program)) %></td>
-    <td></td>
+    <td><%= link_to(program.delete_user.name, user_path(program.delete_user)) %></td>
     <td>Zum löschen markiert (Grund: <%= program.delete_comment %>)</td>
   <% end %>
   <% @comments_pub.each do |comment| %>
@@ -50,7 +51,7 @@
       <% else %>
         <td><%= link_to(comment.entry.title, entry_path(comment.entry)) %></td>
       <% end %>
-      <td><%= comment.user.first_name %> <%= comment.user.last_name %></td>
+      <td><%= link_to(comment.user.name, user_path(comment.user)) %></td>
       <td>Neuer Kommentar</td>
     </tr>
   <% end %>
@@ -60,8 +61,17 @@
     <% else %>
       <td><%= link_to(comment.entry.title, entry_path(comment.entry)) %></td>
     <% end %>
-    <td></td>
+    <td><%= link_to(comment.delete_user.name, user_path(comment.delete_user)) %></td>
     <td>Zum löschen markiert (Grund: <%= comment.delete_comment %>)</td>
+  <% end %>
+  <% @attachments_del.each do |attachment| %>
+    <td><%= link_to(attachment.entry.title, entry_path(attachment.entry)) %></td>
+    <td><%= link_to(attachment.delete_user.name, user_path(attachment.delete_user)) %></td>
+    <td>Anhang zum löschen markiert (Grund: <%= attachment.delete_comment %>)</td>
   <% end %>
 
 </table>
+
+<% if @publish_num == 0 %>
+  <p>Keine Anträge</p>
+<% end %>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :authorize_user
+  before_action :authorize_user
   before_action :authorize_moderator, only: [:publish, :destroy_final, :keep]
 
   def create
@@ -55,6 +55,7 @@ class CommentsController < ApplicationController
         flash[:error] = "Dieser Kommentar wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
       else
         comment.delete_comment = params[:hint]
+        comment.delete_user = current_user
         comment.save
         flash[:alert] = "Der Kommentar wurde markiert. Ein Moderator wird den Antrag pruefen und den Kommentar gegebenenfalls entfernen."
       end

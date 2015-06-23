@@ -108,6 +108,7 @@ class ProgramEntriesController < ApplicationController
         flash[:error] = "Dieser Eintrag wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
       else
         program_entry.delete_comment = params[:hint]
+        program_entry.delete_user = current_user
         program_entry.save
         flash[:alert] = "Der Eintrag wurde markiert. Ein Moderator wird den Antrag pruefen und den Eintrag gegebenenfalls entfernen."
       end

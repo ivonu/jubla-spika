@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [:create]
-    resources :attachments, only: [:destroy, :destroy_final]
   end
 
   resources :program_entries, only: [:destroy] do
@@ -57,6 +56,13 @@ Rails.application.routes.draw do
   resources :comments, only: [:destroy] do
     member do
       post :publish
+      post :destroy_final
+      post :keep
+    end
+  end
+
+  resources :attachments, only: [:destroy] do
+    member do
       post :destroy_final
       post :keep
     end

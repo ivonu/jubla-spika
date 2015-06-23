@@ -6,6 +6,7 @@ class Program < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :user
+  belongs_to :delete_user, :class_name => 'User', :foreign_key => 'delete_user'
 
   validates :title, presence: true
 

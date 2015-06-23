@@ -180,6 +180,7 @@ class ProgramsController < ApplicationController
         redirect_to @program
       else
         @program.edited_title = params[:program][:title]
+        @program.user = current_user
 
         if @program.save
           flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
@@ -209,6 +210,7 @@ class ProgramsController < ApplicationController
         flash[:error] = "Diese Gruppenstunde wurde bereits zum entfernen markiert, aber noch nicht abgearbeitet und kann daher zurzeit nicht nochmals markiert werden."
       else
         @program.delete_comment = params[:hint]
+        @program.delete_user = current_user
         @program.save
         flash[:alert] = "Die Gruppenstunde wurde markiert. Ein Moderator wird den Antrag pruefen und sie gegebenenfalls entfernen."
       end

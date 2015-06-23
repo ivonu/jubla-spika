@@ -8,10 +8,20 @@
       <% end %>
     <% end %>
   </span>
-
-  <span class="attachment_name"><%= attachment.file.original_filename %></span>
-  <%= link_to entry_attachment_path(attachment.entry, attachment),
-        method: :delete, data: { confirm: 'Soll diese Datei wirklich gelöscht werden?' } do %>
-    <span class="glyphicon glyphicon-remove"></span>
+  <div>
+    <span class="attachment_name"><%= attachment.file.original_filename %></span>
+    <a href="#" data-toggle="modal" data-target="#delete-modal-attach" data-id=<%= attachment.id %>>
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+  </div>
+  <% if user_signed_in? and current_user.is_moderator? %>
+    <% if attachment.delete_comment != nil %>
+      <div class="btn-group btn-space">
+        <%= link_to 'Löschen', destroy_final_attachment_path(attachment), method: :post, class: "btn btn-danger btn-space"%>
+      </div>
+      <div class="btn-group btn-space">
+        <%= link_to 'Behalten', keep_attachment_path(attachment), method: :post, class: "btn btn-success btn-space" %>
+      </div>
+    <% end %>
   <% end %>
 </div>

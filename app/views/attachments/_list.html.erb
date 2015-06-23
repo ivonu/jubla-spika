@@ -9,3 +9,27 @@
   <% end %>
 </div>
 
+<%= form_tag(url_for(controller: "attachments", action: "destroy"), method: "delete") do %>
+  <div class="modal fade" id="delete-modal-attach" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Löschung eines Anhangs beantragen</h4>
+        </div>
+        <div class="modal-body">
+          <p>Bitte gib einen Grund an, warum der Anhang gelöscht werden soll. Die Moderatoren werden deinen Antrag prüfen und ihn gegebenenfalls entfernen.</p>
+          <%= label_tag(:hint, "Löschgrund:") %>
+          <%= text_field_tag(:hint, '', size: 75) %>
+          <%= hidden_field_tag(:attach_id, '') %>
+          <i>Beispiel: Ich besitze das Copyright auf den Anhang und möchte ihn hier nicht veröffentlichen.</i>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+          <%= submit_tag("Löschen beantragen", class: "btn btn-danger") %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>init_delete_modal_attach()</script>

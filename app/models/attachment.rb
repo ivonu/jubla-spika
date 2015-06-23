@@ -1,5 +1,6 @@
 class Attachment < ActiveRecord::Base
   belongs_to :entry
+  belongs_to :delete_user, :class_name => 'User', :foreign_key => 'delete_user'
 
   has_attached_file :file,
     styles: lambda{ |a|

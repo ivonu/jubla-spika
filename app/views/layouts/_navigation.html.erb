@@ -44,7 +44,7 @@
                 <li><%= link_to 'Users', users_path %></li>
                 <% if current_user.is_admin? %><li><%= link_to 'News', news_index_path %></li><% end %>
                     <% if current_user.is_admin? %><li><%= link_to 'Links', links_path %></li><% end %>
-                <li><%= link_to "Zur Überprüfung (#{@publish_num})", not_published_entries_path %></li>
+                <li><%= link_to "Anträge (#{@publish_num})", not_published_entries_path %></li>
               </ul>
             </li>
         <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622174041) do
+ActiveRecord::Schema.define(version: 20150623145215) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20150622174041) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "delete_comment"
+    t.integer  "delete_user"
   end
 
   add_index "attachments", ["entry_id"], name: "index_attachments_on_entry_id"
@@ -34,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150622174041) do
     t.datetime "updated_at",     null: false
     t.boolean  "published"
     t.string   "delete_comment"
+    t.integer  "delete_user"
   end
 
   add_index "comments", ["entry_id"], name: "index_comments_on_entry_id"
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150622174041) do
     t.boolean  "cat_pioneer"
     t.boolean  "cat_night"
     t.string   "delete_comment"
+    t.integer  "delete_user"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
@@ -103,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150622174041) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "delete_comment"
+    t.integer  "delete_user"
   end
 
   add_index "program_entries", ["entry_id"], name: "index_program_entries_on_entry_id"
@@ -141,6 +146,7 @@ ActiveRecord::Schema.define(version: 20150622174041) do
     t.boolean  "published"
     t.string   "edited_title"
     t.string   "delete_comment"
+    t.integer  "delete_user"
   end
 
   add_index "programs", ["user_id"], name: "index_programs_on_user_id"
