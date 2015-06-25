@@ -6,7 +6,13 @@ module UsersHelper
         :moderator => 'primary',
         :admin     => 'danger'
     }[role.to_sym]
+    german = {
+        :user      => 'Benutzer',
+        :writer    => 'Schreiber',
+        :moderator => 'Moderator',
+        :admin     => 'Administrator'
+    }[role.to_sym]
 
-    ('<span class="label label-' + color + '">' + role + '</span>').html_safe
+    ('<span class="label label-' + color + '">' + german + '</span>').html_safe
   end
 end

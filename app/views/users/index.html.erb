@@ -5,8 +5,7 @@
   <tr>
     <th>Name</th>
     <th>E-Mail</th>
-    <th>Role</th>
-    <th>Actions</th>
+    <th>Rolle</th>
   </tr>
   </thead>
   <tbody>
@@ -15,16 +14,6 @@
             <td><%= link_to user.name, user_path(user)  %></td>
             <td><%= user.email %></td>
             <td><%= get_role_label(user.role) %></td>
-            <td>
-              <% if current_user.moderator? || current_user.admin? %>
-                  <%= link_to edit_user_path(user), class: 'btn btn-xs btn-success' do %>
-                    <span class="glyphicon glyphicon-pencil"></span> <%= t(:edit) %>
-                  <% end %>
-                  <%= link_to user_path(user), method: :delete, data: { confirm: t(:sure?) }, class: 'btn btn-xs btn-danger' do %>
-                    <span class="glyphicon glyphicon-remove"></span> <%= t(:delete) %>
-                  <% end %>
-              <% end %>
-            </td>
         </tr>
     <% end %>
   </tbody>

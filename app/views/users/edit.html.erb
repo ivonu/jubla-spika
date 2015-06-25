@@ -1,10 +1,27 @@
-<h1>Edit <%= @user.name %></h1>
+<h1><%= @user.name %> bearbeiten</h1>
 
 <%= simple_form_for @user do |f| %>
-    <%= f.error_notification %>
+  <%= f.error_notification %>
 
+  <%= f.input :first_name, required: true, autofocus: true, label: 'Vorname' %>
+  <%= f.input :last_name, required: true, label: 'Nachname' %>
+  <%= f.input :name, required: true, label: 'Spitzname' %>
+  <%= f.input :email, required: true %>
+
+  <% if current_user.is_moderator? %>
     <%= f.input :role, include_blank: false %>
-    <%= f.button :submit, "Update" %>
+  <% end %>
+
+  <%= f.input :password, autocomplete: "off", hint: "leer lassen, falls du das Passwort nicht ändern willst", required: false, label: 'Neues Passwort'  %>
+  <%= f.input :password_confirmation, required: false, label: 'Neues Passwort wiederholen'  %>
+  <% if not current_user.is_moderator? %>
+    <%= f.input :current_password, required: true, label: 'Aktuelles Passwort' %>
+  <% end %>
+
+  <%= f.button :submit, "Bearbeiten" %>
 <% end %>
 
-<%= link_to "Back", :back %>
+<hr>
+<p>Unglücklich? <%= link_to 'Account löschen', user_path(@user),
+              method: :delete,
+              data: { confirm: 'Willst du deinen Account beim Spielkatapult wirklich löschen?' } %></p>
