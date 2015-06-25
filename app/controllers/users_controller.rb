@@ -28,11 +28,16 @@ class UsersController < ApplicationController
         @user.role = params[:user][:role]
         authorize_update(@user)
       end
-      if @user.update(params[:user][:password] == "" ? user_params : user_params_pwd)
+      if @user == current_user or current_user.is_admin?
+        if @user.update(params[:user][:password] == "" ? user_params : user_params_pwd)
+          flash[:success] = "Der Benutzer wurde geaendert"
+          redirect_to @user
+        else
+          render 'edit'
+        end
+      else
         flash[:success] = "Der Benutzer wurde geaendert"
         redirect_to @user
-      else
-        render 'edit'
       end
     else
       @user.errors.add(:current_password, "Dein Passwort stimmt nicht")

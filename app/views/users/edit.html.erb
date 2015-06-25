@@ -3,17 +3,22 @@
 <%= simple_form_for @user do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :first_name, required: true, autofocus: true, label: 'Vorname' %>
-  <%= f.input :last_name, required: true, label: 'Nachname' %>
-  <%= f.input :name, required: true, label: 'Spitzname' %>
-  <%= f.input :email, required: true %>
+  <% if @user == current_user or current_user.is_admin? %>
+    <%= f.input :first_name, required: true, autofocus: true, label: 'Vorname' %>
+    <%= f.input :last_name, required: true, label: 'Nachname' %>
+    <%= f.input :name, required: true, label: 'Spitzname' %>
+    <%= f.input :email, required: true %>
+  <% end %>
 
   <% if current_user.is_moderator? %>
     <%= f.input :role, include_blank: false %>
   <% end %>
 
-  <%= f.input :password, autocomplete: "off", hint: "leer lassen, falls du das Passwort nicht ändern willst", required: false, label: 'Neues Passwort'  %>
-  <%= f.input :password_confirmation, required: false, label: 'Neues Passwort wiederholen'  %>
+  <% if @user == current_user or current_user.is_admin? %>
+    <%= f.input :password, autocomplete: "off", hint: "leer lassen, falls du das Passwort nicht ändern willst", required: false, label: 'Neues Passwort'  %>
+    <%= f.input :password_confirmation, required: false, label: 'Neues Passwort wiederholen'  %>
+  <% end %>
+
   <% if not current_user.is_moderator? %>
     <%= f.input :current_password, required: true, label: 'Aktuelles Passwort' %>
   <% end %>
@@ -21,7 +26,9 @@
   <%= f.button :submit, "Bearbeiten" %>
 <% end %>
 
-<hr>
-<p>Unglücklich? <%= link_to 'Account löschen', user_path(@user),
-              method: :delete,
-              data: { confirm: 'Willst du deinen Account beim Spielkatapult wirklich löschen?' } %></p>
+<% if @user == current_user or current_user.is_admin? %>
+  <hr>
+  <p>Unglücklich? <%= link_to 'Account löschen', user_path(@user),
+                method: :delete,
+                data: { confirm: 'Willst du deinen Account beim Spielkatapult wirklich löschen?' } %></p>
+<% end %>
