@@ -348,6 +348,7 @@ class EntriesController < ApplicationController
         file.save
       end
       @entry.id = @entry.edited_entry.id
+      @entry.user = @entry.edited_entry.user
       @entry.edited_entry.delete
       @entry.edited_entry = nil
     end

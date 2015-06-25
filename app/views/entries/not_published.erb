@@ -30,7 +30,7 @@
   <% @programs_edit.each do |program| %>
     <tr>
       <td><%= link_to(program.title, program_path(program)) %></td>
-      <td><%= link_to(program.user.name, user_path(program.user)) %></td>
+      <td><%= link_to(program.delete_user.name, user_path(program.delete_user)) %></td>
       <td>Bearbeiteter Titel</td>
     </tr>
   <% end %>

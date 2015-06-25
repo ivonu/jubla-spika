@@ -180,7 +180,7 @@ class ProgramsController < ApplicationController
         redirect_to @program
       else
         @program.edited_title = params[:program][:title]
-        @program.user = current_user
+        @program.delete_user = current_user
 
         if @program.save
           flash[:info] = "Deine Aenderung muss noch von einem Moderator ueberprueft werden, bevor sie veroeffentlicht wird."
