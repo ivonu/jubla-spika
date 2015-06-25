@@ -43,6 +43,8 @@
         Noch keine Bewertungen
       <% end %>
     </p>
+    <h2>Autor</h2>
+    <p><%= link_to(@entry.user.name, user_path(@entry.user)) %></p>
   </div>
 </div>
 
