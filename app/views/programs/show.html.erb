@@ -53,7 +53,7 @@
         <% end %>
       </p>
       <h2>Autor</h2>
-      <% if program.user %>
+      <% if @program.user %>
         <p><%= link_to(@program.user.name, user_path(@program.user)) %></p>
       <% else %>
         Konto gelöscht

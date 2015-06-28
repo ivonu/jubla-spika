@@ -101,8 +101,10 @@ class EntriesController < ApplicationController
         flash[:alert] = "Dieser Eintrag muss noch von einem Moderator veroeffentlicht werden, bevor er in der Suche erscheint."
       end
 
-      if not @entry.delete_comment == nil and @entry.programs.count > 0
-        flash[:error] = "Achtung: Dieser Eintrag kommt in Gruppenstunden vor. Falls er geloescht wird, fehlen diesen Gruppenstunden eventuell wichtige Teile!"
+      if user_signed_in? and current_user.is_moderator?
+        if not @entry.delete_comment == nil and @entry.programs.count > 0
+          flash[:error] = "Achtung: Dieser Eintrag kommt in Gruppenstunden vor. Falls er geloescht wird, fehlen diesen Gruppenstunden eventuell wichtige Teile!"
+        end
       end
 
       respond_to do |format|
@@ -125,7 +127,7 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     @entry.user = current_user
-    @entry.published = false
+    @entry.published = (current_user.role == "writer") ? true : false
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save

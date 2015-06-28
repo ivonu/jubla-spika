@@ -130,8 +130,11 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
     authorize_program_owner @program
     @program.done = true
+    @program.published = (current_user.role == "writer") ? true : false
     @program.save
-    flash[:info] = "Deine Gruppenstunde muss nun noch von einem Moderator freigeschaltet werden, dann ist sie online."
+    if not current_user.role == "writer"
+      flash[:info] = "Deine Gruppenstunde muss nun noch von einem Moderator freigeschaltet werden, dann ist sie online."
+    end
     redirect_to @program
   end
 
