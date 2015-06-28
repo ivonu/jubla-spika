@@ -1,7 +1,7 @@
 <%= simple_form_for @entry, :html => { :multipart => true } do |f| %>
     <div class="row">
         <%= f.input :title, label: 'Titel', wrapper_html: { class: "col-sm-6" }, :input_html => {:onblur => (@check_duplicates == true) ? "load_duplicates();" : ""} %>
-        <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt', wrapper_html: { class: "col-sm-6" }, :input_html => {:onblur => (@check_duplicates == true) ? "load_duplicates();" : ""} %>
+        <%= f.input :title_other, label: 'Alternative Titel', hint: 'Mehrere Titel durch Komma getrennt', wrapper_html: { class: "col-sm-6" }, :input_html => {:onblur => (@check_duplicates == true) ? "load_duplicates();" : ""} %>
     </div>
 
     <div id="duplicates_alert" class="alert alert-warning alert-dismissible" style="display: none;">
