@@ -58,6 +58,10 @@ class ApplicationController < ActionController::Base
     @page = Page.where(title: 'Wissen').first
   end
 
+  def agb
+    @page = Page.where(title: 'AGB').first
+  end
+
   def new_idea
 
   end
