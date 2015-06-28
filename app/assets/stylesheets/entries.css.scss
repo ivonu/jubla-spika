@@ -6,6 +6,9 @@
     th:first-child {
       width: 200px;
     }
+    th:nth-child(2) {
+      width: 100px;
+    }
   }
 
   td {
