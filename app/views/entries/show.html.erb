@@ -44,7 +44,11 @@
       <% end %>
     </p>
     <h2>Autor</h2>
-    <p><%= link_to(@entry.user.name, user_path(@entry.user)) %></p>
+    <% if @entry.user %>
+      <p><%= link_to(@entry.user.name, user_path(@entry.user)) %></p>
+    <% else %>
+      Konto gelöscht
+    <% end %>
   </div>
 </div>
 

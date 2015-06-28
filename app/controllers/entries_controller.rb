@@ -64,6 +64,23 @@ class EntriesController < ApplicationController
 
   end
 
+  def check_duplicates
+    data = []
+    entries = Entry.search_query(params[:titles].gsub(',', ' '))
+    entries.each do |entry|
+      str = OpenStruct.new
+      str.title = entry.title
+      str.url = entry.id
+      data << str
+    end
+
+    respond_to do |format|
+      format.json { 
+        render json: data
+      }
+    end
+  end
+
   def show
     @entry = Entry.find(params[:id])
 
@@ -102,6 +119,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new()
+    @check_duplicates = true;
   end
 
   def create
@@ -142,6 +160,7 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    @check_duplicates = false;
     if Entry.where(edited_entry: @entry).count != 0
       flash[:error] = "Dieser Eintrag wurde bereits bearbeitet, aber noch nicht freigeschaltet und kann daher zurzeit nicht bearbeitet werden."
       redirect_to @entry

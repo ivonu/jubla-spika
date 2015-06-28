@@ -1,7 +1,13 @@
 <%= simple_form_for @entry, :html => { :multipart => true } do |f| %>
     <div class="row">
-        <%= f.input :title, label: 'Titel', wrapper_html: { class: "col-sm-6" } %>
-        <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt', wrapper_html: { class: "col-sm-6" } %>
+        <%= f.input :title, label: 'Titel', wrapper_html: { class: "col-sm-6" }, :input_html => {:onblur => (@check_duplicates == true) ? "load_duplicates();" : ""} %>
+        <%= f.input :title_other, label: 'Alternative Titel', hint: 'durch Komma getrennt', wrapper_html: { class: "col-sm-6" }, :input_html => {:onblur => (@check_duplicates == true) ? "load_duplicates();" : ""} %>
+    </div>
+
+    <div id="duplicates_alert" class="alert alert-warning alert-dismissible" style="display: none;">
+      <button type="button" class="close" onclick="$('#duplicates_alert').fadeOut('fast');">×</button>
+      <div>Achtung: Es existieren bereits Einträge mit ähnlichen Namen oder Inhalten. Bitte überprüfe kurz, ob dein Eintrag nicht bereits in dieser Liste vorkommt:</div>
+      <div id="duplicates_alert_text"></div>
     </div>
 
     <%= f.input :description, label: 'Spiel-Beschreibung' %>

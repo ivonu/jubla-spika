@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     collection do
       get :tags
       get :not_published
+      get :check_duplicates
     end
 
     member do

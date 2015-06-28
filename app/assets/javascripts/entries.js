@@ -35,8 +35,8 @@ function update_checkboxes () {
     document.getElementsByName("filterrific[with_part_end]")[1].disabled = true;
   }
   else if(document.getElementsByName("filterrific[with_part_start]")[1].checked ||
-          document.getElementsByName("filterrific[with_part_main]")[1].checked ||
-          document.getElementsByName("filterrific[with_part_end]")[1].checked) {
+    document.getElementsByName("filterrific[with_part_main]")[1].checked ||
+    document.getElementsByName("filterrific[with_part_end]")[1].checked) {
     document.getElementsByName("filterrific[only_programs]")[1].disabled = true;
   }
   else {
@@ -47,5 +47,40 @@ function update_checkboxes () {
 
   }
 
+}
+
+function load_duplicates () {
+
+  title = document.getElementById("entry_title").value;
+  title_other = document.getElementById("entry_title_other").value;
+
+  if(title != "" || title_other != "") {
+    http = new XMLHttpRequest();
+    http.open("GET", "check_duplicates.json?titles=" + encodeURIComponent(title + " " + title_other), true);
+
+    http.onreadystatechange = function() {
+      if (http.readyState==4 && http.status==200) {
+        var data = JSON.parse(http.responseText)
+
+        if(data.length != 0) {
+          var msg_window = document.getElementById("duplicates_alert_text")
+          msg_window.innerHTML = "";
+          for (var i = 0; i < data.length; i++) {
+            msg_window.innerHTML += "<br><a href=\"" + data[i].table.url + "\" target=\"_blank\">" + data[i].table.title + "</a>"
+          }
+          $('#duplicates_alert').fadeIn('fast');
+        }
+        else {
+          $('#duplicates_alert').fadeOut('fast');
+        }
+
+      }
+    }
+
+    http.send();
+  }
+  else {
+    $('#duplicates_alert').fadeOut('fast');
+  }
 
 }
