@@ -12,8 +12,10 @@
 //
 //= require_tree .
 
-dataConfirmModal.setDefaults({
-  title: 'Bitte bestätigen',
-  commit: 'Fortfahren',
-  cancel: 'Abbrechen'
-});
+function init () {
+  dataConfirmModal.setDefaults({
+    title: 'Bist du sicher?',
+    commit: 'Fortfahren',
+    cancel: 'Abbrechen'
+  });
+}

@@ -13,7 +13,7 @@
     <%= f.input :description, label: 'Spiel-Beschreibung' %>
 
     <div class="row">
-        <%= f.input :material, label: 'Material', wrapper_html: { class: "col-sm-6" } %>
+        <%= f.input :material, label: 'Material', wrapper_html: { class: "col-sm-6" }, :input_html => {:onfocus => "material_start(this);", :onkeyup => "material_check(this);", :onblur => "material_quit(this);"} %>
         <%= f.input :preparation, label: 'Vorbereitungen', wrapper_html: { class: "col-sm-6" } %>
     </div>
 

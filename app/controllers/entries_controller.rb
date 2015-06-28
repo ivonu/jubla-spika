@@ -128,6 +128,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new(entry_params)
     @entry.user = current_user
     @entry.published = (current_user.role == "writer") ? true : false
+    @entry.material = remove_dash(@entry.material)
     @program_entry = ProgramEntry.new(program_entry_params) if params[:program_entry].present?
 
     if @entry.save
@@ -162,6 +163,12 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    temp = ""
+    @entry.material.split(/\r?\n/).each do |t|
+      temp += "\n" unless temp == ""
+      temp += "- " + t
+    end
+    @entry.material = temp
     @check_duplicates = false;
     if Entry.where(edited_entry: @entry).count != 0
       flash[:error] = "Dieser Eintrag wurde bereits bearbeitet, aber noch nicht freigeschaltet und kann daher zurzeit nicht bearbeitet werden."
@@ -176,6 +183,8 @@ class EntriesController < ApplicationController
         authorize_entry_owner @entry
       end
       @entry.update(entry_params)
+      @entry.material = remove_dash(@entry.material)
+      @entry.save
       if params[:entry][:file]
         params[:entry][:file].each do |file|
           @attachment = Attachment.create(file: file, entry: @entry)
@@ -189,6 +198,7 @@ class EntriesController < ApplicationController
       @entry = Entry.new(entry_params)
       @entry.user = current_user
       @entry.published = false
+      @entry.material = remove_dash(@entry.material)
       @entry.edited_entry = Entry.find(params[:id])
 
       if @entry.save
@@ -446,5 +456,14 @@ class EntriesController < ApplicationController
 
     def authorize_entry_owner(entry)
       raise AuthorizationError unless entry_owner?(entry)
+    end
+
+    def remove_dash (list)
+      temp = ""
+      list.split(/\r?\n/).each do |t|
+        temp += "\n" unless temp == ""
+        temp += t[2..-1]
+      end
+      return temp
     end
 end

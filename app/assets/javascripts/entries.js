@@ -84,3 +84,41 @@ function load_duplicates () {
   }
 
 }
+
+function material_start(material) {
+  if(material.value == '') {
+    material.value += "- ";
+  }
+  else {
+    material.value += "\n- ";
+  }
+  try {
+    var range = material.createTextRange();
+    range.collapse(false);
+    range.select();
+  }
+  catch(err) {}
+}
+
+
+function material_check (material) {
+  if(material.value.substr(material.value.length-2, 2) == '\n-') {
+    material.value = material.value.substr(0, material.value.length-2);
+  }
+  else if(material.value == '-') {
+    material.value = '- ';
+  }
+  else if(material.value.substr(material.value.length-1, 1) == '\n') {
+    material.value += "- ";
+  }
+}
+
+
+function material_quit(material) {
+  if(material.value.substr(material.value.length-3, 3) == '\n- ') {
+    material.value = material.value.substr(0, material.value.length-3);
+  }
+  else if(material.value == '- ') {
+    material.value = '';
+  }
+}
