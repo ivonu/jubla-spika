@@ -10,10 +10,11 @@
     <%= f.input :email, required: true %>
     <%= f.input :password, required: true %>
     <%= f.input :password_confirmation, required: true %>
+    <input type="checkbox" onclick="check_agb(this);"> Ich habe die <%= link_to agb_path do %>AGB<% end %> gelesen.
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, disabled: true, :id=> "new_user_submit" %>
   </div>
 <% end %>
 
