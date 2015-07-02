@@ -35,14 +35,14 @@
           <%= f.check_box :with_cat_night   %> Nachtspiel<br>
         </div>
         <div>
-          Gruppengrösse:<br>
-          <%= f.select(:num_group_min, @filterrific.select_options[:num_group]) %> -
-          <%= f.select(:num_group_max, @filterrific.select_options[:num_group]) %> Kinder
-        </div>
-        <div>
           Alter:<br>
           <%= f.select(:num_age_min, @filterrific.select_options[:num_age]) %> -
           <%= f.select(:num_age_max, @filterrific.select_options[:num_age]) %> Jahre
+        </div>
+        <div>
+          Gruppengrösse:<br>
+          <%= f.select(:num_group_min, @filterrific.select_options[:num_group]) %> -
+          <%= f.select(:num_group_max, @filterrific.select_options[:num_group]) %> Kinder
         </div>
         <div>
           Zeit:<br>
