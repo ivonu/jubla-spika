@@ -1,5 +1,5 @@
-<p>Wilkommen <%= @email %>!</p>
+<p>Wilkommen <%= @name %>!</p>
 
-<p>Du kannst deine E-Mail Adresse mit folgenden Link bestätigen:</p>
+<p>Du kannst deine E-Mail Adresse mit folgendem Link bestätigen:</p>
 
-<p><%= link_to 'Bestätige mein Account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to 'Bestätige meinen Account', confirmation_url(@resource, confirmation_token: @token) %></p>
