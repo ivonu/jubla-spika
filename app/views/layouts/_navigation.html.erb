@@ -28,6 +28,11 @@
             </ul>
           </li>
         <% end %>
+        <li class="hidden-xs">
+          <%= form_tag("/entries", method: "get") do %>
+            <%= text_field_tag("filterrific[search_query]", nil, {placeholder: "Schnellsuche"}) %>
+          <% end %>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? and current_user.is_moderator? %>
