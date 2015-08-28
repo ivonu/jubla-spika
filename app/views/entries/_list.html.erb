@@ -38,6 +38,7 @@
       <% entries.each do |program| %>
         <tr class="active">
           <td><%= link_to(program.title, program_path(program)) %></td>
+          <td><%= if program.rating then program.rating else '-' end %> (<%= program.ratings.count %>)</td>
           <td class="hidden-xs">
             <% program.entries.each_with_index do |entry, i| %>
               <%= if i==program.entries.count-1 then entry.title else "#{entry.title}, " end %>
