@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'application#index'
 
-  get 'wissen', to: 'application#theory'
+  get 'faq', to: 'application#faq'
   get 'about', to: 'application#about'
   get 'contact', to: 'application#contact'
   get 'new_idea', to: 'application#new_idea'

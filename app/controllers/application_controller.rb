@@ -54,8 +54,8 @@ class ApplicationController < ActionController::Base
     @page = Page.where(title: 'Kontakt').first
   end
 
-  def theory
-    @page = Page.where(title: 'Wissen').first
+  def faq
+    @page = Page.where(title: 'FAQ').first
   end
 
   def agb
