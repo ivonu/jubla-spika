@@ -1,5 +1,7 @@
 class Entry < ActiveRecord::Base
 
+  before_validation :sanitize_content
+
   has_many :program_entries, dependent: :destroy
   has_many :programs, through: :program_entries
   has_many :ratings, dependent: :destroy
@@ -195,5 +197,10 @@ class Entry < ActiveRecord::Base
       ['Neuigkeit', 'created_at_desc']
     ]
   end
+
+  private
+    def sanitize_content
+      self.description = ActionController::Base.helpers.sanitize self.description
+    end
 
 end
