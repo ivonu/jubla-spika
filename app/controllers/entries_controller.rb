@@ -169,6 +169,7 @@ class EntriesController < ApplicationController
       temp += "- " + t
     end
     @entry.material = temp
+    @entry.keywords = @entry.keywords.split(/[\s,]/).join(',')
     @check_duplicates = false;
     if Entry.where(edited_entry: @entry).count != 0
       flash[:error] = "Dieser Eintrag wurde bereits bearbeitet, aber noch nicht freigeschaltet und kann daher zurzeit nicht bearbeitet werden."
