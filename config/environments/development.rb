@@ -23,8 +23,7 @@ Rails.application.configure do
       :port           => 587,
       :user_name      => Figaro.env.smtp_username,
       :password       => Figaro.env.smtp_password,
-      :authentication => :login,
-      :ssl            => true,
+      :authentication => :plain,
       :enable_starttls_auto => true
   }
 
