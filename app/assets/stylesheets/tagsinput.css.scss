@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.bootstrap-tagsinput input {
+  min-width: 100px;
+}
+
 .twitter-typeahead .tt-query,
 .twitter-typeahead .tt-hint {
   margin-bottom: 0;
