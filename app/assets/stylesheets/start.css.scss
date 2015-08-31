@@ -11,3 +11,21 @@
   padding-top: 20px;
   width: 60%;
 }
+
+.start_image_prev:hover {
+  .glyphicon-remove {
+    color: red;
+  }
+}
+
+.start_image_prev {
+  .glyphicon-remove {
+    color: white;
+  }
+}
+
+#collapseAddPictures {
+  .btn {
+    margin-bottom: 5px;
+  }
+}

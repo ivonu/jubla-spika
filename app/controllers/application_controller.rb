@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
   def index
     @entries = Entry.where(published: true).last(5).reverse
     @news = News.paginate(:page => params[:page], :per_page => 3).order('id DESC')
+    @pictures = Picture.all.reverse
   end
 
   def about

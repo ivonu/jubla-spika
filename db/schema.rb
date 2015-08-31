@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623151009) do
+ActiveRecord::Schema.define(version: 20150830160909) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(version: 20150623151009) do
     t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "program_entries", force: :cascade do |t|

@@ -1,0 +1,32 @@
+<h1>Start-Bilder</h1>
+ 
+<% @pictures.each do |picture| %>
+  <p class="start_image_prev">
+    <%= image_tag picture.file.url(:thumb) %>
+    <%= link_to picture_path(picture),
+          method: :delete,
+          data: { confirm: 'Wirklich löschen?' } do %>
+      <span class="glyphicon glyphicon-remove"></span>
+    <% end %>
+  </p>
+<% end %>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseAddPictures">
+  Bilder hinzufügen
+</button>
+
+<div class="collapse" id="collapseAddPictures">
+  <div class="well">
+    <%= simple_form_for @picture, :html => { :multipart => true } do |f| %>
+      <div>
+        <span class="btn btn-default fileinput-button">
+          Bilder auswählen
+          <%= f.file_field :file, multiple: true %>
+        </span>
+      </div>
+      <%= f.button :submit, 'Hochladen' %>
+    <% end %>
+
+    <p><b>Bemerkung</b>: Zu viele Bilder oder Bilder in zu hoher Qualität verlängern die Ladezeit der Startseite erheblich.</p>
+  </div>
+</div>

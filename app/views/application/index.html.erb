@@ -1,20 +1,16 @@
 <div id="start-carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#start-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#start-carousel" data-slide-to="1"></li>
-    <li data-target="#start-carousel" data-slide-to="2"></li>
+    <% @pictures.each_with_index do |picture, i| %>
+      <li data-target="#start-carousel" data-slide-to="<%= i %>" <%= if(i == 0) then "class='active'".html_safe end %>></li>
+    <% end %>
   </ol>
 
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <%= image_tag("carousel/1.jpg") %>
-    </div>
-    <div class="item">
-      <%= image_tag("carousel/2.jpg") %>
-    </div>
-    <div class="item">
-      <%= image_tag("carousel/3.jpg") %>
-    </div>
+    <% @pictures.each_with_index do |picture, i| %>
+      <div class="item <%= if(i == 0) then "active" end %>">
+        <%= image_tag picture.file.url(:original) %>
+      </div>
+    <% end %>
   </div>
 
   <a class="left carousel-control" href="#start-carousel" role="button" data-slide="prev">
