@@ -117,17 +117,18 @@
             }
         });
 
+        $('.entry_keywords').focusout(function() {
+            $('#entry_keywords').tagsinput('add', $('#entry_keywords').tagsinput('input').val());
+            $('#entry_keywords').tagsinput('input').val('');
+            $('#entry_keywords').tagsinput('input').typeahead('val', '');
+        });
+
+        $('#entry_keywords').on('itemAdded', function(event) {
+            console.log("added");
+            $('#entry_keywords').tagsinput('input').typeahead('val', '');
+        });
     });
 
-    $('.entry_keywords').focusout(function() {
-        $('#entry_keywords').tagsinput('add', $('#entry_keywords').tagsinput('input').val());
-        $('#entry_keywords').tagsinput('input').val('');
-        $('#entry_keywords').tagsinput('input').typeahead('val', '');
-    });
 
-    $('#entry_keywords').on('itemAdded', function(event) {
-        console.log("added");
-        $('#entry_keywords').tagsinput('input').typeahead('val', '');
-    });
 
 </script>
