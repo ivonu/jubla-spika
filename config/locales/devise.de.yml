@@ -58,3 +58,10 @@ de:
       not_saved:
         one: "Konnte %{resource} nicht speichern: ein Fehler."
         other: "Konnte %{resource} nicht speichern: %{count} Fehler."
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Es ist bereits ein Benutzer mit dieser E-Mail Adresse registriert"

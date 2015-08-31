@@ -67,9 +67,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'spika.jubla.ch' }
 
   ActionMailer::Base.smtp_settings = {
-      :address        => 'nerthus.metanet.ch',
-      :domain         => 'releibrugg.ch',
-      :port           => 465,
+      :address        => 'smtp.mandrillapp.com',
+      :domain         => 'jubla.ch',
+      :port           => 587,
       :user_name      => Figaro.env.smtp_username,
       :password       => Figaro.env.smtp_password,
       :authentication => :login,
