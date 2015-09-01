@@ -24,21 +24,21 @@ class Program < ActiveRecord::Base
       :only_programs,
       :with_indoors,
       :with_outdoors,
-      :with_weather_snow,
-      :with_weather_rain,
-      :with_weather_sun,
       :with_act_active,
       :with_act_calm,
       :with_act_creative,
-      :with_cat_pocket, 
-      :with_cat_craft,
-      :with_cat_cook,
-      :with_cat_pioneer,
-      :with_cat_night,
+      :with_act_talk,
+      :with_cat_game, 
+      :with_cat_shape,
+      :with_cat_group,
+      :with_cat_jubla,
+      :with_age_5,
+      :with_age_8,
+      :with_age_12,
+      :with_age_15,
+      :with_age_17,
       :num_group_min,
       :num_group_max,
-      :num_age_min,
-      :num_age_max,
       :num_time_min,
       :num_time_max
     ]
@@ -53,19 +53,21 @@ class Program < ActiveRecord::Base
   scope :with_part_start, lambda { |flag| }
   scope :with_part_main, lambda { |flag| }
   scope :with_part_end, lambda { |flag| }
+  scope :with_age_5, lambda { |flag| check_boolean_attr "age_5", flag }
+  scope :with_age_8, lambda { |flag| check_boolean_attr "age_8", flag }
+  scope :with_age_12, lambda { |flag| check_boolean_attr "age_12", flag }
+  scope :with_age_15, lambda { |flag| check_boolean_attr "age_15", flag }
+  scope :with_age_17, lambda { |flag| check_boolean_attr "age_17", flag }
   scope :with_indoors, lambda { |flag| check_boolean_attr "indoors", flag }
   scope :with_outdoors, lambda { |flag| check_boolean_attr "outdoors", flag }
-  scope :with_weather_snow, lambda { |flag| check_boolean_attr "weather_snow", flag }
-  scope :with_weather_rain, lambda { |flag| check_boolean_attr "weather_rain", flag }
-  scope :with_weather_sun, lambda { |flag| check_boolean_attr "weather_sun", flag }
   scope :with_act_active, lambda { |flag| check_boolean_attr "act_active", flag }
   scope :with_act_calm, lambda { |flag| check_boolean_attr "act_calm", flag }
   scope :with_act_creative, lambda { |flag| check_boolean_attr "act_creative", flag }
-  scope :with_cat_pocket, lambda { |flag| check_boolean_attr "cat_pocket", flag }
-  scope :with_cat_craft, lambda { |flag| check_boolean_attr "cat_craft", flag }
-  scope :with_cat_cook, lambda { |flag| check_boolean_attr "cat_cook", flag }
-  scope :with_cat_pioneer, lambda { |flag| check_boolean_attr "cat_pioneer", flag }
-  scope :with_cat_night, lambda { |flag| check_boolean_attr "cat_night", flag }
+  scope :with_act_talk, lambda { |flag| check_boolean_attr "act_talk", flag }
+  scope :with_cat_game, lambda { |flag| check_boolean_attr "cat_game", flag }
+  scope :with_cat_shape, lambda { |flag| check_boolean_attr "cat_shape", flag }
+  scope :with_cat_group, lambda { |flag| check_boolean_attr "cat_group", flag }
+  scope :with_cat_jubla, lambda { |flag| check_boolean_attr "cat_jubla", flag }
 
   def self.check_integer_attr attr_name, attr_value, comp
     return nil  if attr_value.blank?
@@ -75,8 +77,6 @@ class Program < ActiveRecord::Base
 
   scope :num_group_min, lambda { |num| check_integer_attr "group_size_min", num, "<="}
   scope :num_group_max, lambda { |num| check_integer_attr "group_size_max", num, ">="}
-  scope :num_age_min, lambda { |num| check_integer_attr "age_min", num, "<="}
-  scope :num_age_max, lambda { |num| check_integer_attr "age_max", num, ">="}
   scope :num_time_min, lambda { |num| check_integer_attr "time_min", num, "<="}
   scope :num_time_max, lambda { |num| check_integer_attr "time_max", num, ">="}
 

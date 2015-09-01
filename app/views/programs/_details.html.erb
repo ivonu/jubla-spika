@@ -1,40 +1,37 @@
+<h3>Alter</h3>
+<p>
+  <%= checked_glyphicons(@program.age_5) %>  5 - 7 Jahre<br>
+  <%= checked_glyphicons(@program.age_8) %>  8 - 11 Jahre<br>
+  <%= checked_glyphicons(@program.age_12) %> 12 - 14 Jahre<br>
+  <%= checked_glyphicons(@program.age_15) %> 15 - 16 Jahre<br>
+  <%= checked_glyphicons(@program.age_17) %> 17+ Jahre<br>
+</p>
+
 <h3>Spielbar</h3>
 <p>
   <%= checked_glyphicons(@program.indoors)  %> Drinnen<br>
   <%= checked_glyphicons(@program.outdoors) %> Draussen<br>
 </p>
 
-<h3>Wetter</h3>
-<p>
-  <%= checked_glyphicons(@program.weather_snow) %> Schnee<br>
-  <%= checked_glyphicons(@program.weather_rain) %> Regen<br>
-  <%= checked_glyphicons(@program.weather_sun)  %> Sonne<br>
-</p>
-
 <h3>Spielart</h3>
 <p>
-  <%= checked_glyphicons(@program.act_active)   %> Aktiv<br>
+  <%= checked_glyphicons(@program.act_active)   %> Bewegt<br>
   <%= checked_glyphicons(@program.act_calm)     %> Ruhig<br>
   <%= checked_glyphicons(@program.act_creative) %> Kreativ<br>
+  <%= checked_glyphicons(@program.act_talk) %>     Gesprächig<br>
 </p>
 
 <h3>Kategorie</h3>
 <p>
-  <%= checked_glyphicons(@program.cat_pocket)  %> Hosensackspiel<br>
-  <%= checked_glyphicons(@program.cat_craft)   %> Basteln<br>
-  <%= checked_glyphicons(@program.cat_cook)    %> Kochen<br>
-  <%= checked_glyphicons(@program.cat_pioneer) %> Pioniertechnik<br>
-  <%= checked_glyphicons(@program.cat_night)   %> Nachtspiel<br>
+  <%= checked_glyphicons(@program.cat_game)  %> Spiel &amp; Sport<br>
+  <%= checked_glyphicons(@program.cat_shape) %> Gestalten<br>
+  <%= checked_glyphicons(@program.cat_group) %> Gruppengeist<br>
+  <%= checked_glyphicons(@program.cat_jubla) %> Jubla-Wissen<br>
 </p>
 
 <h3>Gruppengrösse</h3>
 <p>
   <%= @program.group_size_min %> - <%= @program.group_size_max %> Kinder
-</p>
-
-<h3>Alter</h3>
-<p>
-  <%= @program.age_min %> - <%= @program.age_max %> Jahre
 </p>
 
 <h3>Zeit</h3>

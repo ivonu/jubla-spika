@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901124525) do
+ActiveRecord::Schema.define(version: 20150901132328) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "entry_id"
@@ -141,28 +141,28 @@ ActiveRecord::Schema.define(version: 20150901124525) do
     t.text     "preparation"
     t.boolean  "indoors"
     t.boolean  "outdoors"
-    t.boolean  "weather_snow"
-    t.boolean  "weather_rain"
-    t.boolean  "weather_sun"
     t.boolean  "act_active"
     t.boolean  "act_calm"
     t.boolean  "act_creative"
     t.integer  "group_size_min"
     t.integer  "group_size_max"
-    t.integer  "age_min"
-    t.integer  "age_max"
     t.integer  "time_min"
     t.integer  "time_max"
-    t.boolean  "cat_pocket"
-    t.boolean  "cat_craft"
-    t.boolean  "cat_cook"
-    t.boolean  "cat_pioneer"
-    t.boolean  "cat_night"
     t.boolean  "done"
     t.boolean  "published"
     t.string   "edited_title"
     t.string   "delete_comment"
     t.integer  "delete_user"
+    t.boolean  "age_5"
+    t.boolean  "age_8"
+    t.boolean  "age_12"
+    t.boolean  "age_15"
+    t.boolean  "age_17"
+    t.boolean  "act_talk"
+    t.boolean  "cat_game"
+    t.boolean  "cat_shape"
+    t.boolean  "cat_group"
+    t.boolean  "cat_jubla"
   end
 
   add_index "programs", ["user_id"], name: "index_programs_on_user_id"
