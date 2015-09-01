@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :ratings, dependent: :destroy
+  has_many :ratings
   has_many :comments, dependent: :destroy
   has_many :programs
   has_many :entries
