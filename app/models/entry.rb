@@ -120,13 +120,13 @@ class Entry < ActiveRecord::Base
 
     case sort_option.to_s
     when /^rating_/
-      order("LOWER(entries.rating) #{ direction }")
+      order("entries.rating #{ direction }")
     when /^title_/
       order("LOWER(entries.title) #{ direction }")
     when /^duration_/
-      order("LOWER(entries.time_min) #{ direction }")
-    when /^created_at_/
-      order("LOWER(entries.created_at) #{ direction }")
+      order("entries.time_min #{ direction }")
+    when /^id_/
+      order("entries.id #{ direction }")
     else
       raise(ArgumentError, "Sortier-Option ungueltig: #{ sort_option.inspect }")
     end
@@ -194,7 +194,7 @@ class Entry < ActiveRecord::Base
       ['Bewertung', 'rating_desc'],
       ['Titel', 'title_asc'],
       ['Dauer', 'duration_asc'],
-      ['Neuigkeit', 'created_at_desc']
+      ['Neuigkeit', 'id_asc']
     ]
   end
 
