@@ -5,6 +5,11 @@ class EntriesController < ApplicationController
 
   def index
 
+    @page_cat_game = Page.where(title: 'Erklaerung Spiel und Sport').first
+    @page_cat_shape = Page.where(title: 'Erklaerung Gestalten').first
+    @page_cat_group = Page.where(title: 'Erklaerung Gruppengeist').first
+    @page_cat_jubla = Page.where(title: 'Erklaerung Jubla Wissen').first
+
     @plan_start = (session[:plan_start] == nil) ? [] : session[:plan_start]
     @plan_main = (session[:plan_main] == nil) ? [] : session[:plan_main]
     @plan_end = (session[:plan_end] == nil) ? [] : session[:plan_end]
