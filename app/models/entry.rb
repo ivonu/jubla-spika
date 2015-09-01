@@ -194,7 +194,7 @@ class Entry < ActiveRecord::Base
       ['Bewertung', 'rating_desc'],
       ['Titel', 'title_asc'],
       ['Dauer', 'duration_asc'],
-      ['Neuigkeit', 'id_asc']
+      ['Neuigkeit', 'id_desc']
     ]
   end
 
