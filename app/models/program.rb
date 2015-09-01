@@ -98,13 +98,13 @@ class Program < ActiveRecord::Base
 
     case sort_option.to_s
     when /^rating_/
-      order("LOWER(programs.rating) #{ direction }")
+      order("programs.rating #{ direction }")
     when /^title_/
       order("LOWER(programs.title) #{ direction }")
     when /^duration_/
-      order("LOWER(programs.time_min) #{ direction }")
-    when /^created_at_/
-      order("LOWER(programs.created_at) #{ direction }")
+      order("programs.time_min #{ direction }")
+    when /^id_/
+      order("programs.id #{ direction }")
     else
       raise(ArgumentError, "Sortier-Option ungueltig: #{ sort_option.inspect }")
     end

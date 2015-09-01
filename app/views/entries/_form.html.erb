@@ -28,10 +28,19 @@
         <%= f.input :part_end, label: 'Schluss' %>
       </div>
       <div class="col-sm-2 col-xs-6">
+        <label>Alter:</label>
+        <%= f.input :age_5, label: '5 - 7 Jahre' %>
+        <%= f.input :age_8, label: '8 - 11 Jahre' %>
+        <%= f.input :age_12, label: '12 - 14 Jahre' %>
+        <%= f.input :age_15, label: '15 - 16 Jahre' %>
+        <%= f.input :age_17, label: '17+ Jahre' %>
+      </div>
+      <div class="col-sm-2 col-xs-6">
         <label>Spielart:</label>
-        <%= f.input :act_active, label: 'Aktiv' %>
+        <%= f.input :act_active, label: 'Bewegt' %>
         <%= f.input :act_calm, label: 'Ruhig' %>
         <%= f.input :act_creative, label: 'Kreativ' %>
+        <%= f.input :act_talk, label: 'Gesprächig' %>
       </div>
       <div class="col-sm-2 col-xs-6">
         <label>Spielbar:</label>
@@ -39,23 +48,15 @@
         <%= f.input :outdoors, label: 'Draussen' %>
       </div>
       <div class="col-sm-2 col-xs-6">
-        <label>Wetter:</label>
-        <%= f.input :weather_snow, label: 'Schnee' %>
-        <%= f.input :weather_rain, label: 'Regen' %>
-        <%= f.input :weather_sun, label: 'Sonne' %>
-      </div>
-      <div class="col-sm-2 col-xs-12">
         <label>Kategorie:</label>
-        <%= f.input :cat_pocket, label: 'Hosensackspiel' %>
-        <%= f.input :cat_craft, label: 'Basteln' %>
-        <%= f.input :cat_cook, label: 'Kochen' %>
-        <%= f.input :cat_pioneer, label: 'Pioniertechnik' %>
-        <%= f.input :cat_night, label: 'Nachtspiel' %>
+        <%= f.input :cat_game, label: 'Spiel & Sport' %>
+        <%= f.input :cat_shape, label: 'Gestalten' %>
+        <%= f.input :cat_group, label: 'Gruppengeist' %>
+        <%= f.input :cat_jubla, label: 'Jubla-Wissen' %>
       </div>
     </div>
 
   <%= f.input :group_size, label: 'Gruppengrösse', as: :slider, min: '2', max: '100', unit: 'Kinder' %>
-  <%= f.input :age, label: 'Alter', as: :slider, min: '5', max: '99', unit: 'Jahre' %>
   <%= f.input :time, label: 'Zeitaufwand', as: :slider, min: '5', max: '180', setter: 'slider_set_time' %>
 
   <div>
