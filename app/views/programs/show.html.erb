@@ -62,11 +62,14 @@
     
   </div>
 </div>
-<div class="row">
-  <div class="col-sm-12">
-    <%= render  partial: 'comments/create', locals: { res: @program } %>
+
+<% if not @plan %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= render  partial: 'comments/create', locals: { res: @program } %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="row visible-xs-block">
   <div class="col-xs-12">
