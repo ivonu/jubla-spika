@@ -118,7 +118,7 @@ class Entry < ActiveRecord::Base
 
     case sort_option.to_s
     when /^rating_/
-      order("entries.rating #{ direction }")
+      order("entries.rating_calc #{ direction }")
     when /^title_/
       order("LOWER(entries.title) #{ direction }")
     when /^duration_/
