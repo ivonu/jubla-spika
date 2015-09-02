@@ -7,9 +7,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'vendor', media: 'all', 'data-turbolinks-track' => true, debug: false %>
     <%= javascript_include_tag 'vendor', 'data-turbolinks-track' => true, debug: false %>
+    <%= render 'layouts/analytics' %>
+    <%= render 'layouts/structured_data' %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
-    <meta name="google-site-verification" content="XJRz77eZTe4V9PiK2aTEHYoYhdcbNSyCQt_jisOifzw" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if lt IE 9]>
