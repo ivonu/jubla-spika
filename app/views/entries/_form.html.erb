@@ -49,10 +49,14 @@
       </div>
       <div class="col-sm-4 col-xs-6">
         <label>Kategorie:</label>
-        <%= f.input :cat_game, label: 'Spiel & Sport' %>
-        <%= f.input :cat_shape, label: 'Gestalten' %>
-        <%= f.input :cat_group, label: 'Gruppengeist' %>
-        <%= f.input :cat_jubla, label: 'Jubla-Wissen' %>
+        <%= f.input :cat_game,  label: "Spiel &amp; Sport
+          (<span onclick='return false' data-toggle='modal' data-target='#modal_cat_game' >?</span>)".html_safe %>
+        <%= f.input :cat_shape, label: "Gestalten
+          (<span onclick='return false' data-toggle='modal' data-target='#modal_cat_shape'>?</span>)".html_safe %>
+        <%= f.input :cat_group, label: "Gruppengeist
+          (<span onclick='return false' data-toggle='modal' data-target='#modal_cat_group'>?</span>)".html_safe %>
+        <%= f.input :cat_jubla, label: "Jubla-Wissen
+          (<span onclick='return false' data-toggle='modal' data-target='#modal_cat_jubla'>?</span>)".html_safe %>
       </div>
     </div>
 
@@ -81,6 +85,8 @@
   <%= f.button :submit, 'Speichern' %>
 
 <% end %>
+
+<%= render 'entries/explanations' %>
 
 <script>init_slider();</script>
 <script>

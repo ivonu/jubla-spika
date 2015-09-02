@@ -2,13 +2,9 @@ class EntriesController < ApplicationController
 
   before_action :authorize_user, except: [:index, :show, :plan]
   before_action :authorize_moderator, only: [:not_published, :publish, :keep, :destroy_final]
+  before_action :load_descriptions, only: [:index, :new, :edit]
 
   def index
-
-    @page_cat_game = Page.where(title: 'Erklaerung Spiel und Sport').first
-    @page_cat_shape = Page.where(title: 'Erklaerung Gestalten').first
-    @page_cat_group = Page.where(title: 'Erklaerung Gruppengeist').first
-    @page_cat_jubla = Page.where(title: 'Erklaerung Jubla Wissen').first
 
     @plan_start = (session[:plan_start] == nil) ? [] : session[:plan_start]
     @plan_main = (session[:plan_main] == nil) ? [] : session[:plan_main]
@@ -406,6 +402,13 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.json { render json: @keywords }
     end
+  end
+
+  def load_descriptions
+    @page_cat_game = Page.where(title: 'Erklaerung Spiel und Sport').first
+    @page_cat_shape = Page.where(title: 'Erklaerung Gestalten').first
+    @page_cat_group = Page.where(title: 'Erklaerung Gruppengeist').first
+    @page_cat_jubla = Page.where(title: 'Erklaerung Jubla Wissen').first
   end
 
   private
