@@ -64,7 +64,7 @@
         <div class="modal-body">
           <p>Bitte gib einen Grund an, warum der Eintrag gelöscht werden soll. Die Moderatoren werden deinen Antrag prüfen und gegebenenfalls den Eintrag entfernen.</p>
           <%= label_tag(:hint, "Löschgrund:") %>
-          <%= text_field_tag(:hint, '', size: 75) %>
+          <%= text_field_tag(:hint, '', class: "delete_hint_textfield") %>
           <i>Beispiel: Fast gleicher Eintrag ist bereits unter dem Namen XY vorhanden.</i>
         </div>
         <div class="modal-footer">
