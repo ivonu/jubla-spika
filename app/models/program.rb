@@ -98,7 +98,7 @@ class Program < ActiveRecord::Base
 
     case sort_option.to_s
     when /^rating_/
-      order("programs.rating #{ direction }")
+      order("programs.rating_calc #{ direction }")
     when /^title_/
       order("LOWER(programs.title) #{ direction }")
     when /^duration_/
