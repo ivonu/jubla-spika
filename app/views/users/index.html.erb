@@ -4,7 +4,7 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>E-Mail</th>
+    <th class="hidden-xs">E-Mail</th>
     <th>Rolle</th>
   </tr>
   </thead>
@@ -12,7 +12,7 @@
     <% @users.each do |user| %>
         <tr>
             <td><%= link_to user.name, user_path(user)  %></td>
-            <td><%= user.email %></td>
+            <td class="hidden-xs"><%= user.email %></td>
             <td><%= get_role_label(user.role) %></td>
         </tr>
     <% end %>
