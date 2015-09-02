@@ -383,6 +383,8 @@ class EntriesController < ApplicationController
       end
       @entry.id = @entry.edited_entry.id
       @entry.user = @entry.edited_entry.user
+      @entry.rating = @entry.edited_entry.rating
+      @entry.rating_calc = @entry.edited_entry.rating_calc
       @entry.edited_entry.delete
       @entry.edited_entry = nil
     end
