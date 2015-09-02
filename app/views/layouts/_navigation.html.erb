@@ -30,7 +30,7 @@
         <% end %>
         <li class="hidden-xs">
           <%= form_tag("/entries", method: "get") do %>
-            <%= text_field_tag("filterrific[search_query]", nil, {placeholder: "Schnellsuche"}) %>
+            <%= text_field_tag("filterrific[search_query]", nil, {placeholder: "Schnellsuche", id: "fast_search"}) %>
           <% end %>
         </li>
       </ul>

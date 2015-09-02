@@ -117,4 +117,11 @@
   <% end %>
 </div>
 
+<script>
+  $(".filterrific-periodically-observed").filterrific_observe_field(
+    0.5,
+    Filterrific.submitFilterForm
+  );
+</script>
+
 <%= render 'entries/explanations' %>
