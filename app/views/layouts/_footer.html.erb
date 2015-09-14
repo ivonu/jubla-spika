@@ -5,21 +5,9 @@
     <div class="row">
 
       <div class="col-xs-6 col-sm-2">
-        <ul>
-          <li class="sub-title">Spielkatapult</li>
-          <li><%= link_to about_path do %><span>Über uns</span><% end %></li>
-          <li><%= link_to wissen_path do %><span>Wissen</span><% end %></li>
-          <li><%= link_to contact_path do %><span>Kontakt</span><% end %></li>
-        </ul>
       </div>
 
       <div class="col-xs-6 col-sm-2">
-        <ul>
-          <li class="sub-title">Links</li>
-          <% @links.each do |link| %>
-            <li><a href="<%= link.url %>" target="_blank"><%= link.title %></a></li>
-          <% end %>
-        </ul>
       </div>
 
       <!-- Add the extra clearfix for only the required viewport -->
