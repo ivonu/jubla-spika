@@ -139,6 +139,11 @@ class ProgramEntriesController < ApplicationController
     order = last_program_entry.order+1 if last_program_entry
     @program_entry = ProgramEntry.new(program: program, order: order)
 
+    @page_cat_game = Page.where(title: 'Erklaerung Spiel und Sport').first
+    @page_cat_shape = Page.where(title: 'Erklaerung Gestalten').first
+    @page_cat_group = Page.where(title: 'Erklaerung Gruppengeist').first
+    @page_cat_jubla = Page.where(title: 'Erklaerung Jubla Wissen').first
+
     render 'entries/new'
   end
 
