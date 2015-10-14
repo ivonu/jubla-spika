@@ -92,12 +92,9 @@ class Entry < ActiveRecord::Base
   scope :search_query, lambda { |query|
     return nil  if query.blank?
 
-    terms = query.downcase.split(/\s+/)
+    terms = query.to_s.downcase.split(/\s+/)
+    terms = terms.map { |e| ('%' + e + '%') }
 
-    terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
-    }
-    
     num_or_conds = 7
     where(
       terms.map { |term|
