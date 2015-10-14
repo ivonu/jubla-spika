@@ -79,8 +79,8 @@ class ApplicationController < ActionController::Base
     program.age_12 = false
     program.age_15 = false
     program.age_17 = false
-    program.time_min = 5
-    program.time_max = 180
+    program.time_min = 0
+    program.time_max = 0
     program.indoors = false
     program.outdoors = false
     program.act_active = false
