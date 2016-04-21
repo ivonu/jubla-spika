@@ -5,7 +5,7 @@
   </div>
 
   <% @program.program_entries.order(:order).where(order: (start_order..end_order)).each do |pe| %>
-    <% if pe.entry.published or (user_signed_in? and current_user.is_moderator?) %>
+    <% if pe.entry.published or (user_signed_in? and current_user.is_moderator?) or (pe.entry.user == current_user) %>
       <div class="row">
         <div class="col-xs-9"><h3><%= link_to_if (not params[:format] == 'pdf'), pe.entry.title, pe.entry %></h3></div>
         <div class="col-xs-3 text-right move-buttons">
