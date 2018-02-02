@@ -10,8 +10,11 @@
         <div class="col-xs-9"><h3><%= link_to_if (not params[:format] == 'pdf'), pe.entry.title, pe.entry %></h3></div>
         <div class="col-xs-3 text-right move-buttons">
           <% if @edit and (not params[:format] == 'pdf') %>
+              <% if false %>
+                  //Buttons disabled
             <%= link_to move_up_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-up"/><% end %>
             <%= link_to move_down_program_entry_path(pe), method: :post do %><span class="glyphicon glyphicon-arrow-down"/><% end %>
+              <% end %>
             <% if @program.published %>
               <a href="#" data-toggle="modal" data-target="#delete-modal-entry" data-id="<%= pe.id %>"><span class="glyphicon glyphicon-remove"/></a>
             <% else %>
