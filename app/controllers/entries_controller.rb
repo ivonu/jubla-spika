@@ -157,7 +157,7 @@ class EntriesController < ApplicationController
         redirect_to @entry
       end
     else
-      flash[:error] = "Es wurden nicht alle Plichtfelder ausgefüllt!"
+      flash[:error] = "Es wurden nicht alle Plichtfelder ausgefuellt!"
       render 'new'
     end
   end
