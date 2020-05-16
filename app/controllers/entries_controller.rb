@@ -433,6 +433,7 @@ class EntriesController < ApplicationController
                                     :act_calm,
                                     :act_creative,
                                     :act_talk,
+                                    :act_distance,
                                     :group_size_min,
                                     :group_size_max,
                                     :age_5,

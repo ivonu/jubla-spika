@@ -37,6 +37,7 @@ class Entry < ActiveRecord::Base
       :with_act_calm,
       :with_act_creative,
       :with_act_talk,
+      :with_act_distance,
       :with_cat_game, 
       :with_cat_shape,
       :with_cat_group,
@@ -73,6 +74,7 @@ class Entry < ActiveRecord::Base
   scope :with_act_calm, lambda { |flag| check_boolean_attr "act_calm", flag }
   scope :with_act_creative, lambda { |flag| check_boolean_attr "act_creative", flag }
   scope :with_act_talk, lambda { |flag| check_boolean_attr "act_talk", flag }
+  scope :with_act_distance, lambda { |flag| check_boolean_attr "act_distance", flag }
   scope :with_cat_game, lambda { |flag| check_boolean_attr "cat_game", flag }
   scope :with_cat_shape, lambda { |flag| check_boolean_attr "cat_shape", flag }
   scope :with_cat_group, lambda { |flag| check_boolean_attr "cat_group", flag }

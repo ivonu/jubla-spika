@@ -107,6 +107,7 @@ class ProgramsController < ApplicationController
     @program.act_calm = false
     @program.act_creative = false
     @program.act_talk = false
+    @program.act_distance = false
     @program.cat_game = false
     @program.cat_shape = false
     @program.cat_group = false
