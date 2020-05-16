@@ -35,11 +35,8 @@ gem 'wkhtmltopdf-binary'
 
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-gem 'bcrypt', '~> 3.1.7'
-
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.11'
+  gem 'sqlite3'
 end
 
 group :production do
@@ -47,4 +44,3 @@ group :production do
   gem 'rails_12factor'
   gem 'aws-sdk', '< 2.0'
 end
-
