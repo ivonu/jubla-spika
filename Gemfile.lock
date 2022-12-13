@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/ifad/data-confirm-modal.git
-  revision: c2c1e466c6b2d6065c1e2e16e37456813d32b348
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: 404119ad5bf7754c31af41e35935e365c69dcd92
   specs:
-    data-confirm-modal (1.0.1)
+    data-confirm-modal (1.6.3)
       railties (>= 3.0)
 
 GEM
@@ -72,6 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    crass (1.0.6)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -104,17 +105,18 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.2)
-    loofah (2.0.1)
+    loofah (2.19.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
-    mini_portile (0.6.2)
+    mini_portile2 (2.1.0)
     minitest (5.5.1)
     multi_json (1.10.1)
     mysql2 (0.3.17)
-    nokogiri (1.6.5)
-      mini_portile (~> 0.6.0)
+    nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     paperclip (4.2.1)
       activemodel (>= 3.0.0)
