@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/ifad/data-confirm-modal.git
-  revision: c2c1e466c6b2d6065c1e2e16e37456813d32b348
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: 404119ad5bf7754c31af41e35935e365c69dcd92
   specs:
-    data-confirm-modal (1.0.1)
+    data-confirm-modal (1.6.3)
       railties (>= 3.0)
 
 GEM
@@ -121,7 +121,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    rack (1.6.0)
+    rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
